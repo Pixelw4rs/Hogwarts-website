@@ -2,3 +2,7 @@
 .impeccable/mocks/
 .impeccable/config.local.json
 node_modules/
+
+# live data written by the server; never tracked so git pull cannot touch it
+data/db/
+data/uploads/
