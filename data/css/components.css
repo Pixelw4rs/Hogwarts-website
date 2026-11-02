@@ -252,7 +252,7 @@ input.mono { font-family: var(--font-mono); font-size: var(--fs-sm); }
 
 .toasts {
   position: fixed;
-  inset: auto var(--s4) var(--s4) auto;
+  inset: auto max(var(--s4), env(safe-area-inset-right)) max(var(--s4), env(safe-area-inset-bottom)) auto;
   z-index: 50;
   display: grid;
   gap: var(--s2);

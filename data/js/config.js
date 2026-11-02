@@ -28,27 +28,27 @@ export const DEFAULT_VIEW = 'start';
 export const BOARDS = [
   {
     key: 'build', label: 'Bauaufgaben', tincture: 'gules', noun: 'Aufgabe',
-    titlePlaceholder: "z. B. 'Dachdetails hinzufügen'",
+    titlePlaceholder: 'z. B. „Dachdetails hinzufügen“',
     metaLabel: 'Zugewiesen an', metaPlaceholder: 'optional', submit: 'Aufgabe hinzufügen',
   },
   {
     key: 'design', label: 'Design-Vorschläge', shortLabel: 'Design-Vor­schläge', tincture: 'purpure', noun: 'Vorschlag',
-    titlePlaceholder: "z. B. 'Terrakotta-Dach für die Mühle'",
+    titlePlaceholder: 'z. B. „Terrakotta-Dach für die Mühle“',
     metaLabel: 'Von', metaPlaceholder: 'optional', submit: 'Vorschlag hinzufügen',
   },
   {
     key: 'terraforming', label: 'Terraforming', shortLabel: 'Terra­forming', tincture: 'vert', noun: 'Projekt',
-    titlePlaceholder: "z. B. 'Hügel bei Spawn einebnen'",
+    titlePlaceholder: 'z. B. „Hügel bei Spawn einebnen“',
     metaLabel: 'Zugewiesen an', metaPlaceholder: 'optional', submit: 'Projekt hinzufügen',
   },
   {
     key: 'complex', label: 'Zweiter Gebäudekomplex', shortLabel: 'Zweiter Gebäude­komplex', tincture: 'azure', noun: 'Aufgabe',
-    titlePlaceholder: "z. B. 'Ecke updaten'",
+    titlePlaceholder: 'z. B. „Ecke updaten“',
     metaLabel: 'Zugewiesen an', metaPlaceholder: 'optional', submit: 'Aufgabe hinzufügen',
   },
   {
     key: 'map', label: 'Server-Map (Koordinaten)', shortLabel: 'Server-Map', tincture: 'sable', noun: 'Ort',
-    titlePlaceholder: "z. B. 'Eisenfarm'",
+    titlePlaceholder: 'z. B. „Eisenfarm“',
     metaLabel: 'Koordinaten', metaPlaceholder: 'X Y Z / Dimension', submit: 'Ort hinzufügen',
     coordinates: true,
   },

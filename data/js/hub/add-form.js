@@ -34,7 +34,7 @@ export function createAddForm(board, submit) {
   let previewUrl = '';
 
   const title = el('input', { id: id('title'), name: 'title', required: true, maxlength: MAX_TITLE, autocomplete: 'off', placeholder: board.titlePlaceholder, 'aria-describedby': id('error') });
-  const meta = el('input', { id: id('meta'), name: 'meta', maxlength: MAX_META, autocomplete: 'off', placeholder: board.metaPlaceholder, class: board.coordinates ? 'mono' : null });
+  const meta = el('input', { id: id('meta'), name: 'meta', maxlength: MAX_META, autocomplete: 'off', spellcheck: 'false', placeholder: board.metaPlaceholder, class: board.coordinates ? 'mono' : null, inputmode: board.coordinates ? 'text' : null });
   const fileInput = el('input', { id: id('image'), name: 'image', type: 'file', accept: IMAGE_TYPES.join(','), class: 'file-input' });
   const preview = el('div', { class: 'file-preview', hidden: true });
   const error = el('p', { id: id('error'), class: 'field-error', role: 'alert' });

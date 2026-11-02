@@ -5,11 +5,11 @@ must still work after the rewrite. Tick each one during verification.
 
 ## Architecture
 
-- [ ] **Single-page site** at `data/index.html`, written in German (`lang="de"`). No framework and no build step.
-- [ ] **Static assets** in `data/`: `favicon.png`, `favicon.ico`, `hogwarts-bg.jpg`.
-- [ ] **Backend** in `server/server.js`: dependency-free Node HTTP server (Node 22 in Docker).
-- [ ] **Deployment** via `docker-compose.yml`: mounts `./server` read-only and `./data` read-write, port 8080, env `PORT` and `WEB_ROOT`.
-- [ ] **Health check** runs `GET /api/boards` every 30s.
+- [x] **Single-page site** at `data/index.html`, written in German (`lang="de"`). No framework and no build step.
+- [x] **Static assets** in `data/`: `favicon.png`, `favicon.ico`, `hogwarts-bg.jpg`.
+- [x] **Backend** in `server/server.js`: dependency-free Node HTTP server (Node 22 in Docker).
+- [x] **Deployment** via `docker-compose.yml`: mounts `./server` read-only and `./data` read-write, port 8080, env `PORT` and `WEB_ROOT`.
+- [x] **Health check** runs `GET /api/boards` every 30s.
 
 ## Pages / views
 
@@ -26,49 +26,49 @@ Tabs in a sticky header switch views client-side, with no URL change and no rout
 
 ### Shell
 
-- [ ] Brand "ARDET" with a glowing orb mark.
-- [ ] Sticky, blurred header containing the tab nav. The nav scrolls horizontally on narrow screens.
-- [ ] The active tab is highlighted with a gold underline.
-- [ ] `<title>` is "ARDET — Minecraft Server"; `theme-color` is `#0e1519`.
-- [ ] Favicons: PNG, ICO, and apple-touch-icon.
-- [ ] Fonts: Cormorant Garamond (display), Space Grotesk (body), IBM Plex Mono (code).
-- [ ] Background: blurred `hogwarts-bg.jpg` layered under a gold radial glow and a dark gradient.
-- [ ] `:focus-visible` outline in glow blue.
+- [x] Brand "ARDET" with a glowing orb mark.
+- [x] Sticky, blurred header containing the tab nav. The nav scrolls horizontally on narrow screens.
+- [x] The active tab is highlighted with a gold underline.
+- [x] `<title>` is "ARDET — Minecraft Server"; `theme-color` is `#0e1519`.
+- [x] Favicons: PNG, ICO, and apple-touch-icon.
+- [x] Fonts: Cormorant Garamond (display), Space Grotesk (body), IBM Plex Mono (code).
+- [x] Background: blurred `hogwarts-bg.jpg` layered under a gold radial glow and a dark gradient.
+- [x] `:focus-visible` outline in glow blue.
 
 ### Start (home)
 
-- [ ] Shows the server address `mc.ardet.de`.
-- [ ] **Copy IP** button writes `mc.ardet.de` to the clipboard, shows "Kopiert!" for 1.4s, then restores its label.
-- [ ] **Live status** comes from `GET https://api.mcsrvstat.us/3/mc.ardet.de` (`cache: no-store`):
-  - [ ] While loading: "Status wird geprüft…" with a neutral dot.
-  - [ ] Online: green dot, "Online", players `online / max`, version string.
-  - [ ] Offline: red dot, "Offline", players and version shown as "—".
-  - [ ] Fetch error: red dot, "Status nicht verfügbar", "—" values.
-  - [ ] Status refreshes on page load, every 60s while the page is visible, and whenever the Start tab is opened.
-- [ ] Feature cards: Community Hub, Server-Map, Discord (link `https://discord.gg/2SQccy5vT3`, opens in a new tab with `rel=noopener`).
+- [x] Shows the server address `mc.ardet.de`.
+- [x] **Copy IP** button writes `mc.ardet.de` to the clipboard, shows "Kopiert!" for 1.4s, then restores its label.
+- [x] **Live status** comes from `GET https://api.mcsrvstat.us/3/mc.ardet.de` (`cache: no-store`):
+  - [x] While loading: "Status wird geprüft…" with a neutral dot.
+  - [x] Online: green dot, "Online", players `online / max`, version string.
+  - [x] Offline: red dot, "Offline", players and version shown as "—".
+  - [x] Fetch error: red dot, "Status nicht verfügbar", "—" values.
+  - [x] Status refreshes on page load, every 60s while the page is visible, and whenever the Start tab is opened.
+- [x] Feature cards: Community Hub, Server-Map, Discord (link `https://discord.gg/2SQccy5vT3`, opens in a new tab with `rel=noopener`).
 
 ### Regeln
 
-- [ ] Numbered list with CSS counters:
+- [x] Numbered list with CSS counters:
   1. Redstone-/Farm-Lag im Blick behalten — Chunks verantwortungsvoll laden.
   2. Große Terraforming- oder Gelände-Projekte zuerst auf das Terraforming-Board.
 
 ### Beitreten
 
-- [ ] Java card: add `www.ardet.de`; the server is whitelisted, so ask an admin to be added.
-- [ ] Bedrock card: use a GeyserMC-compatible client and connect to `www.ardet.de` on the port an admin gives you.
-- ⚠ **Inconsistency:** the hero shows `mc.ardet.de` but the Join page says `www.ardet.de`. This is kept as-is until the owner decides which is correct.
+- [x] Java card: add `www.ardet.de`; the server is whitelisted, so ask an admin to be added.
+- [x] Bedrock card: use a GeyserMC-compatible client and connect to `www.ardet.de` on the port an admin gives you.
+- [x] ~~Inconsistency~~ resolved: the owner confirmed `mc.ardet.de`, and the Join page now uses it.
 
 ### Map
 
-- [ ] Iframe to `https://map.ardet.de`, **lazy**: `src` is set only the first time the Map tab is opened.
-- [ ] Fallback link "In neuem Tab öffnen".
-- [ ] The iframe fills the viewport height (`100vh - 170px`, min 420px) and uses a wider container (max 1400px).
-- [ ] Has `allow="fullscreen"` and `referrerpolicy="no-referrer-when-downgrade"`.
+- [x] Iframe to `https://map.ardet.de`, **lazy**: `src` is set only the first time the Map tab is opened.
+- [x] Fallback link "In neuem Tab öffnen".
+- [x] The iframe fills the viewport height (`100vh - 170px`, min 420px) and uses a wider container (max 1400px).
+- [x] Has `allow="fullscreen"` and `referrerpolicy="no-referrer-when-downgrade"`.
 
 ### Staff
 
-- [ ] Pills: "Owner — Pixel_wars | praeditus", "Admin — Pixel_wars | praeditus", "Bauleitung — praeditus".
+- [x] Pills: "Owner — Pixel_wars | praeditus", "Admin — Pixel_wars | praeditus", "Bauleitung — praeditus".
 
 ## Community Hub (shared boards)
 
@@ -84,25 +84,25 @@ Five boards, switched by sub-tabs:
 
 ### Behaviors
 
-- [ ] **Add item:** title is required (an empty title does nothing); meta and image are optional.
-  - [ ] Images must be png, jpeg, gif or webp, at most 4 MB (checked on the client), and are sent as a data URL.
-  - [ ] An oversized image shows "Bild zu groß (max. 4 MB)."; an unreadable file shows "Bild konnte nicht gelesen werden."
-  - [ ] Inputs clear optimistically. **If saving fails, the title and meta are restored.**
-- [ ] **Toggle done** with a checkbox. A done item is dimmed to 50% with its title struck through.
-- [ ] **Delete** with the × button (no confirmation today).
-- [ ] **Image thumbnail** 56×56, linking to the full image in a new tab.
-- [ ] **Meta** shown in monospace under the title.
-- [ ] **States:**
-  - [ ] Loading: "Wird geladen…" while `rev < 0`.
-  - [ ] Empty: "Noch nichts hier — füge oben den ersten Eintrag hinzu."
-  - [ ] Error banner (`#hubStatus`): the server's error message, or the offline message "Server nicht erreichbar — Einträge können gerade nicht geladen oder gespeichert werden." for network errors. It clears on the next success.
-- [ ] **Sync:**
-  - [ ] Initial fetch on page load.
-  - [ ] Refetch whenever the Community tab is opened.
-  - [ ] Poll every 5s while the tab is visible and the Hub view is shown.
-  - [ ] Refetch when the browser tab becomes visible again (if the Hub is shown).
-  - [ ] Re-render only when `rev` changes.
-- [ ] **XSS safety:** title and meta are HTML-escaped and ids are sanitized to alphanumerics.
+- [x] **Add item:** title is required (an empty title does nothing); meta and image are optional.
+  - [x] Images must be png, jpeg, gif or webp, at most 4 MB (checked on the client), and are sent as a data URL.
+  - [x] An oversized image shows "Bild zu groß (max. 4 MB)."; an unreadable file shows "Bild konnte nicht gelesen werden."
+  - [x] Inputs clear optimistically. **If saving fails, the title and meta are restored.**
+- [x] **Toggle done** with a checkbox. A done item is dimmed to 50% with its title struck through.
+- [x] **Delete** with the × button (no confirmation today).
+- [x] **Image thumbnail** 56×56, linking to the full image in a new tab.
+- [x] **Meta** shown in monospace under the title.
+- [x] **States:**
+  - [x] Loading: "Wird geladen…" while `rev < 0`.
+  - [x] Empty: "Noch nichts hier — füge oben den ersten Eintrag hinzu."
+  - [x] Error banner (`#hubStatus`): the server's error message, or the offline message "Server nicht erreichbar — Einträge können gerade nicht geladen oder gespeichert werden." for network errors. It clears on the next success.
+- [x] **Sync:**
+  - [x] Initial fetch on page load.
+  - [x] Refetch whenever the Community tab is opened.
+  - [x] Poll every 5s while the tab is visible and the Hub view is shown.
+  - [x] Refetch when the browser tab becomes visible again (if the Hub is shown).
+  - [x] Re-render only when `rev` changes.
+- [x] **XSS safety:** title and meta are HTML-escaped and ids are sanitized to alphanumerics.
 
 ## Backend API (contract must stay identical)
 
@@ -116,13 +116,13 @@ An `Item` is `{ id: hex12, title ≤200, meta ≤100, image: "/uploads/<board>/<
 | PATCH | `/api/boards/:board/items/:id` | `{done: bool}` → full state; 404 if the item is missing |
 | DELETE | `/api/boards/:board/items/:id` | Removes the item and its uploaded image → full state (idempotent) |
 
-- [ ] Every write bumps `rev` and is saved with an atomic write (tmp file + rename).
-- [ ] A corrupt DB is backed up to `boards.json.corrupt-<ts>` and the server starts empty.
-- [ ] Write rate limit: 60 per minute per IP (honours `X-Forwarded-For`), answering 429 "Zu viele Änderungen — kurz warten."
-- [ ] Body limit is 6 MB (413); the decoded image limit is 4 MB (413); only png/jpeg/gif/webp data URLs are accepted.
-- [ ] Error messages are in German and returned as JSON `{error}`.
-- [ ] Static server: serves `WEB_ROOT`, maps `/` to `index.html`, blocks path traversal, dotfiles and `/db/`; HTML is sent `no-cache`, everything else `max-age=3600`.
-- [ ] Image deletion only touches paths matching `/uploads/<board>/<hex>.<ext>`.
+- [x] Every write bumps `rev` and is saved with an atomic write (tmp file + rename).
+- [x] A corrupt DB is backed up to `boards.json.corrupt-<ts>` and the server starts empty.
+- [x] Write rate limit: 60 per minute per IP (honours `X-Forwarded-For`), answering 429 "Zu viele Änderungen — kurz warten."
+- [x] Body limit is 6 MB (413); the decoded image limit is 4 MB (413); only png/jpeg/gif/webp data URLs are accepted.
+- [x] Error messages are in German and returned as JSON `{error}`.
+- [x] Static server: serves `WEB_ROOT`, maps `/` to `index.html`, blocks path traversal, dotfiles and `/db/`; HTML is sent `no-cache`, everything else `max-age=3600`.
+- [x] Image deletion only touches paths matching `/uploads/<board>/<hex>.<ext>`.
 
 ## Known gaps (to fix in the redesign, without changing behavior)
 
@@ -134,3 +134,49 @@ An `Item` is `{ id: hex12, title ≤200, meta ≤100, image: "/uploads/<board>/<
 - The rendered `<img>` has no width/height, which causes layout shift.
 - There is no `prefers-reduced-motion` handling (and almost no motion).
 - The client hardcodes the IP string in two places in JS plus the markup.
+
+All eight gaps are fixed in the redesign: ARIA tabs with arrow keys and Home/End, `#hash` routes, labels on every field, live regions, no inline handlers, undo for delete, fixed image sizes, reduced-motion support, and the address set in one place (`data/js/config.js`).
+
+## Redesign verification (2026-11-02, branch `redesign`)
+
+**How it was verified:**
+- `npm test` runs 38 tests: 17 backend contract tests against the unchanged `server.js`, plus 21 unit tests for the DOM-free client modules.
+- `npm run check` lints syntax, asset references, inline handlers and duplicate ids.
+- A scripted headless-browser pass against a local copy with demo data covered:
+  - copy IP (label "Kopiert!", restored after 1.4s)
+  - status display
+  - tab keyboard navigation and hashes
+  - add, toggle and delete with undo, plus the server-side delete after 5s
+  - search and the no-match state
+  - image size limit, preview, upload and thumbnail link
+  - title/meta restored when saving fails
+  - offline banner and its clearing
+  - the 5s poll
+  - lazy map loading and its attributes
+  - Discord link attributes
+  - rules and staff content
+- Screenshots: desktop 1440 and mobile 390, night and day.
+
+**Intentional behaviour changes:**
+1. **Delete** hides the entry immediately and shows a 5-second "Rückgängig" toast. The `DELETE` request is sent when the toast expires, or right away if the page is hidden or closed (`keepalive`).
+2. **Empty title** now shows "Bitte einen Titel eingeben." inline. Before, nothing happened.
+3. **Image errors** ("Bild zu groß (max. 4 MB).", unreadable file, wrong type) appear inline under the form instead of in the Hub banner. The text is the same. An image is checked and previewed as soon as it's chosen.
+4. **Server status** shows "Status wird geprüft…" only on the first check. Later checks update the values in place, without flicker. Opening Start still triggers a recheck.
+5. **Board data** is also polled every 5s while Start is open, because Start now shows live board counts.
+6. **Join page** shows `mc.ardet.de`, which is now confirmed as the only address.
+7. **Views** have URLs (`#regeln`, `#hub/map`…), so Back/Forward and deep links work.
+8. **Visual identity** is replaced: new fonts, a castle image band instead of the blurred full-page background, and a night/day theme switch that follows the system setting by default.
+9. **Leaving the page** with a typed but unsent title now asks for confirmation.
+
+**Vercel guideline deviations (accepted):**
+- Three animations go beyond transform/opacity:
+  - the banner unfurl (`clip-path`)
+  - the undo ring (a custom property)
+  - the skeleton shimmer (`background-position`)
+
+  All three are short, run on few elements, and are off under reduced motion.
+- Lists aren't virtualized: there are at most 500 entries per board, and rows are keyed and patched in place.
+- Fonts come from Google Fonts with `preconnect` and no preload, because the font file URLs aren't stable.
+
+**Open items (need the owner's decision):**
+- `server.js` sends `.css`/`.js` with `max-age=3600`. After a future deploy, returning visitors can run new HTML against cached old modules for up to an hour. Fix options: make `.js`/`.css` `no-cache` in `server.js` (a one-line backend change), or version the asset paths.

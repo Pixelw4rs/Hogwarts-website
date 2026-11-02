@@ -16,14 +16,16 @@ function render(status) {
 
 export function startServerStatus() {
   let inFlight = null;
+  let hasResult = false;
 
   async function refresh() {
     if (inFlight) return inFlight;
-    render(LOADING_STATUS);
+    // Only the first check shows the loading state; later polls swap values in place without flicker.
+    if (!hasResult) render(LOADING_STATUS);
     inFlight = fetch(STATUS_URL, { cache: 'no-store' })
       .then((r) => (r.ok ? r.json() : Promise.reject(new Error(`HTTP ${r.status}`))))
       .then(interpretStatus, () => ERROR_STATUS)
-      .then(render)
+      .then((status) => { hasResult = true; render(status); })
       .finally(() => { inFlight = null; });
     return inFlight;
   }

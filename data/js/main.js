@@ -70,3 +70,8 @@ document.addEventListener('visibilitychange', () => {
   else if (LIVE_VIEWS.has(current)) store.refresh();
 });
 addEventListener('pagehide', () => store.flushDeletes());
+
+// Warn before leaving with a typed but unsent entry.
+addEventListener('beforeunload', (e) => {
+  if ($$('.add-form input[name="title"]').some((i) => /** @type {HTMLInputElement} */ (i).value.trim())) e.preventDefault();
+});

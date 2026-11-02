@@ -56,6 +56,7 @@ code, kbd, .mono {
 
 button, input, select, textarea { font: inherit; color: inherit; }
 button { cursor: pointer; }
+a, button, input, label, [role="tab"] { touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
 button:disabled { cursor: not-allowed; }
 
 img { max-width: 100%; display: block; }
@@ -64,7 +65,7 @@ img { max-width: 100%; display: block; }
   width: 100%;
   max-width: var(--page-max);
   margin-inline: auto;
-  padding-inline: var(--gutter);
+  padding-inline: max(var(--gutter), env(safe-area-inset-left)) max(var(--gutter), env(safe-area-inset-right));
 }
 
 .visually-hidden {

@@ -6,7 +6,8 @@
     "start": "node server/server.js",
     "dev": "node scripts/dev.mjs",
     "check": "node scripts/check.mjs",
-    "test": "node --test tests/"
+    "test": "node --test tests/",
+    "test:coverage": "node --test --experimental-test-coverage tests/"
   },
   "engines": {
     "node": ">=22"
