@@ -194,7 +194,7 @@ function serveStatic(req, res, url) {
     res.writeHead(200, {
       'Content-Type': MIME[ext] || 'application/octet-stream',
       'Content-Length': st.size,
-      'Cache-Control': ext === '.html' ? 'no-cache' : 'public, max-age=3600',
+      'Cache-Control': ['.html', '.css', '.js'].includes(ext) ? 'no-cache' : 'public, max-age=3600',
     });
     if (req.method === 'HEAD') return res.end();
     fs.createReadStream(full).pipe(res);

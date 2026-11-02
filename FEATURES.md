@@ -121,7 +121,7 @@ An `Item` is `{ id: hex12, title ≤200, meta ≤100, image: "/uploads/<board>/<
 - [x] Write rate limit: 60 per minute per IP (honours `X-Forwarded-For`), answering 429 "Zu viele Änderungen — kurz warten."
 - [x] Body limit is 6 MB (413); the decoded image limit is 4 MB (413); only png/jpeg/gif/webp data URLs are accepted.
 - [x] Error messages are in German and returned as JSON `{error}`.
-- [x] Static server: serves `WEB_ROOT`, maps `/` to `index.html`, blocks path traversal, dotfiles and `/db/`; HTML is sent `no-cache`, everything else `max-age=3600`.
+- [x] Static server: serves `WEB_ROOT`, maps `/` to `index.html`, blocks path traversal, dotfiles and `/db/`; HTML, CSS and JS are sent `no-cache` (changed 2026-11-02 with the owner's approval, so deploys never mix versions); images and other files `max-age=3600`.
 - [x] Image deletion only touches paths matching `/uploads/<board>/<hex>.<ext>`.
 
 ## Known gaps (to fix in the redesign, without changing behavior)
@@ -178,5 +178,5 @@ All eight gaps are fixed in the redesign: ARIA tabs with arrow keys and Home/End
 - Lists aren't virtualized: there are at most 500 entries per board, and rows are keyed and patched in place.
 - Fonts come from Google Fonts with `preconnect` and no preload, because the font file URLs aren't stable.
 
-**Open items (need the owner's decision):**
-- `server.js` sends `.css`/`.js` with `max-age=3600`. After a future deploy, returning visitors can run new HTML against cached old modules for up to an hour. Fix options: make `.js`/`.css` `no-cache` in `server.js` (a one-line backend change), or version the asset paths.
+**Resolved after review:**
+- Asset caching: `server.js` used to send `.css`/`.js` with `max-age=3600`, so after a deploy returning visitors could run new HTML against cached old modules. With the owner's approval it now sends them `no-cache` (one line in `serveStatic`, covered by a test). Images keep the 1h cache.

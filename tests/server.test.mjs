@@ -139,11 +139,19 @@ describe('static files', () => {
     assert.equal(res.headers.get('cache-control'), 'no-cache');
   });
 
-  test('css is served with its MIME type and a 1h cache', async () => {
+  test('css and js are revalidated on every load so deploys never mix versions', async () => {
     const css = await fetch(srv.base + '/css/tokens.css');
     assert.equal(css.status, 200);
     assert.match(css.headers.get('content-type'), /text\/css/);
-    assert.equal(css.headers.get('cache-control'), 'public, max-age=3600');
+    assert.equal(css.headers.get('cache-control'), 'no-cache');
+    const js = await fetch(srv.base + '/js/main.js');
+    assert.match(js.headers.get('content-type'), /text\/javascript/);
+    assert.equal(js.headers.get('cache-control'), 'no-cache');
+  });
+
+  test('images keep the 1h cache', async () => {
+    const img = await fetch(srv.base + '/favicon.png');
+    assert.equal(img.headers.get('cache-control'), 'public, max-age=3600');
   });
 
   test('db folder, dotfiles and traversal are blocked', async () => {
