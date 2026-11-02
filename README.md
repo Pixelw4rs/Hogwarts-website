@@ -1,0 +1,2 @@
+# Hogwarts-website
+Holy Vibecode
