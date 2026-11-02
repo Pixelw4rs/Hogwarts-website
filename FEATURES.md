@@ -161,11 +161,11 @@ All eight gaps are fixed in the redesign: ARIA tabs with arrow keys and Home/End
 1. **Delete** hides the entry immediately and shows a 5-second "Rückgängig" toast. The `DELETE` request is sent when the toast expires, or right away if the page is hidden or closed (`keepalive`).
 2. **Empty title** now shows "Bitte einen Titel eingeben." inline. Before, nothing happened.
 3. **Image errors** ("Bild zu groß (max. 4 MB).", unreadable file, wrong type) appear inline under the form instead of in the Hub banner. The text is the same. An image is checked and previewed as soon as it's chosen.
-4. **Server status** shows "Status wird geprüft…" only on the first check. Later checks update the values in place, without flicker. Opening Start still triggers a recheck.
+4. **Server status** on Start is a plain line (status · players · version) instead of three boxes. It shows "Status wird geprüft…" only on the first check. Later checks update the values in place, without flicker. Opening Start still triggers a recheck.
 5. **Board data** is also polled every 5s while Start is open, because Start now shows live board counts.
 6. **Join page** shows `mc.ardet.de`, which is now confirmed as the only address.
 7. **Views** have URLs (`#regeln`, `#hub/map`…), so Back/Forward and deep links work.
-8. **Visual identity** is replaced: new fonts, a castle image band instead of the blurred full-page background, and a night/day theme switch that follows the system setting by default.
+8. **Visual identity** is replaced: new fonts, a castle image band instead of the blurred full-page background, and a night/day theme switch. Night is the default; day is opt-in and remembered per browser.
 9. **Leaving the page** with a typed but unsent title now asks for confirmation.
 
 **Vercel guideline deviations (accepted):**

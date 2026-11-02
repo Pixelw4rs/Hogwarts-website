@@ -38,8 +38,12 @@ function applyRoute({ focus }) {
   root.dataset.view = route.view;
 
   for (const link of $$('[data-nav]')) {
-    if (link.dataset.nav === route.view) link.setAttribute('aria-current', 'page');
-    else link.removeAttribute('aria-current');
+    if (link.dataset.nav === route.view) {
+      link.setAttribute('aria-current', 'page');
+      link.scrollIntoView({ block: 'nearest', inline: 'nearest' }); // keep the active tab visible on phones
+    } else {
+      link.removeAttribute('aria-current');
+    }
   }
   const meta = VIEWS.find((v) => v.id === route.view);
   document.title = route.view === 'start' ? 'ARDET — Minecraft Server' : `${meta.title} — ARDET`;

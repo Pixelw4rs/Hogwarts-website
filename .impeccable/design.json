@@ -1,0 +1,720 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-02T21:39:01.414Z",
+  "title": "Design System: ARDET",
+  "extensions": {
+    "colorMeta": {
+      "or": {
+        "role": "primary",
+        "displayName": "Or, the Gilt Metal",
+        "canonical": "oklch(74.1% 0.130 81.8)",
+        "tonalRamp": [
+          "#130900",
+          "#312100",
+          "#533b07",
+          "#775816",
+          "#9d7626",
+          "#c59636",
+          "#eabc66",
+          "#ffe9a3"
+        ]
+      },
+      "or-hi": {
+        "role": "primary",
+        "displayName": "Bright Or",
+        "canonical": "oklch(81.5% 0.123 84.8)",
+        "tonalRamp": [
+          "#100a02",
+          "#2d220a",
+          "#4e3d19",
+          "#715a29",
+          "#967939",
+          "#bd994b",
+          "#e8be60",
+          "#ffea9d"
+        ]
+      },
+      "on-or": {
+        "role": "primary",
+        "displayName": "Pitch",
+        "canonical": "oklch(18.9% 0.026 77.5)",
+        "tonalRamp": [
+          "#110a02",
+          "#2a2317",
+          "#463f34",
+          "#635d53",
+          "#827c75",
+          "#a29e98",
+          "#c6c4c0",
+          "#f0eeec"
+        ]
+      },
+      "gules": {
+        "role": "secondary",
+        "displayName": "Gules, Banner Red",
+        "canonical": "oklch(51.3% 0.160 28.6)",
+        "tonalRamp": [
+          "#260000",
+          "#4d0000",
+          "#761510",
+          "#a22e25",
+          "#c55549",
+          "#e17f72",
+          "#ffab9f",
+          "#ffdcd2"
+        ]
+      },
+      "purpure": {
+        "role": "secondary",
+        "displayName": "Purpure, Heraldic Violet",
+        "canonical": "oklch(44.5% 0.129 312.7)",
+        "tonalRamp": [
+          "#170023",
+          "#340f46",
+          "#55286b",
+          "#75468f",
+          "#936aab",
+          "#b28ec7",
+          "#d4b7e6",
+          "#fbe5ff"
+        ]
+      },
+      "vert": {
+        "role": "secondary",
+        "displayName": "Vert, Field Green",
+        "canonical": "oklch(47.4% 0.094 155.1)",
+        "tonalRamp": [
+          "#001102",
+          "#002d14",
+          "#0f4c2c",
+          "#2a6d46",
+          "#548c68",
+          "#7cab8c",
+          "#a9cfb5",
+          "#daf7e3"
+        ]
+      },
+      "azure": {
+        "role": "secondary",
+        "displayName": "Azure, Lapis Blue",
+        "canonical": "oklch(47.9% 0.131 259.7)",
+        "tonalRamp": [
+          "#00062b",
+          "#032151",
+          "#173d7b",
+          "#2d5ba6",
+          "#547dc0",
+          "#7b9fda",
+          "#a7c6f7",
+          "#d8f0ff"
+        ]
+      },
+      "sable-field": {
+        "role": "secondary",
+        "displayName": "Sable Field",
+        "canonical": "oklch(27.2% 0.023 307.5)",
+        "tonalRamp": [
+          "#0d0912",
+          "#27212d",
+          "#433d48",
+          "#605b66",
+          "#7f7b84",
+          "#a09da4",
+          "#c5c3c8",
+          "#efeef1"
+        ]
+      },
+      "on-tincture": {
+        "role": "secondary",
+        "displayName": "Argent on Tincture",
+        "canonical": "oklch(98.1% 0.020 84.6)",
+        "tonalRamp": [
+          "#0c0b0a",
+          "#252422",
+          "#413f3d",
+          "#605d59",
+          "#807d76",
+          "#a29e95",
+          "#c9c3b9",
+          "#f4eee0"
+        ]
+      },
+      "ground": {
+        "role": "neutral",
+        "displayName": "Sable Ground",
+        "canonical": "oklch(18.4% 0.011 311.9)",
+        "tonalRamp": [
+          "#0d0a0e",
+          "#262328",
+          "#413e43",
+          "#5f5c61",
+          "#7e7c80",
+          "#9f9ea0",
+          "#c4c3c5",
+          "#efeeef"
+        ]
+      },
+      "ground-raised": {
+        "role": "neutral",
+        "displayName": "Raised Cloth",
+        "canonical": "oklch(22.1% 0.015 310.7)",
+        "tonalRamp": [
+          "#0d0a0f",
+          "#262229",
+          "#423e45",
+          "#5f5c62",
+          "#7f7c81",
+          "#a09da1",
+          "#c5c3c6",
+          "#efeeef"
+        ]
+      },
+      "ground-sunk": {
+        "role": "neutral",
+        "displayName": "Sunk Cloth",
+        "canonical": "oklch(16.3% 0.009 307.9)",
+        "tonalRamp": [
+          "#0c0a0e",
+          "#252327",
+          "#413f42",
+          "#5e5d60",
+          "#7e7c7f",
+          "#9f9ea0",
+          "#c4c4c5",
+          "#efeeef"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Argent Ink",
+        "canonical": "oklch(92.6% 0.017 84.6)",
+        "tonalRamp": [
+          "#0c0b0a",
+          "#252422",
+          "#413f3c",
+          "#605d59",
+          "#807d76",
+          "#a29e96",
+          "#c9c4b9",
+          "#f4eee2"
+        ]
+      },
+      "ink-dim": {
+        "role": "neutral",
+        "displayName": "Faded Ink",
+        "canonical": "oklch(74.7% 0.020 80.1)",
+        "tonalRamp": [
+          "#0c0b08",
+          "#26241f",
+          "#433f39",
+          "#625d55",
+          "#827c72",
+          "#a59d91",
+          "#cbc3b7",
+          "#f4eee3"
+        ]
+      },
+      "state-on": {
+        "role": "tertiary",
+        "displayName": "Beacon Green",
+        "canonical": "oklch(73.1% 0.141 156.7)",
+        "tonalRamp": [
+          "#001004",
+          "#012c17",
+          "#0f4c2e",
+          "#216e46",
+          "#339260",
+          "#46b77b",
+          "#79dda3",
+          "#b3ffd2"
+        ]
+      },
+      "state-off": {
+        "role": "tertiary",
+        "displayName": "Ember Red",
+        "canonical": "oklch(65.0% 0.166 29.8)",
+        "tonalRamp": [
+          "#200000",
+          "#460c07",
+          "#6e2219",
+          "#9a392d",
+          "#c85243",
+          "#ef7462",
+          "#ffa291",
+          "#ffd4c5"
+        ]
+      },
+      "state-wait": {
+        "role": "tertiary",
+        "displayName": "Ash",
+        "canonical": "oklch(61.3% 0.017 77.0)",
+        "tonalRamp": [
+          "#0d0b08",
+          "#27231f",
+          "#433f39",
+          "#625d55",
+          "#837c73",
+          "#a49d94",
+          "#c9c3bb",
+          "#f2eee7"
+        ]
+      },
+      "or-day": {
+        "role": "primary",
+        "displayName": "Or, Day Metal",
+        "canonical": "oklch(59.2% 0.113 77.2)",
+        "tonalRamp": [
+          "#170700",
+          "#361e00",
+          "#583900",
+          "#7c5508",
+          "#a2731f",
+          "#c19654",
+          "#e2be88",
+          "#ffeabf"
+        ]
+      },
+      "or-hi-day": {
+        "role": "primary",
+        "displayName": "Bright Or, Day",
+        "canonical": "oklch(65.4% 0.121 78.3)",
+        "tonalRamp": [
+          "#160800",
+          "#341f00",
+          "#563900",
+          "#7b560b",
+          "#a1741f",
+          "#c59544",
+          "#e6bd7b",
+          "#ffe9b4"
+        ]
+      },
+      "link-day": {
+        "role": "primary",
+        "displayName": "Day Link Gold",
+        "canonical": "oklch(48.4% 0.094 80.4)",
+        "tonalRamp": [
+          "#170700",
+          "#351f00",
+          "#563a00",
+          "#79570f",
+          "#977841",
+          "#b59a6c",
+          "#d7c19c",
+          "#fdecd0"
+        ]
+      },
+      "ground-day": {
+        "role": "neutral",
+        "displayName": "Vellum",
+        "canonical": "oklch(93.5% 0.017 84.6)",
+        "tonalRamp": [
+          "#0c0b0a",
+          "#252422",
+          "#413f3c",
+          "#605d59",
+          "#807d77",
+          "#a29e96",
+          "#c9c4ba",
+          "#f4eee2"
+        ]
+      },
+      "ground-raised-day": {
+        "role": "neutral",
+        "displayName": "Raised Vellum",
+        "canonical": "oklch(96.8% 0.011 84.6)",
+        "tonalRamp": [
+          "#0b0b0a",
+          "#242423",
+          "#40403e",
+          "#5f5d5b",
+          "#7f7d79",
+          "#a19e99",
+          "#c7c4bd",
+          "#f2eee6"
+        ]
+      },
+      "ground-sunk-day": {
+        "role": "neutral",
+        "displayName": "Sunk Vellum",
+        "canonical": "oklch(89.9% 0.020 84.6)",
+        "tonalRamp": [
+          "#0c0b0a",
+          "#252421",
+          "#413f3b",
+          "#605d57",
+          "#817d75",
+          "#a39e94",
+          "#cac3b7",
+          "#f4eee0"
+        ]
+      },
+      "ink-day": {
+        "role": "neutral",
+        "displayName": "Iron Gall",
+        "canonical": "oklch(21.2% 0.013 314.5)",
+        "tonalRamp": [
+          "#0d0a0f",
+          "#262228",
+          "#423e44",
+          "#5f5c61",
+          "#7f7c80",
+          "#a09da1",
+          "#c5c3c6",
+          "#efeeef"
+        ]
+      },
+      "ink-dim-day": {
+        "role": "neutral",
+        "displayName": "Faded Iron Gall",
+        "canonical": "oklch(44.8% 0.014 334.4)",
+        "tonalRamp": [
+          "#0e0a0d",
+          "#272226",
+          "#443d42",
+          "#635b61",
+          "#827b80",
+          "#a29ca1",
+          "#c7c2c6",
+          "#f1edf0"
+        ]
+      },
+      "sable-field-day": {
+        "role": "secondary",
+        "displayName": "Sable Field, Day",
+        "canonical": "oklch(22.5% 0.015 310.7)",
+        "tonalRamp": [
+          "#0d0a0f",
+          "#262229",
+          "#423e45",
+          "#5f5c62",
+          "#7f7c81",
+          "#a09da1",
+          "#c5c3c6",
+          "#efeeef"
+        ]
+      },
+      "state-on-day": {
+        "role": "tertiary",
+        "displayName": "Beacon Green, Day",
+        "canonical": "oklch(55.6% 0.127 153.8)",
+        "tonalRamp": [
+          "#001201",
+          "#002f0f",
+          "#004e26",
+          "#10703e",
+          "#36925b",
+          "#67b280",
+          "#98d5aa",
+          "#cdfcda"
+        ]
+      },
+      "state-off-day": {
+        "role": "tertiary",
+        "displayName": "Ember Red, Day",
+        "canonical": "oklch(52.1% 0.160 29.9)",
+        "tonalRamp": [
+          "#260000",
+          "#4c0000",
+          "#76160d",
+          "#a23023",
+          "#c55546",
+          "#e27e6f",
+          "#ffab9d",
+          "#ffdcd0"
+        ]
+      },
+      "rule": {
+        "role": "neutral",
+        "displayName": "Hairline",
+        "canonical": "rgb(236 230 218 / 0.14)",
+        "tonalRamp": [
+          "#0c0b0a",
+          "#252422",
+          "#413f3c",
+          "#605d59",
+          "#807d76",
+          "#a29e96",
+          "#c9c4b9",
+          "#f4eee2"
+        ]
+      },
+      "rule-strong": {
+        "role": "neutral",
+        "displayName": "Strong Hairline",
+        "canonical": "rgb(236 230 218 / 0.28)",
+        "tonalRamp": [
+          "#0c0b0a",
+          "#252422",
+          "#413f3c",
+          "#605d59",
+          "#807d76",
+          "#a29e96",
+          "#c9c4b9",
+          "#f4eee2"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "The Willkommen bei Hogwarts hero over the castle band only."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "View titles."
+      },
+      "banner": {
+        "displayName": "Banner",
+        "purpose": "Board name inside the tincture banner."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Section titles, edition and Staff ribbons, way-onward names, brand wordmark."
+      },
+      "numeral": {
+        "displayName": "Numeral",
+        "purpose": "Open count on each pennant; Regeln counters at 2.5rem."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "All running text; tabular numerals site-wide."
+      },
+      "lede": {
+        "displayName": "Lede",
+        "purpose": "View introductions, max 62ch."
+      },
+      "ui-strong": {
+        "displayName": "UI Strong",
+        "purpose": "Buttons, field labels, inline errors."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Uppercase data term bound to a value; never above a heading."
+      },
+      "mono": {
+        "displayName": "Mono",
+        "purpose": "Server address, coordinates, player names: anything copied or typed into the game."
+      }
+    },
+    "shadows": [
+      {
+        "name": "shadow-1",
+        "value": "0 2px 6px rgb(0 0 0 / 0.35)",
+        "purpose": "The gules error notice. Day: 0 2px 6px rgb(40 30 20 / 0.16)."
+      },
+      {
+        "name": "shadow-2",
+        "value": "0 10px 28px rgb(0 0 0 / 0.45)",
+        "purpose": "Floating undo toasts. Day: 0 10px 28px rgb(40 30 20 / 0.2)."
+      },
+      {
+        "name": "hanging-cloth",
+        "value": "drop-shadow(0 6px 10px rgb(0 0 0 / 0.3))",
+        "purpose": "Filter on each pennant, following its swallowtail."
+      },
+      {
+        "name": "gilt-rail",
+        "value": "0 2px 4px rgb(0 0 0 / 0.35)",
+        "purpose": "The rod the pennants hang from."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-out",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Every transition and entrance; exponential settle."
+      },
+      {
+        "name": "dur-1",
+        "value": "160ms",
+        "purpose": "Colour and border state changes, button press."
+      },
+      {
+        "name": "dur-2",
+        "value": "320ms",
+        "purpose": "Row entrance, toast in and out, shield fill and charge draw, copy check draw, view fade."
+      },
+      {
+        "name": "dur-3",
+        "value": "560ms",
+        "purpose": "Pennant drop and banner unfurl."
+      },
+      {
+        "name": "drop",
+        "value": "12px",
+        "purpose": "Pennant drop distance (half, sideways, on mobile). All four tokens go to 0 under prefers-reduced-motion."
+      },
+      {
+        "name": "undo-window",
+        "value": "5000ms",
+        "purpose": "Undo toast countdown before the DELETE is sent; pauses on hover and focus."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "tiny",
+        "value": "400px"
+      },
+      {
+        "name": "phone",
+        "value": "600px"
+      },
+      {
+        "name": "narrow",
+        "value": "760px"
+      },
+      {
+        "name": "scroll-rows",
+        "value": "900px"
+      },
+      {
+        "name": "tablet",
+        "value": "1024px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Or Button",
+      "kind": "button",
+      "refersTo": "button-or",
+      "description": "The primary action, for example IP kopieren or Aufgabe hinzufügen.",
+      "html": "<div class=\"ds-root\"><button class=\"ds-btn ds-btn-or\" type=\"button\"><svg class=\"ds-icon\" viewBox=\"0 0 20 20\" width=\"20\" height=\"20\" aria-hidden=\"true\"><path d=\"M7 7h9v10H7zM4 13V3h9\"/></svg>IP kopieren</button></div>",
+      "css": ":host, .ds-root { --or:#d4a23c; --or-hi:#e7bc5e; --on-or:#1a1206; --gules:#b0362c; --purpure:#6c3a86; --vert:#276b44; --azure:#2d5ba6; --sable-field:#2a2430; --on-tincture:#fff8ea; --ground:#141116; --ground-raised:#1d1920; --ground-sunk:#0f0d11; --ink:#ece6da; --ink-dim:#b4ac9f; --link:var(--or); --rule:rgb(236 230 218 / 0.14); --rule-strong:rgb(236 230 218 / 0.28); --state-on:#4cc283; --state-off:#e2604f; --state-wait:#8a8379; --radius:2px; --hit:44px; --ease-out:cubic-bezier(0.16, 1, 0.3, 1); --dur-1:160ms; --dur-2:320ms; --dur-3:560ms; --drop:12px; --font-display:\"IM Fell English SC\",\"Iowan Old Style\",Georgia,serif; --font-ui:\"Atkinson Hyperlegible\",system-ui,sans-serif; --font-mono:\"JetBrains Mono\",ui-monospace,monospace; } .ds-root { background:var(--ground); padding:16px; color:var(--ink); font-family:var(--font-ui); } .ds-icon { flex:none; fill:none; stroke:currentColor; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round; } .ds-btn { display:inline-flex; align-items:center; justify-content:center; gap:8px; min-height:var(--hit); padding:0 16px; border:1px solid transparent; border-radius:var(--radius); background:none; font:700 0.875rem/1 var(--font-ui); white-space:nowrap; cursor:pointer; transition:background-color var(--dur-1) var(--ease-out), color var(--dur-1) var(--ease-out), border-color var(--dur-1) var(--ease-out), transform var(--dur-1) var(--ease-out); } .ds-btn:active { transform:translateY(1px); } .ds-btn:focus-visible { outline:2px solid var(--or); outline-offset:3px; } .ds-btn-or { background:var(--or); color:var(--on-or); } .ds-btn-or:hover { background:var(--or-hi); }"
+    },
+    {
+      "name": "Quiet Button",
+      "kind": "button",
+      "refersTo": "button-quiet",
+      "description": "Secondary actions: Rückgängig, Bild, Erneut versuchen.",
+      "html": "<div class=\"ds-root\"><button class=\"ds-btn ds-btn-quiet\" type=\"button\"><svg class=\"ds-icon\" viewBox=\"0 0 20 20\" width=\"20\" height=\"20\" aria-hidden=\"true\"><path d=\"M6 8H13a4 4 0 0 1 0 8H8M6 8l3-3M6 8l3 3\"/></svg>Rückgängig</button></div>",
+      "css": ":host, .ds-root { --or:#d4a23c; --or-hi:#e7bc5e; --on-or:#1a1206; --gules:#b0362c; --purpure:#6c3a86; --vert:#276b44; --azure:#2d5ba6; --sable-field:#2a2430; --on-tincture:#fff8ea; --ground:#141116; --ground-raised:#1d1920; --ground-sunk:#0f0d11; --ink:#ece6da; --ink-dim:#b4ac9f; --link:var(--or); --rule:rgb(236 230 218 / 0.14); --rule-strong:rgb(236 230 218 / 0.28); --state-on:#4cc283; --state-off:#e2604f; --state-wait:#8a8379; --radius:2px; --hit:44px; --ease-out:cubic-bezier(0.16, 1, 0.3, 1); --dur-1:160ms; --dur-2:320ms; --dur-3:560ms; --drop:12px; --font-display:\"IM Fell English SC\",\"Iowan Old Style\",Georgia,serif; --font-ui:\"Atkinson Hyperlegible\",system-ui,sans-serif; --font-mono:\"JetBrains Mono\",ui-monospace,monospace; } .ds-root { background:var(--ground); padding:16px; color:var(--ink); font-family:var(--font-ui); } .ds-icon { flex:none; fill:none; stroke:currentColor; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round; } .ds-btn { display:inline-flex; align-items:center; justify-content:center; gap:8px; min-height:var(--hit); padding:0 16px; border:1px solid transparent; border-radius:var(--radius); background:none; font:700 0.875rem/1 var(--font-ui); white-space:nowrap; cursor:pointer; transition:background-color var(--dur-1) var(--ease-out), color var(--dur-1) var(--ease-out), border-color var(--dur-1) var(--ease-out), transform var(--dur-1) var(--ease-out); } .ds-btn:active { transform:translateY(1px); } .ds-btn:focus-visible { outline:2px solid var(--or); outline-offset:3px; } .ds-btn-quiet { border-color:var(--rule-strong); color:var(--ink); } .ds-btn-quiet:hover { border-color:var(--or); color:var(--link); }"
+    },
+    {
+      "name": "IP Copy Group",
+      "kind": "custom",
+      "refersTo": "button-or",
+      "description": "Mono address joined to the or copy button inside a 1px or outline.",
+      "html": "<div class=\"ds-root\"><div class=\"ds-ip\"><code>mc.ardet.de</code><button class=\"ds-btn ds-btn-or\" type=\"button\"><svg class=\"ds-icon\" viewBox=\"0 0 20 20\" width=\"20\" height=\"20\" aria-hidden=\"true\"><path d=\"M7 7h9v10H7zM4 13V3h9\"/></svg>IP kopieren</button></div></div>",
+      "css": ":host, .ds-root { --or:#d4a23c; --or-hi:#e7bc5e; --on-or:#1a1206; --gules:#b0362c; --purpure:#6c3a86; --vert:#276b44; --azure:#2d5ba6; --sable-field:#2a2430; --on-tincture:#fff8ea; --ground:#141116; --ground-raised:#1d1920; --ground-sunk:#0f0d11; --ink:#ece6da; --ink-dim:#b4ac9f; --link:var(--or); --rule:rgb(236 230 218 / 0.14); --rule-strong:rgb(236 230 218 / 0.28); --state-on:#4cc283; --state-off:#e2604f; --state-wait:#8a8379; --radius:2px; --hit:44px; --ease-out:cubic-bezier(0.16, 1, 0.3, 1); --dur-1:160ms; --dur-2:320ms; --dur-3:560ms; --drop:12px; --font-display:\"IM Fell English SC\",\"Iowan Old Style\",Georgia,serif; --font-ui:\"Atkinson Hyperlegible\",system-ui,sans-serif; --font-mono:\"JetBrains Mono\",ui-monospace,monospace; } .ds-root { background:var(--ground); padding:16px; color:var(--ink); font-family:var(--font-ui); } .ds-icon { flex:none; fill:none; stroke:currentColor; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round; } .ds-btn { display:inline-flex; align-items:center; justify-content:center; gap:8px; min-height:var(--hit); padding:0 16px; border:1px solid transparent; border-radius:var(--radius); background:none; font:700 0.875rem/1 var(--font-ui); white-space:nowrap; cursor:pointer; transition:background-color var(--dur-1) var(--ease-out), color var(--dur-1) var(--ease-out), border-color var(--dur-1) var(--ease-out), transform var(--dur-1) var(--ease-out); } .ds-btn:active { transform:translateY(1px); } .ds-btn:focus-visible { outline:2px solid var(--or); outline-offset:3px; } .ds-btn-or { background:var(--or); color:var(--on-or); } .ds-btn-or:hover { background:var(--or-hi); } .ds-ip { display:inline-flex; align-items:stretch; border:1px solid var(--or); border-radius:var(--radius); } .ds-ip .ds-btn { border-radius:0; } .ds-ip code { display:inline-flex; align-items:center; padding:0 12px; color:var(--link); font:600 0.98rem var(--font-mono); }"
+    },
+    {
+      "name": "Text Field",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Sunk-cloth well, hairline border, or focus glow.",
+      "html": "<div class=\"ds-root\"><label class=\"ds-field\"><span>Aufgabe</span><input class=\"ds-input\" placeholder=\"z. B. Dach der Großen Halle\"></label></div>",
+      "css": ":host, .ds-root { --or:#d4a23c; --or-hi:#e7bc5e; --on-or:#1a1206; --gules:#b0362c; --purpure:#6c3a86; --vert:#276b44; --azure:#2d5ba6; --sable-field:#2a2430; --on-tincture:#fff8ea; --ground:#141116; --ground-raised:#1d1920; --ground-sunk:#0f0d11; --ink:#ece6da; --ink-dim:#b4ac9f; --link:var(--or); --rule:rgb(236 230 218 / 0.14); --rule-strong:rgb(236 230 218 / 0.28); --state-on:#4cc283; --state-off:#e2604f; --state-wait:#8a8379; --radius:2px; --hit:44px; --ease-out:cubic-bezier(0.16, 1, 0.3, 1); --dur-1:160ms; --dur-2:320ms; --dur-3:560ms; --drop:12px; --font-display:\"IM Fell English SC\",\"Iowan Old Style\",Georgia,serif; --font-ui:\"Atkinson Hyperlegible\",system-ui,sans-serif; --font-mono:\"JetBrains Mono\",ui-monospace,monospace; } .ds-root { background:var(--ground); padding:16px; color:var(--ink); font-family:var(--font-ui); } .ds-field { display:grid; gap:4px; } .ds-field span { font-size:0.875rem; font-weight:700; color:var(--ink-dim); } .ds-input { width:100%; min-height:var(--hit); padding:0 12px; border:1px solid var(--rule-strong); border-radius:var(--radius); background:var(--ground-sunk); color:var(--ink); font:400 1.0625rem var(--font-ui); caret-color:var(--or); transition:border-color var(--dur-1) var(--ease-out), box-shadow var(--dur-1) var(--ease-out); } .ds-input::placeholder { color:var(--ink-dim); } .ds-input:hover { border-color:var(--ink-dim); } .ds-input:focus-visible { outline:none; border-color:var(--or); box-shadow:0 0 0 3px color-mix(in srgb, var(--or) 30%, transparent); }"
+    },
+    {
+      "name": "Board Tabs",
+      "kind": "nav",
+      "refersTo": "board-tab",
+      "description": "Tincture shield, name and count; the selected tab carries a 3px tincture underline over a 16% tincture wash.",
+      "html": "<div class=\"ds-root\"><div class=\"ds-tabs\" role=\"tablist\"><button class=\"ds-tab\" role=\"tab\" aria-selected=\"false\" style=\"--tincture:var(--gules)\"><span class=\"ds-shield\"></span>Bauaufgaben<b>3</b></button><button class=\"ds-tab\" role=\"tab\" aria-selected=\"true\" style=\"--tincture:var(--purpure)\"><span class=\"ds-shield\"></span>Design-Vorschläge<b>2</b></button><button class=\"ds-tab\" role=\"tab\" aria-selected=\"false\" style=\"--tincture:var(--vert)\"><span class=\"ds-shield\"></span>Terraforming<b>2</b></button></div></div>",
+      "css": ":host, .ds-root { --or:#d4a23c; --or-hi:#e7bc5e; --on-or:#1a1206; --gules:#b0362c; --purpure:#6c3a86; --vert:#276b44; --azure:#2d5ba6; --sable-field:#2a2430; --on-tincture:#fff8ea; --ground:#141116; --ground-raised:#1d1920; --ground-sunk:#0f0d11; --ink:#ece6da; --ink-dim:#b4ac9f; --link:var(--or); --rule:rgb(236 230 218 / 0.14); --rule-strong:rgb(236 230 218 / 0.28); --state-on:#4cc283; --state-off:#e2604f; --state-wait:#8a8379; --radius:2px; --hit:44px; --ease-out:cubic-bezier(0.16, 1, 0.3, 1); --dur-1:160ms; --dur-2:320ms; --dur-3:560ms; --drop:12px; --font-display:\"IM Fell English SC\",\"Iowan Old Style\",Georgia,serif; --font-ui:\"Atkinson Hyperlegible\",system-ui,sans-serif; --font-mono:\"JetBrains Mono\",ui-monospace,monospace; } .ds-root { background:var(--ground); padding:16px; color:var(--ink); font-family:var(--font-ui); } .ds-tabs { display:flex; gap:4px; border-bottom:1px solid var(--rule); } .ds-tab { display:inline-flex; align-items:center; gap:8px; min-height:var(--hit); padding:0 16px; border:0; border-bottom:3px solid transparent; background:none; color:var(--ink-dim); font:400 1.0625rem var(--font-ui); white-space:nowrap; cursor:pointer; transition:color var(--dur-1) var(--ease-out), border-color var(--dur-2) var(--ease-out), background-color var(--dur-2) var(--ease-out); } .ds-tab:hover { color:var(--ink); } .ds-tab:focus-visible { outline:2px solid var(--or); outline-offset:-2px; } .ds-tab[aria-selected=\"true\"] { color:var(--ink); border-bottom-color:var(--tincture); background:color-mix(in srgb, var(--tincture) 16%, transparent); } .ds-tab b { font-size:0.8125rem; color:var(--ink-dim); } .ds-shield { width:12px; height:14px; background:var(--tincture); clip-path:polygon(0 0, 100% 0, 100% 55%, 50% 100%, 0 55%); }"
+    },
+    {
+      "name": "Pennant Rail",
+      "kind": "custom",
+      "refersTo": "pennant",
+      "description": "Signature: tincture pennants hanging from the gilt rail; each drops 12px on hover or focus.",
+      "html": "<div class=\"ds-root\"><div class=\"ds-rail\"><a class=\"ds-pennant\" href=\"#\" style=\"--tincture:var(--gules)\"><span class=\"ds-count\">3</span><span class=\"ds-unit\">offen · 1 erledigt</span><span class=\"ds-name\">Bauaufgaben</span></a><a class=\"ds-pennant\" href=\"#\" style=\"--tincture:var(--azure)\"><span class=\"ds-count\">1</span><span class=\"ds-unit\">offen · 0 erledigt</span><span class=\"ds-name\">Zweiter Gebäudekomplex</span></a></div></div>",
+      "css": ":host, .ds-root { --or:#d4a23c; --or-hi:#e7bc5e; --on-or:#1a1206; --gules:#b0362c; --purpure:#6c3a86; --vert:#276b44; --azure:#2d5ba6; --sable-field:#2a2430; --on-tincture:#fff8ea; --ground:#141116; --ground-raised:#1d1920; --ground-sunk:#0f0d11; --ink:#ece6da; --ink-dim:#b4ac9f; --link:var(--or); --rule:rgb(236 230 218 / 0.14); --rule-strong:rgb(236 230 218 / 0.28); --state-on:#4cc283; --state-off:#e2604f; --state-wait:#8a8379; --radius:2px; --hit:44px; --ease-out:cubic-bezier(0.16, 1, 0.3, 1); --dur-1:160ms; --dur-2:320ms; --dur-3:560ms; --drop:12px; --font-display:\"IM Fell English SC\",\"Iowan Old Style\",Georgia,serif; --font-ui:\"Atkinson Hyperlegible\",system-ui,sans-serif; --font-mono:\"JetBrains Mono\",ui-monospace,monospace; } .ds-root { background:var(--ground); padding:16px; color:var(--ink); font-family:var(--font-ui); } .ds-rail { position:relative; display:grid; grid-template-columns:repeat(2, 160px); gap:12px; padding:12px 8px 24px; } .ds-rail::before { content:\"\"; position:absolute; inset:0 0 auto; height:10px; border-radius:5px; background:linear-gradient(#5a4e52, #2a2427); box-shadow:0 2px 4px rgb(0 0 0 / 0.35); } .ds-pennant { position:relative; isolation:isolate; display:flex; flex-direction:column; min-height:280px; padding:24px 16px 64px; color:var(--on-tincture); text-decoration:none; filter:drop-shadow(0 6px 10px rgb(0 0 0 / 0.3)); transition:transform var(--dur-3) var(--ease-out); } .ds-pennant::before { content:\"\"; position:absolute; inset:0; z-index:-1; background:repeating-linear-gradient(0deg, rgb(0 0 0 / 0.1) 0 1px, transparent 1px 3px), linear-gradient(180deg, rgb(0 0 0 / 0.22), transparent 18%), var(--tincture); clip-path:polygon(0 0, 100% 0, 100% 100%, 50% 86%, 0 100%); } .ds-pennant:hover, .ds-pennant:focus-visible { transform:translateY(var(--drop)); } .ds-pennant:focus-visible { outline:2px solid var(--or); outline-offset:4px; } .ds-count { font:400 4rem/1 var(--font-display); } .ds-unit { margin-top:4px; font-size:0.8125rem; letter-spacing:0.1em; text-transform:uppercase; } .ds-name { margin-top:auto; padding-top:24px; font:400 1.2rem/1.15 var(--font-display); } @media (prefers-reduced-motion: reduce) { .ds-pennant { transition:none; } .ds-pennant:hover, .ds-pennant:focus-visible { transform:none; } }"
+    },
+    {
+      "name": "Tincture Banner",
+      "kind": "custom",
+      "refersTo": "tincture-banner",
+      "description": "Signature: swallowtail board header in the board tincture; unfurls from the hoist on board switch.",
+      "html": "<div class=\"ds-root\"><div class=\"ds-banner\" style=\"--tincture:var(--purpure)\"><h2>Design-Vorschläge</h2><span>2 offen · 0 erledigt</span></div></div>",
+      "css": ":host, .ds-root { --or:#d4a23c; --or-hi:#e7bc5e; --on-or:#1a1206; --gules:#b0362c; --purpure:#6c3a86; --vert:#276b44; --azure:#2d5ba6; --sable-field:#2a2430; --on-tincture:#fff8ea; --ground:#141116; --ground-raised:#1d1920; --ground-sunk:#0f0d11; --ink:#ece6da; --ink-dim:#b4ac9f; --link:var(--or); --rule:rgb(236 230 218 / 0.14); --rule-strong:rgb(236 230 218 / 0.28); --state-on:#4cc283; --state-off:#e2604f; --state-wait:#8a8379; --radius:2px; --hit:44px; --ease-out:cubic-bezier(0.16, 1, 0.3, 1); --dur-1:160ms; --dur-2:320ms; --dur-3:560ms; --drop:12px; --font-display:\"IM Fell English SC\",\"Iowan Old Style\",Georgia,serif; --font-ui:\"Atkinson Hyperlegible\",system-ui,sans-serif; --font-mono:\"JetBrains Mono\",ui-monospace,monospace; } .ds-root { background:var(--ground); padding:16px; color:var(--ink); font-family:var(--font-ui); } .ds-banner { display:flex; flex-wrap:wrap; align-items:baseline; justify-content:space-between; gap:8px 24px; padding:20px 48px 20px 24px; color:var(--on-tincture); background:repeating-linear-gradient(0deg, rgb(0 0 0 / 0.1) 0 1px, transparent 1px 3px), var(--tincture); clip-path:polygon(0 0, 100% 0, calc(100% - 28px) 50%, 100% 100%, 0 100%); animation:ds-unfurl var(--dur-3) var(--ease-out) both; } .ds-banner h2 { margin:0; font:400 2.25rem/1.05 var(--font-display); } .ds-banner span { font:700 1.0625rem var(--font-ui); } @keyframes ds-unfurl { from { clip-path:polygon(0 0, 0 0, 0 50%, 0 100%, 0 100%); } } @media (prefers-reduced-motion: reduce) { .ds-banner { transition:none; animation:none; } }"
+    },
+    {
+      "name": "Shield Checkbox Row",
+      "kind": "custom",
+      "refersTo": "input",
+      "description": "State by form: outlined shield when open, or-filled shield with a drawn charge when done.",
+      "html": "<div class=\"ds-root\"><label class=\"ds-row\"><input type=\"checkbox\" class=\"ds-check\"><span class=\"ds-shieldbox\"><svg viewBox=\"0 0 20 20\" width=\"24\" height=\"24\" aria-hidden=\"true\"><path class=\"ds-s\" d=\"M4 3h12v7.2c0 3.6-2.6 5.9-6 7.3-3.4-1.4-6-3.7-6-7.3Z\"/><path class=\"ds-c\" d=\"m6.8 9.6 2.2 2.2 4.4-4.6\"/></svg></span><span class=\"ds-title\">Banner in der Großen Halle</span></label></div>",
+      "css": ":host, .ds-root { --or:#d4a23c; --or-hi:#e7bc5e; --on-or:#1a1206; --gules:#b0362c; --purpure:#6c3a86; --vert:#276b44; --azure:#2d5ba6; --sable-field:#2a2430; --on-tincture:#fff8ea; --ground:#141116; --ground-raised:#1d1920; --ground-sunk:#0f0d11; --ink:#ece6da; --ink-dim:#b4ac9f; --link:var(--or); --rule:rgb(236 230 218 / 0.14); --rule-strong:rgb(236 230 218 / 0.28); --state-on:#4cc283; --state-off:#e2604f; --state-wait:#8a8379; --radius:2px; --hit:44px; --ease-out:cubic-bezier(0.16, 1, 0.3, 1); --dur-1:160ms; --dur-2:320ms; --dur-3:560ms; --drop:12px; --font-display:\"IM Fell English SC\",\"Iowan Old Style\",Georgia,serif; --font-ui:\"Atkinson Hyperlegible\",system-ui,sans-serif; --font-mono:\"JetBrains Mono\",ui-monospace,monospace; } .ds-root { background:var(--ground); padding:16px; color:var(--ink); font-family:var(--font-ui); } .ds-row { position:relative; display:flex; align-items:center; gap:12px; padding:12px 0; border-block:1px solid var(--rule); font-weight:700; cursor:pointer; } .ds-check { position:absolute; opacity:0; width:44px; height:44px; margin:0; cursor:pointer; } .ds-shieldbox { display:inline-flex; align-items:center; justify-content:center; width:44px; height:44px; color:var(--ink-dim); transition:color var(--dur-1) var(--ease-out); } .ds-shieldbox svg { fill:none; stroke:currentColor; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round; } .ds-s { transition:fill var(--dur-2) var(--ease-out); } .ds-c { opacity:0; stroke:var(--on-or); stroke-width:2.2; stroke-dasharray:12; stroke-dashoffset:12; } .ds-row:hover .ds-shieldbox { color:var(--or); } .ds-check:focus-visible + .ds-shieldbox { outline:2px solid var(--or); outline-offset:-2px; } .ds-check:checked + .ds-shieldbox { color:var(--or); } .ds-check:checked + .ds-shieldbox .ds-s { fill:var(--or); } .ds-check:checked + .ds-shieldbox .ds-c { opacity:1; stroke-dashoffset:0; transition:stroke-dashoffset var(--dur-2) var(--ease-out) 60ms; } .ds-check:checked ~ .ds-title { text-decoration:line-through; text-decoration-thickness:1px; color:var(--ink-dim); }"
+    },
+    {
+      "name": "Undo Toast",
+      "kind": "custom",
+      "refersTo": "undo-toast",
+      "description": "Deletion waits 5s behind a draining or ring and a quiet Rückgängig button.",
+      "html": "<div class=\"ds-root\"><div class=\"ds-toast\" role=\"status\"><span class=\"ds-ring\"></span><span class=\"ds-msg\">Eintrag entfernt</span><button class=\"ds-btn ds-btn-quiet\" type=\"button\"><svg class=\"ds-icon\" viewBox=\"0 0 20 20\" width=\"20\" height=\"20\" aria-hidden=\"true\"><path d=\"M6 8H13a4 4 0 0 1 0 8H8M6 8l3-3M6 8l3 3\"/></svg>Rückgängig</button></div></div>",
+      "css": ":host, .ds-root { --or:#d4a23c; --or-hi:#e7bc5e; --on-or:#1a1206; --gules:#b0362c; --purpure:#6c3a86; --vert:#276b44; --azure:#2d5ba6; --sable-field:#2a2430; --on-tincture:#fff8ea; --ground:#141116; --ground-raised:#1d1920; --ground-sunk:#0f0d11; --ink:#ece6da; --ink-dim:#b4ac9f; --link:var(--or); --rule:rgb(236 230 218 / 0.14); --rule-strong:rgb(236 230 218 / 0.28); --state-on:#4cc283; --state-off:#e2604f; --state-wait:#8a8379; --radius:2px; --hit:44px; --ease-out:cubic-bezier(0.16, 1, 0.3, 1); --dur-1:160ms; --dur-2:320ms; --dur-3:560ms; --drop:12px; --font-display:\"IM Fell English SC\",\"Iowan Old Style\",Georgia,serif; --font-ui:\"Atkinson Hyperlegible\",system-ui,sans-serif; --font-mono:\"JetBrains Mono\",ui-monospace,monospace; } .ds-root { background:var(--ground); padding:16px; color:var(--ink); font-family:var(--font-ui); } .ds-icon { flex:none; fill:none; stroke:currentColor; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round; } .ds-btn { display:inline-flex; align-items:center; justify-content:center; gap:8px; min-height:var(--hit); padding:0 16px; border:1px solid transparent; border-radius:var(--radius); background:none; font:700 0.875rem/1 var(--font-ui); white-space:nowrap; cursor:pointer; transition:background-color var(--dur-1) var(--ease-out), color var(--dur-1) var(--ease-out), border-color var(--dur-1) var(--ease-out), transform var(--dur-1) var(--ease-out); } .ds-btn:active { transform:translateY(1px); } .ds-btn:focus-visible { outline:2px solid var(--or); outline-offset:3px; } .ds-btn-quiet { border-color:var(--rule-strong); color:var(--ink); } .ds-btn-quiet:hover { border-color:var(--or); color:var(--link); } .ds-toast { display:flex; align-items:center; gap:12px; max-width:420px; padding:8px 8px 8px 16px; background:var(--ground-raised); border:1px solid var(--rule-strong); border-radius:var(--radius); box-shadow:0 10px 28px rgb(0 0 0 / 0.45); } .ds-msg { flex:1; font-size:0.875rem; } .ds-ring { flex:none; width:18px; height:18px; border-radius:50%; background:conic-gradient(var(--or) 62%, transparent 0); mask:radial-gradient(circle, transparent 5px, #000 5.5px); }"
+    },
+    {
+      "name": "Status Pip",
+      "kind": "chip",
+      "refersTo": "button-icon",
+      "description": "Escutcheon pip plus a word: ash while loading, beacon green online, ember red offline.",
+      "html": "<div class=\"ds-root\"><p class=\"ds-status\" data-state=\"online\"><span class=\"ds-pip\"></span><b>Online</b> · 0 / 50 Spieler</p></div>",
+      "css": ":host, .ds-root { --or:#d4a23c; --or-hi:#e7bc5e; --on-or:#1a1206; --gules:#b0362c; --purpure:#6c3a86; --vert:#276b44; --azure:#2d5ba6; --sable-field:#2a2430; --on-tincture:#fff8ea; --ground:#141116; --ground-raised:#1d1920; --ground-sunk:#0f0d11; --ink:#ece6da; --ink-dim:#b4ac9f; --link:var(--or); --rule:rgb(236 230 218 / 0.14); --rule-strong:rgb(236 230 218 / 0.28); --state-on:#4cc283; --state-off:#e2604f; --state-wait:#8a8379; --radius:2px; --hit:44px; --ease-out:cubic-bezier(0.16, 1, 0.3, 1); --dur-1:160ms; --dur-2:320ms; --dur-3:560ms; --drop:12px; --font-display:\"IM Fell English SC\",\"Iowan Old Style\",Georgia,serif; --font-ui:\"Atkinson Hyperlegible\",system-ui,sans-serif; --font-mono:\"JetBrains Mono\",ui-monospace,monospace; } .ds-root { background:var(--ground); padding:16px; color:var(--ink); font-family:var(--font-ui); } .ds-status { display:inline-flex; align-items:center; gap:8px; margin:0; color:var(--ink-dim); font-size:0.875rem; font-variant-numeric:tabular-nums; } .ds-status b { color:var(--ink); } .ds-pip { width:10px; height:12px; background:var(--state-wait); clip-path:polygon(0 0, 100% 0, 100% 55%, 50% 100%, 0 55%); } [data-state=\"online\"] .ds-pip { background:var(--state-on); } [data-state=\"offline\"] .ds-pip { background:var(--state-off); }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Wappenrolle",
+    "overview": "The site is a heraldic roll of arms for a building crew. Each of the five boards flies its own tincture, and heraldry's rule of tincture (metal on colour, never colour on colour) is the whole contrast system. The ground is cloth, not a dashboard panel: a near-black sable at night and warm vellum by day, both carrying a faint 4px warp-and-weft weave. Text is argent, actions are or (gold), and a board's colour shows up only as a field (pennant, banner, ribbon) or as a small escutcheon shield marking which board something belongs to.\n\nThe layout is dense and plain, because people use it mid-session next to a running game. Structure comes from 1px hairlines on a 4px grid, not from cards or shadows. The ceremony is kept to a few devices: the gilt rail of hanging pennants on Start, the swallowtail banner that unfurls over each board, the Fell display face, and the shield shape repeated at every scale from the 10px status pip to the 40px empty-state mark. Everything else is quiet UI in Atkinson Hyperlegible.\n\nBoth themes are first-class. Night is the default (no JS means night). Day keeps the same tinctures and deepens the gold so fills and focus rings still hold 3:1 on vellum.",
+    "keyCharacteristics": [
+      "Five fixed board tinctures (gules, purpure, vert, azure, sable). They look the same in both themes and always carry argent text.",
+      "Or (gold) marks action: the primary button, links, focus rings, the active nav underline, the checked shield.",
+      "Every divider is one 1px hairline. Corners are cut to 2px.",
+      "Escutcheon and swallowtail silhouettes made with clip-path. No other ornament.",
+      "Woven ground texture, flat surfaces, and shadows only where something hangs or floats.",
+      "One signature motion: the pennant drop (12px, exponential ease-out)."
+    ],
+    "rules": [
+      {
+        "name": "The Rule of Tincture",
+        "body": "Anything laid on a tincture field (pennant, banner, ribbon, error notice) is argent ({colors.on-tincture}) or or. Tinctures are never used as text colour, and one tincture never sits on another.",
+        "section": "colors"
+      },
+      {
+        "name": "The Or Is Action Rule",
+        "body": "Gold means \"you can press this\" or \"this has focus\". The only static uses are the brand shield and the Regeln rule numerals. Don't use or as decoration on a surface you can't act on.",
+        "section": "colors"
+      },
+      {
+        "name": "The One Board, One Tincture Rule",
+        "body": "A board's colour reaches the UI only through `--tincture` bound by `data-tincture`. A new board gets a new tincture key. It never borrows a hex.",
+        "section": "colors"
+      },
+      {
+        "name": "The Fell Is for Names Rule",
+        "body": "IM Fell English SC sets names and numbers: titles, board names, ribbons, counts. It never sets running text, buttons, form labels, or metadata.",
+        "section": "typography"
+      },
+      {
+        "name": "The Copyable Is Mono Rule",
+        "body": "Anything a player copies or types into the game (the IP, coordinates, player names) is set in JetBrains Mono. Nothing else is.",
+        "section": "typography"
+      },
+      {
+        "name": "The Nothing Floats Without Reason Rule",
+        "body": "A surface gets a shadow only if it hangs (pennant, rail) or floats over content (toast, error notice). Rows, forms, tabs, and panels stay flat on the cloth.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do read a board's colour from `--tincture` through `data-tincture`. Give a new board its own tincture key.",
+      "Do set every word on a tincture field in argent ({colors.on-tincture}) or or. On the sable field, add the argent edge (an inset `rule-strong` ring) so it separates from the night ground.",
+      "Do show state by form as well as hue: outline vs. filled shield, the pip plus a word, strike-through for done.",
+      "Do divide with one 1px hairline on the 4px scale. Use dashed hairlines only for empty or pending slots.",
+      "Do keep controls at 44px (`hit`) with the 2px corner.",
+      "Do run motion on `--ease-out` with `--dur-1/2/3` (160, 320, 560ms) so reduced motion sets all of it to zero, including the pennant drop and the banner unfurl.",
+      "Do check new colours in both themes. By day the metal is {colors.or-day} and links are {colors.link-day}."
+    ],
+    "donts": [
+      "Don't use a tincture as text colour, and don't lay one tincture on another.",
+      "Don't use or on anything that isn't an action, focus, or selection, apart from the brand shield and the rule numerals.",
+      "Don't set running text, buttons, or labels in IM Fell English SC.",
+      "Don't wrap rows or panels in shadowed cards. Lists stay hairline-ruled on flat cloth.",
+      "Don't use tracked uppercase labels except as the term attached to a value. Never put one above a heading.",
+      "Don't round corners beyond 2px on rectangular surfaces."
+    ]
+  }
+}

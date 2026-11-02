@@ -50,23 +50,19 @@
   letter-spacing: 0.005em;
   text-shadow: 0 2px 18px rgb(0 0 0 / 0.5);
 }
-.status-panel {
+/* plain status line under the headline (players + version stay visible on phones) */
+.status-line {
   display: flex;
   flex-wrap: wrap;
-  margin: var(--s6) 0 0;
-  border: var(--hairline) solid rgb(255 248 234 / 0.22);
-  border-radius: var(--radius);
-  background: rgb(14 11 16 / 0.55);
-  backdrop-filter: blur(8px);
-  width: fit-content;
-  max-width: 100%;
+  align-items: center;
+  gap: var(--s1) var(--s3);
+  margin-top: var(--s5);
+  font-size: var(--fs-lg);
+  text-shadow: 0 1px 8px rgb(0 0 0 / 0.6);
 }
-.status-cell { padding: var(--s3) var(--s5); border-left: var(--hairline) solid rgb(255 248 234 / 0.18); }
-.status-cell:first-child { border-left: 0; }
-.status-cell dt { font-size: var(--fs-xs); letter-spacing: 0.08em; text-transform: uppercase; color: rgb(255 248 234 / 0.78); }
-.status-cell dd { margin: 0; font-weight: 700; font-size: var(--fs-lg); }
-.status-main dd { display: flex; align-items: center; gap: var(--s2); height: 100%; }
-.status-main .pip { width: 12px; height: 14px; }
+.status-line b { font-weight: 700; }
+.status-line .sep { opacity: 0.6; }
+.status-line .pip { width: 12px; height: 14px; }
 
 /* ---------- Start: banner rail (signature: the pennant drop) ---------- */
 .start-grid {
@@ -90,13 +86,18 @@
   inset: 0 calc(-1 * var(--s2)) auto;
   height: 10px;
   border-radius: 5px;
-  background: linear-gradient(var(--rail-hi), var(--rail-lo));
+  background: linear-gradient(var(--rail-hi), var(--or) 55%, var(--rail-lo));
   box-shadow: 0 2px 4px rgb(0 0 0 / 0.35);
 }
-.rail > li { filter: drop-shadow(0 6px 10px rgb(0 0 0 / 0.3)); }
+.rail > li { display: flex; filter: drop-shadow(0 6px 10px rgb(0 0 0 / 0.3)); }
+/* sable on sable needs its argent edge (follows the clip-path, unlike a border) */
+.rail > li:has([data-tincture="sable"]) {
+  filter: drop-shadow(1px 0 0 var(--ink)) drop-shadow(-1px 0 0 var(--ink)) drop-shadow(0 1px 0 var(--ink)) drop-shadow(0 6px 10px rgb(0 0 0 / 0.3));
+}
 .pennant {
   position: relative;
   isolation: isolate;
+  flex: 1;
   display: flex;
   flex-direction: column;
   min-height: 320px;
@@ -119,7 +120,8 @@
 .pennant:hover,
 .pennant:focus-visible { color: var(--on-tincture); transform: translateY(var(--drop)); }
 .pennant:focus-visible { outline-offset: 4px; }
-.pennant-count { font: 400 clamp(3rem, 2rem + 2.6vw, 5rem) / 1 var(--font-display); }
+/* UI face with lining figures: Fell's old-style 1 reads as a capital I */
+.pennant-count { font: 700 clamp(2.5rem, 1.8rem + 2.2vw, 4.25rem) / 1 var(--font-ui); font-variant-numeric: lining-nums tabular-nums; letter-spacing: -0.02em; }
 .pennant-unit { margin-top: var(--s1); font-size: var(--fs-xs); letter-spacing: 0.1em; text-transform: uppercase; }
 .pennant-name { margin-top: auto; padding-top: var(--s6); font: 400 clamp(1rem, 0.7rem + 0.6vw, 1.25rem) / 1.15 var(--font-display); hyphens: manual; }
 .pennant-latest {
@@ -190,7 +192,7 @@
   font-size: var(--fs-lg);
 }
 .rules li:last-child { border-bottom: var(--hairline) solid var(--rule); }
-.rules li::before { content: counter(rule); font: 400 2.5rem/1 var(--font-display); color: var(--link); }
+.rules li::before { content: counter(rule, upper-roman); font: 400 2.5rem/1 var(--font-display); color: var(--link); }
 
 /* ---------- Beitreten ---------- */
 .editions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s8); }
@@ -362,10 +364,6 @@
   .board-tools .search { flex-basis: 100%; max-width: none; }
   .roll-row { grid-template-columns: 1fr; gap: var(--s2); }
   .roll-row dt { width: fit-content; }
-  .status-panel { width: 100%; }
-  .status-cell { flex: 1 1 0; }
-  .status-main { flex-basis: 100%; border-bottom: var(--hairline) solid rgb(255 248 234 / 0.18); }
-  .status-main + .status-cell { border-left: 0; }
   .banner { padding-right: var(--s10); }
 }
 

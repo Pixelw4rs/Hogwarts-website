@@ -14,7 +14,7 @@ FIRST VIEWPORT: A sticky 64px bar holds the brand shield, the live status and an
 
 FORM: Wappenrolle (heraldic roll of arms), candidate 7 on my ordered list (assigned by the roll). seed:8d28c46511bbf272
 
-Raises: state is shown by form, not just hue (shield outline vs filled) — from emission-line rail. Deleting stamps the row "Entfernt" with a 5s undo before the DELETE is sent — from ticket wallet. One rule weight on a 4px grid — from design annual.
+Raises: state is shown by form, not just hue (shield outline vs filled) — from emission-line rail. Nothing disappears silently: a deleted row is held back and a „… entfernt“ toast offers 5s of Rückgängig before the DELETE is sent — from ticket wallet. One rule weight on a 4px grid — from design annual.
 
 Signature motion: the pennant drop. The active or hovered pennant lowers 12px with an exponential ease-out, and switching boards unfurls the board's banner header with a clip-path reveal. Both turn off under reduced motion.
 

@@ -14,7 +14,7 @@
   (function () {
     var root = document.documentElement, theme;
     try { theme = localStorage.getItem('ardet-theme'); } catch (e) {}
-    root.dataset.theme = theme || (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+    root.dataset.theme = theme || 'dark'; // night is the default; day is opt-in via the toggle
     var view = location.hash.replace(/^#\/?/, '').split('/')[0];
     root.dataset.view = /^(start|regeln|beitreten|hub|map|staff)$/.test(view) ? view : 'start';
     root.classList.add('js');
@@ -65,11 +65,11 @@
     <img class="castle-img" src="hogwarts-bg.jpg" alt="" width="1280" height="720" fetchpriority="high">
     <div class="wrap castle-inner">
       <h1 id="start-title" class="hero-title" tabindex="-1">Willkommen bei Hogwarts</h1>
-      <dl class="status-panel" data-status data-state="loading">
-        <div class="status-cell status-main"><dt class="visually-hidden">Status</dt><dd><span class="pip" aria-hidden="true"></span><b data-status-label>Status wird geprüft…</b></dd></div>
-        <div class="status-cell"><dt>Spieler online</dt><dd data-status-players>—</dd></div>
-        <div class="status-cell"><dt>Version</dt><dd data-status-version>—</dd></div>
-      </dl>
+      <p class="status-line" data-status data-state="loading">
+        <span class="pip" aria-hidden="true"></span><span class="visually-hidden">Serverstatus: </span><b data-status-label>Status wird geprüft…</b>
+        <span class="sep" aria-hidden="true">·</span><span>Spieler online: <b data-status-players>—</b></span>
+        <span class="sep" aria-hidden="true">·</span><span>Version: <b data-status-version>—</b></span>
+      </p>
     </div>
   </div>
 
@@ -112,8 +112,8 @@
 <section class="view wrap view-page" id="view-regeln" aria-labelledby="regeln-title">
   <h1 id="regeln-title" class="view-title" tabindex="-1">Regeln</h1>
   <ol class="rules">
-    <li>Redstone-/Farm-Lag im Blick behalten — Chunks verantwortungsvoll laden.</li>
-    <li>Große Terraforming- oder Gelände-Projekte zuerst auf das <a href="#hub/terraforming">Terraforming-Board</a>.</li>
+    <li><span>Redstone-/Farm-Lag im Blick behalten — Chunks verantwortungsvoll laden.</span></li>
+    <li><span>Große Terraforming- oder Gelände-Projekte zuerst auf das <a href="#hub/terraforming">Terraforming-Board</a>.</span></li>
   </ol>
 </section>
 
