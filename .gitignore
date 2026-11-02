@@ -1,1 +1,4 @@
 .claude/
+.impeccable/mocks/
+.impeccable/config.local.json
+node_modules/
