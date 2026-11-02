@@ -1,0 +1,21 @@
+services:
+  hogwarts:
+    image: node:22-alpine
+    container_name: hogwarts
+    restart: unless-stopped
+    user: "1000:1000"          # run `id pixel` - change if pixel is not 1000
+    working_dir: /app
+    command: ["node", "server.js"]
+    ports:
+      - "8080:8080"
+    environment:
+      - PORT=8080
+      - WEB_ROOT=/data
+    volumes:
+      - ./server:/app:ro       # the small backend (server.js)
+      - ./data:/data           # website + everything you upload; boards live in data/db/
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:8080/api/boards"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
