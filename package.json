@@ -1,0 +1,14 @@
+{
+  "name": "ardet-hogwarts-website",
+  "private": true,
+  "description": "ARDET Minecraft server site. No build step: data/ is served as-is by server/server.js.",
+  "scripts": {
+    "start": "node server/server.js",
+    "dev": "node scripts/dev.mjs",
+    "check": "node scripts/check.mjs",
+    "test": "node --test tests/"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}
