@@ -42,7 +42,7 @@ export function mountHub(root, store, { onSelect }) {
   tablist.append(...tabs);
 
   root.replaceChildren(
-    el('div', { class: 'hub-head' }, el('h1', { class: 'view-title', text: 'Community Hub' }), sync),
+    el('div', { class: 'hub-head' }, el('h1', { class: 'view-title', id: 'hub-title', tabindex: '-1', text: 'Community Hub' }), sync),
     banner,
     tablist,
     ...[...panels.values()].map((p) => p.panel),
@@ -96,8 +96,8 @@ export function mountHub(root, store, { onSelect }) {
     if (/** @type {HTMLElement} */ (e.target).closest('[data-act="retry"]')) store.refresh();
   });
   root.addEventListener('animationend', (e) => {
-    const p = /** @type {HTMLElement} */ (e.target);
-    if (p.classList.contains('board-panel')) delete p.dataset.unfurl;
+    const panel = /** @type {HTMLElement} */ (e.target).closest('.board-panel');
+    if (panel) delete panel.dataset.unfurl;
   });
 
   function paintSync(snap) {

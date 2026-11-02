@@ -83,6 +83,9 @@
    script in index.html (stored choice, else system preference); no JS = night. */
 :root[data-theme="light"] {
   color-scheme: light;
+  /* day metal: deeper gold so fills and focus rings keep 3:1 on vellum */
+  --or: #a3741f;
+  --or-hi: #b8862a;
   --ground: #efe9dd;
   --ground-raised: #f8f4ec;
   --ground-sunk: #e4ddcf;

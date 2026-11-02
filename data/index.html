@@ -2,432 +2,180 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>ARDET — Minecraft Server</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<meta name="theme-color" content="#0e1519">
+<meta name="description" content="ARDET: Status, Beitritt, Regeln und der Community Hub für unseren Hogwarts-Bau auf mc.ardet.de.">
+<meta name="theme-color" content="#141116">
 <link rel="icon" type="image/png" href="favicon.png">
 <link rel="shortcut icon" href="favicon.ico">
 <link rel="apple-touch-icon" href="favicon.png">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
-<style>
-  /* Palette pulled from the Hogwarts key art:
-     night slate, cloak navy, mist, sunlit gold, wand-blue glow, valley green */
-  :root{
-    --bg:#0e1519; --bg2:rgba(20,30,38,.72); --panel:rgba(24,36,45,.58); --line:rgba(214,226,224,.16);
-    --stone:#8d9aa0; --moss:#6f9080; --gold:#e6bc5e; --gold-dim:#b8923f;
-    --glow:#62b4ff; --navy:#1c2a44;
-    --text:#f0f2ea; --text-dim:#b7c3c4; --danger:#d9705a;
-    font-family:'Space Grotesk',system-ui,sans-serif;
-  }
-  *{box-sizing:border-box;}
-  html{background:var(--bg);}
-  body{margin:0;background:transparent;color:var(--text);line-height:1.5;min-height:100vh;position:relative;}
-
-  /* Blurred castle picture: only its colours come through */
-  body::before{
-    content:"";position:fixed;inset:-12%;z-index:-2;
-    background:url("hogwarts-bg.jpg") center/cover no-repeat;
-    filter:blur(48px) saturate(1.15);
-  }
-  body::after{
-    content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
-    background:
-      radial-gradient(70% 55% at 25% 12%, rgba(230,188,94,.20), transparent 70%),
-      linear-gradient(180deg, rgba(10,16,20,.45) 0%, rgba(10,16,20,.72) 100%);
-  }
-
-  a{color:var(--gold);}
-  a:hover{color:#f3d07f;}
-  :focus-visible{outline:2px solid var(--glow);outline-offset:2px;}
-  code{font-family:'IBM Plex Mono',monospace;color:var(--gold);}
-  .wrap{max-width:920px;margin:0 auto;padding:0 24px;}
-
-  header.top{position:sticky;top:0;background:rgba(12,19,24,.55);backdrop-filter:blur(14px) saturate(1.2);-webkit-backdrop-filter:blur(14px) saturate(1.2);border-bottom:1px solid var(--line);z-index:10;}
-  .topbar{display:flex;align-items:center;justify-content:space-between;padding:14px 0;gap:16px;}
-  .brand{display:flex;align-items:center;gap:12px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:700;font-size:1.5rem;letter-spacing:.06em;}
-  .brand .mark{width:16px;height:16px;border-radius:50%;background:radial-gradient(circle,#fff 0 18%,var(--glow) 42%,transparent 72%);box-shadow:0 0 14px 3px rgba(98,180,255,.55);}
-  nav.tabs{display:flex;gap:4px;overflow-x:auto;padding:4px 0 12px;}
-  nav.tabs button{background:none;border:none;color:var(--text-dim);font-family:inherit;font-size:.92rem;padding:8px 12px;border-radius:6px;cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent;}
-  nav.tabs button.active{background:rgba(255,255,255,.07);color:var(--text);border-bottom-color:var(--gold);}
-  nav.tabs button:hover{color:var(--text);}
-
-  .hero{padding:64px 0 44px;border-bottom:1px solid var(--line);}
-  .hero h1{font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:3.2rem;margin:0 0 10px;line-height:1.05;text-shadow:0 2px 24px rgba(0,0,0,.45);}
-  .ip-box{display:flex;align-items:center;gap:0;background:var(--panel);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid var(--line);border-radius:8px;overflow:hidden;max-width:420px;}
-  .ip-box code{flex:1;font-size:1.05rem;padding:14px 16px;color:var(--gold);}
-  .ip-box button{background:var(--gold);color:#241a06;border:none;padding:14px 18px;font-family:inherit;font-weight:600;cursor:pointer;}
-  .ip-box button:hover{background:#f0cb78;}
-  .status-row{display:flex;gap:22px;margin-top:18px;flex-wrap:wrap;font-size:.9rem;color:var(--text-dim);}
-  .status-row b{color:var(--text);}
-  .dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;background:var(--stone);}
-  .dot.on{background:#7bd08a;box-shadow:0 0 8px rgba(123,208,138,.7);}
-  .dot.off{background:var(--danger);}
-
-  section.panel{padding:44px 0;border-bottom:1px solid var(--line);}
-  section.panel h2{font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:1.9rem;margin:0 0 18px;}
-  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
-  @media(max-width:640px){.grid2{grid-template-columns:1fr;}.hero h1{font-size:2.4rem;}}
-  .card{background:var(--panel);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid var(--line);border-radius:10px;padding:18px 20px;}
-  .card h3{margin:0 0 8px;font-size:1.02rem;}
-  .card p{margin:0;color:var(--text-dim);font-size:.92rem;}
-  ul.rules{margin:0;padding:0;list-style:none;counter-reset:r;}
-  ul.rules li{counter-increment:r;padding:10px 0 10px 34px;position:relative;border-top:1px solid var(--line);}
-  ul.rules li:first-child{border-top:none;}
-  ul.rules li::before{content:counter(r);position:absolute;left:0;top:10px;color:var(--gold-dim);font-family:'IBM Plex Mono',monospace;font-size:.85rem;}
-
-  .staff{display:flex;gap:10px;flex-wrap:wrap;}
-  .staff span{background:var(--bg2);border:1px solid var(--line);border-radius:20px;padding:6px 14px;font-size:.85rem;}
-
-  /* community boards */
-  .board-tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:18px;}
-  .board-tabs button{background:var(--bg2);border:1px solid var(--line);color:var(--text-dim);padding:7px 13px;border-radius:6px;font-family:inherit;font-size:.85rem;cursor:pointer;}
-  .board-tabs button:hover{color:var(--text);}
-  .board-tabs button.active{background:var(--gold);color:#241a06;border-color:var(--gold);}
-  .board{display:none;}
-  .board.active{display:block;}
-  .add-row{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;}
-  .add-row input{flex:1;min-width:140px;background:var(--bg2);border:1px solid var(--line);color:var(--text);padding:10px 12px;border-radius:6px;font-family:inherit;}
-  .add-row input::placeholder{color:var(--stone);}
-  .add-row input:focus{outline:none;border-color:var(--glow);box-shadow:0 0 0 3px rgba(98,180,255,.22);}
-  .add-row button{background:var(--gold);color:#241a06;border:none;padding:10px 16px;border-radius:6px;font-weight:600;cursor:pointer;font-family:inherit;}
-  .add-row button:hover{background:#f0cb78;}
-  .items{display:flex;flex-direction:column;gap:8px;}
-  .item{display:flex;align-items:flex-start;gap:10px;background:var(--bg2);border:1px solid var(--line);border-radius:8px;padding:12px 14px;}
-  .item.done{opacity:.5;}
-  .item.done .item-title{text-decoration:line-through;}
-  .item input[type=checkbox]{margin-top:3px;accent-color:var(--gold);}
-  .item-body{flex:1;}
-  .item-title{font-weight:600;font-size:.95rem;}
-  .item-meta{font-size:.78rem;color:var(--text-dim);font-family:'IBM Plex Mono',monospace;margin-top:2px;}
-  .item button.del{background:none;border:none;color:var(--danger);cursor:pointer;font-size:1.1rem;line-height:1;padding:2px 6px;}
-  .item-img{width:56px;height:56px;object-fit:cover;border-radius:6px;flex:none;border:1px solid var(--line);}
-  .add-row input[type=file]{flex:1 1 180px;min-width:180px;background:var(--bg2);border:1px solid var(--line);color:var(--text-dim);padding:7px 10px;border-radius:6px;font-family:inherit;font-size:.8rem;}
-  .add-row input[type=file]::file-selector-button{background:var(--gold);color:#241a06;border:none;padding:6px 10px;border-radius:5px;font-weight:600;cursor:pointer;margin-right:8px;font-family:inherit;}
-  .img-hint{font-size:.78rem;color:var(--text-dim);width:100%;margin:-8px 0 2px;}
-  .empty{color:var(--text-dim);font-size:.9rem;padding:14px 0;}
-  .mapwrap{max-width:1400px;margin:0 auto;padding:16px 24px 24px;}
-  .mapbar{font-size:.85rem;color:var(--text-dim);margin-bottom:10px;}
-  #mapFrame{display:block;width:100%;height:calc(100vh - 170px);min-height:420px;border:1px solid var(--line);border-radius:10px;background:var(--bg);}
-  #hubStatus{border-style:solid;border-color:var(--danger);color:var(--text);}
-  #hubStatus[hidden]{display:none;}
-  .note-box{background:var(--bg2);border:1px dashed var(--line);border-radius:8px;padding:12px 14px;font-size:.83rem;color:var(--text-dim);margin-bottom:16px;}
-
-</style>
+<script>
+  // Before first paint: theme (stored choice, else system) and the view from the URL hash.
+  (function () {
+    var root = document.documentElement, theme;
+    try { theme = localStorage.getItem('ardet-theme'); } catch (e) {}
+    root.dataset.theme = theme || (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+    var view = location.hash.replace(/^#\/?/, '').split('/')[0];
+    root.dataset.view = /^(start|regeln|beitreten|hub|map|staff)$/.test(view) ? view : 'start';
+    root.classList.add('js');
+  })();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=IM+Fell+English+SC&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/views.css">
+<script type="module" src="js/main.js"></script>
 </head>
 <body>
+<a class="skip-link" href="#main">Zum Inhalt springen</a>
 
-<header class="top">
-  <div class="wrap">
-    <div class="topbar">
-      <div class="brand"><span class="mark"></span> ARDET</div>
+<header class="bar">
+  <div class="wrap bar-row">
+    <a class="brand" href="#start" aria-label="ARDET – zur Startseite"><span class="brand-mark" aria-hidden="true"></span>ARDET</a>
+    <p class="status-chip" data-status data-state="loading">
+      <span class="pip" aria-hidden="true"></span>
+      <span class="visually-hidden">Serverstatus: </span><b data-status-label>Status wird geprüft…</b>
+      <span class="status-players"><span aria-hidden="true">·</span> <span data-status-players>—</span> Spieler</span>
+    </p>
+    <div class="ip-group">
+      <code data-address>mc.ardet.de</code>
+      <button class="btn btn-or" type="button" data-copy-address><span data-label>IP kopieren</span></button>
     </div>
-    <nav class="tabs" id="mainTabs">
-      <button data-view="home" class="active">Start</button>
-      <button data-view="rules">Regeln</button>
-      <button data-view="join">Beitreten</button>
-      <button data-view="community">Community Hub</button>
-      <button data-view="map">Map</button>
-      <button data-view="staff">Staff</button>
-    </nav>
+    <button class="btn btn-icon theme-toggle" type="button" data-theme-toggle aria-label="Tagmodus einschalten"></button>
   </div>
+  <nav class="nav wrap" aria-label="Hauptnavigation">
+    <ul class="nav-list">
+      <li><a class="nav-link" href="#start" data-nav="start">Start</a></li>
+      <li><a class="nav-link" href="#regeln" data-nav="regeln">Regeln</a></li>
+      <li><a class="nav-link" href="#beitreten" data-nav="beitreten">Beitreten</a></li>
+      <li><a class="nav-link" href="#hub" data-nav="hub">Community Hub</a></li>
+      <li><a class="nav-link" href="#map" data-nav="map">Map</a></li>
+      <li><a class="nav-link" href="#staff" data-nav="staff">Staff</a></li>
+    </ul>
+  </nav>
 </header>
 
-<main>
+<main id="main">
 
-<div id="view-home">
-  <div class="hero wrap">
-    <h1>Willkommen bei Hogwarts</h1>
-    <div class="ip-box">
-      <code id="ipText">mc.ardet.de</code>
-      <button id="copyIp">IP kopieren</button>
-    </div>
-    <div class="status-row">
-      <span><span class="dot" id="statusDot"></span><b id="statusText">Status wird geprüft…</b></span>
-      <span>Spieler online: <b id="statusPlayers">—</b></span>
-      <span>Version: <b id="statusVersion">—</b></span>
+<section class="view view-start" id="view-start" aria-labelledby="start-title">
+  <div class="castle">
+    <img class="castle-img" src="hogwarts-bg.jpg" alt="" width="1280" height="720" fetchpriority="high">
+    <div class="wrap castle-inner">
+      <h1 id="start-title" class="hero-title" tabindex="-1">Willkommen bei Hogwarts</h1>
+      <dl class="status-panel" data-status data-state="loading" aria-live="polite">
+        <div class="status-cell status-main"><dt class="visually-hidden">Status</dt><dd><span class="pip" aria-hidden="true"></span><b data-status-label>Status wird geprüft…</b></dd></div>
+        <div class="status-cell"><dt>Spieler online</dt><dd data-status-players>—</dd></div>
+        <div class="status-cell"><dt>Version</dt><dd data-status-version>—</dd></div>
+      </dl>
     </div>
   </div>
 
-  <section class="panel wrap">
-    <h2>Was es hier gibt</h2>
-    <div class="grid2">
-      <div class="card"><h3>Community Hub</h3><p>Bauaufgaben, Design-Vorschläge, Terraforming-Pläne und der zweite Gebäudekomplex — hier statt in Discord.</p></div>
-      <div class="card"><h3>Server-Map</h3><p>Gemeinsames Koordinaten-Board für Basen, Farmen und sehenswerte Orte.</p></div>
-      <div class="card"><h3>Discord</h3><p>Immer noch da für Voice und schnellen Chat. <a href="https://discord.gg/2SQccy5vT3" target="_blank" rel="noopener" id="discordLink">Discord beitreten</a>.</p></div>
-    </div>
-  </section>
-</div>
+  <div class="wrap start-grid">
+    <section class="rail-section" aria-labelledby="rail-title">
+      <h2 id="rail-title" class="section-title">Die Boards</h2>
+      <ul class="rail" id="pennants" aria-describedby="rail-hint"></ul>
+      <p id="rail-hint" class="rail-hint">Wähle ein Banner, um im Community Hub weiterzubauen.</p>
+    </section>
+    <aside class="recent" aria-labelledby="recent-title">
+      <h2 id="recent-title" class="section-title">Zuletzt im Hub</h2>
+      <ol class="recent-list" id="recent"></ol>
+    </aside>
+  </div>
 
-<div id="view-rules" style="display:none">
-  <section class="panel wrap">
-    <h2>Regeln</h2>
-    <ul class="rules">
-      <li>Redstone-/Farm-Lag im Blick behalten — Chunks verantwortungsvoll laden.</li>
-      <li>Große Terraforming- oder Gelände-Projekte zuerst auf das Terraforming-Board.</li>
+  <div class="wrap">
+    <ul class="ways">
+      <li>
+        <a class="way" href="#map">
+          <span class="way-name">Server-Map</span>
+          <span class="way-text">Live-Karte der Welt. Dazu das gemeinsame Koordinaten-Board für Basen, Farmen und sehenswerte Orte.</span>
+        </a>
+      </li>
+      <li>
+        <a class="way" href="https://discord.gg/2SQccy5vT3" target="_blank" rel="noopener" id="discordLink">
+          <span class="way-name">Discord beitreten <span class="visually-hidden">(öffnet in neuem Tab)</span></span>
+          <span class="way-text">Immer noch da für Voice und schnellen Chat.</span>
+        </a>
+      </li>
+      <li>
+        <a class="way" href="#hub">
+          <span class="way-name">Community Hub</span>
+          <span class="way-text">Bauaufgaben, Design-Vorschläge, Terraforming-Pläne und der zweite Gebäudekomplex — hier statt in Discord.</span>
+        </a>
+      </li>
     </ul>
-  </section>
-</div>
-
-<div id="view-join" style="display:none">
-  <section class="panel wrap">
-    <h2>Wie man beitritt</h2>
-    <div class="grid2">
-      <div class="card"><h3>Java Edition</h3><p>Füge <code>www.ardet.de</code> als Server in deiner Multiplayer-Liste hinzu. Whitelisted — bitte einen Admin, deinen Namen hinzuzufügen.</p></div>
-      <div class="card"><h3>Bedrock Edition</h3><p>Nutze einen GeyserMC-kompatiblen Client und verbinde dich mit <code>www.ardet.de</code> auf dem Port, den dir ein Admin gibt.</p></div>
-    </div>
-  </section>
-</div>
-
-<div id="view-staff" style="display:none">
-  <section class="panel wrap">
-    <h2>Staff</h2>
-    <div class="staff">
-      <span>Owner — Pixel_wars | praeditus</span>
-      <span>Admin — Pixel_wars | praeditus</span>
-      <span>Bauleitung — praeditus</span>
-    </div>
-  </section>
-</div>
-
-<div id="view-community" style="display:none">
-  <section class="panel wrap">
-    <h2>Community Hub</h2>
-    <div class="note-box" id="hubStatus" hidden></div>
-    <div class="board-tabs" id="boardTabs">
-      <button data-board="build" class="active">Bauaufgaben</button>
-      <button data-board="design">Design-Vorschläge</button>
-      <button data-board="terraforming">Terraforming</button>
-      <button data-board="complex">Zweiter Gebäudekomplex</button>
-      <button data-board="map">Server-Map (Koordinaten)</button>
-    </div>
-
-    <div class="board active" data-board="build">
-      <div class="add-row">
-        <input id="in-build-t" placeholder="Aufgabe, z. B. 'Dachdetails hinzufügen'">
-        <input id="in-build-a" placeholder="Zugewiesen an (optional)" style="max-width:160px">
-        <input type="file" id="in-build-img" accept="image/png,image/jpeg,image/gif,image/webp">
-        <button onclick="addItem('build')">Aufgabe hinzufügen</button>
-      </div>
-      <div class="items" id="list-build"></div>
-    </div>
-
-    <div class="board" data-board="design">
-      <div class="add-row">
-        <input id="in-design-t" placeholder="Vorschlag, z. B. 'Terrakotta-Dach für die Mühle'">
-        <input id="in-design-a" placeholder="Von (optional)" style="max-width:160px">
-        <input type="file" id="in-design-img" accept="image/png,image/jpeg,image/gif,image/webp">
-        <button onclick="addItem('design')">Vorschlag hinzufügen</button>
-      </div>
-      <div class="items" id="list-design"></div>
-    </div>
-
-    <div class="board" data-board="terraforming">
-      <div class="add-row">
-        <input id="in-terraforming-t" placeholder="Projekt, z. B. 'Hügel bei Spawn einebnen'">
-        <input id="in-terraforming-a" placeholder="Zugewiesen an (optional)" style="max-width:160px">
-        <input type="file" id="in-terraforming-img" accept="image/png,image/jpeg,image/gif,image/webp">
-        <button onclick="addItem('terraforming')">Projekt hinzufügen</button>
-      </div>
-      <div class="items" id="list-terraforming"></div>
-    </div>
-
-    <div class="board" data-board="complex">
-      <div class="add-row">
-        <input id="in-complex-t" placeholder="Aufgabe, z. B. 'Ecke updaten'">
-        <input id="in-complex-a" placeholder="Zugewiesen an (optional)" style="max-width:160px">
-        <input type="file" id="in-complex-img" accept="image/png,image/jpeg,image/gif,image/webp">
-        <button onclick="addItem('complex')">Aufgabe hinzufügen</button>
-      </div>
-      <div class="items" id="list-complex"></div>
-    </div>
-
-    <div class="board" data-board="map">
-      <div class="add-row">
-        <input id="in-map-t" placeholder="Name, z. B. 'Eisenfarm'">
-        <input id="in-map-a" placeholder="X Y Z / Dimension" style="max-width:200px">
-        <input type="file" id="in-map-img" accept="image/png,image/jpeg,image/gif,image/webp">
-        <button onclick="addItem('map')">Ort hinzufügen</button>
-      </div>
-      <div class="items" id="list-map"></div>
-    </div>
-  </section>
-</div>
-
-<div id="view-map" style="display:none">
-  <div class="mapwrap">
-    <div class="mapbar">Die Karte lädt nicht? <a href="https://map.ardet.de" target="_blank" rel="noopener">In neuem Tab öffnen</a></div>
-    <iframe id="mapFrame" title="Server-Karte" data-src="https://map.ardet.de" allow="fullscreen" referrerpolicy="no-referrer-when-downgrade"></iframe>
   </div>
-</div>
+</section>
+
+<section class="view wrap view-page" id="view-regeln" aria-labelledby="regeln-title">
+  <h1 id="regeln-title" class="view-title" tabindex="-1">Regeln</h1>
+  <ol class="rules">
+    <li>Redstone-/Farm-Lag im Blick behalten — Chunks verantwortungsvoll laden.</li>
+    <li>Große Terraforming- oder Gelände-Projekte zuerst auf das <a href="#hub/terraforming">Terraforming-Board</a>.</li>
+  </ol>
+</section>
+
+<section class="view wrap view-page" id="view-beitreten" aria-labelledby="beitreten-title">
+  <h1 id="beitreten-title" class="view-title" tabindex="-1">Wie man beitritt</h1>
+  <p class="view-lede">Der Server ist whitelisted — bitte einen Admin, deinen Namen hinzuzufügen.</p>
+  <div class="editions">
+    <article class="edition" data-tincture="azure">
+      <h2 class="edition-title">Java Edition</h2>
+      <p>Füge die Adresse als Server in deiner Multiplayer-Liste hinzu.</p>
+      <div class="ip-group ip-group-lg">
+        <code data-address>mc.ardet.de</code>
+        <button class="btn btn-or" type="button" data-copy-address><span data-label>IP kopieren</span></button>
+      </div>
+    </article>
+    <article class="edition" data-tincture="vert">
+      <h2 class="edition-title">Bedrock Edition</h2>
+      <p>Nutze einen GeyserMC-kompatiblen Client und verbinde dich mit der Adresse auf dem Port, den dir ein Admin gibt.</p>
+      <div class="ip-group ip-group-lg">
+        <code data-address>mc.ardet.de</code>
+        <button class="btn btn-or" type="button" data-copy-address><span data-label>IP kopieren</span></button>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="view view-hub" id="view-hub" aria-label="Community Hub">
+  <div class="wrap" id="hub-root">
+    <h1 class="view-title">Community Hub</h1>
+    <noscript><p class="notice notice-error">Der Community Hub braucht JavaScript.</p></noscript>
+  </div>
+</section>
+
+<section class="view view-map" id="view-map" aria-labelledby="map-title">
+  <div class="map-wrap">
+    <div class="map-head">
+      <h1 id="map-title" class="view-title" tabindex="-1">Server-Karte</h1>
+      <p class="map-fallback">Die Karte lädt nicht? <a href="https://map.ardet.de" target="_blank" rel="noopener">In neuem Tab öffnen<span class="visually-hidden"> (öffnet in neuem Tab)</span></a></p>
+    </div>
+    <div class="map-frame" data-state="idle">
+      <iframe id="mapFrame" title="Server-Karte" data-src="https://map.ardet.de" allow="fullscreen" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      <p class="map-loading" aria-hidden="true">Karte wird geladen…</p>
+    </div>
+  </div>
+</section>
+
+<section class="view wrap view-page" id="view-staff" aria-labelledby="staff-title">
+  <h1 id="staff-title" class="view-title" tabindex="-1">Staff</h1>
+  <dl class="roll">
+    <div class="roll-row" data-tincture="gules"><dt>Owner</dt><dd><span class="name">Pixel_wars</span><span class="name">praeditus</span></dd></div>
+    <div class="roll-row" data-tincture="purpure"><dt>Admin</dt><dd><span class="name">Pixel_wars</span><span class="name">praeditus</span></dd></div>
+    <div class="roll-row" data-tincture="vert"><dt>Bauleitung</dt><dd><span class="name">praeditus</span></dd></div>
+  </dl>
+</section>
 
 </main>
 
+<footer class="footer wrap">
+  <p><span class="footer-brand">ARDET</span> · <code data-address>mc.ardet.de</code> · <a href="https://discord.gg/2SQccy5vT3" target="_blank" rel="noopener">Discord</a></p>
+</footer>
 
-<script>
-// ---- tab navigation ----
-const VIEWS = ['home','rules','join','community','staff','map'];
-document.getElementById('mainTabs').addEventListener('click', e=>{
-  const b = e.target.closest('button'); if(!b) return;
-  document.querySelectorAll('#mainTabs button').forEach(x=>x.classList.remove('active'));
-  b.classList.add('active');
-  VIEWS.forEach(v=>{
-    document.getElementById('view-'+v).style.display = (v===b.dataset.view) ? '' : 'none';
-  });
-  if(b.dataset.view==='map'){
-    const f = document.getElementById('mapFrame');
-    if(!f.getAttribute('src')) f.src = f.dataset.src; // load the map only when first opened
-  }
-  if(b.dataset.view==='community') refreshHub();
-  if(b.dataset.view==='home') refreshServerStatus();
-});
-
-// ---- copy IP ----
-document.getElementById('copyIp').addEventListener('click', ()=>{
-  navigator.clipboard?.writeText('mc.ardet.de').then(()=>{
-    const btn = document.getElementById('copyIp');
-    const old = btn.textContent; btn.textContent = 'Kopiert!';
-    setTimeout(()=>btn.textContent = old, 1400);
-  });
-});
-
-// ---- live server status via public mcsrvstat.us API ----
-function refreshServerStatus(){
-  const dot = document.getElementById('statusDot');
-  const txt = document.getElementById('statusText');
-  const pl  = document.getElementById('statusPlayers');
-  const ver = document.getElementById('statusVersion');
-  dot.classList.remove('on','off');
-  txt.textContent = 'Status wird geprüft…';
-  fetch('https://api.mcsrvstat.us/3/mc.ardet.de', {cache:'no-store'}).then(r=>r.json()).then(d=>{
-    if(d.online){
-      dot.classList.add('on'); txt.textContent = 'Online';
-      pl.textContent = (d.players?.online ?? '—') + ' / ' + (d.players?.max ?? '—');
-      ver.textContent = d.version || '—';
-    } else {
-      dot.classList.add('off'); txt.textContent = 'Offline';
-      pl.textContent = '—'; ver.textContent = '—';
-    }
-  }).catch(()=>{
-    dot.classList.add('off'); txt.textContent = 'Status nicht verfügbar';
-    pl.textContent = '—'; ver.textContent = '—';
-  });
-}
-refreshServerStatus();
-// keep it current: re-check every 60s, and whenever the Start tab is opened
-setInterval(()=>{ if(!document.hidden) refreshServerStatus(); }, 60000);
-
-// ---- community boards (shared backend: /api/boards) ----
-const BOARDS = ['build','design','terraforming','complex','map'];
-let hub = {rev:-1, boards:{}};
-const hubStatus = document.getElementById('hubStatus');
-function setHubError(msg){ hubStatus.textContent = msg || ''; hubStatus.hidden = !msg; }
-
-async function api(method, url, body){
-  const r = await fetch(url, {
-    method, cache:'no-store',
-    headers: body ? {'Content-Type':'application/json'} : {},
-    body: body ? JSON.stringify(body) : undefined
-  });
-  if(!r.ok){
-    let m = 'Fehler ' + r.status;
-    try{ m = (await r.json()).error || m; }catch(e){}
-    throw new Error(m);
-  }
-  return r.json();
-}
-function apply(state){
-  if(state.rev === hub.rev) return;
-  hub = state;
-  BOARDS.forEach(render);
-}
-const OFFLINE_MSG = 'Server nicht erreichbar — Einträge können gerade nicht geladen oder gespeichert werden.';
-async function refreshHub(){
-  try{ apply(await api('GET','/api/boards')); setHubError(''); }
-  catch(e){ setHubError(OFFLINE_MSG); }
-}
-async function mutate(method, url, body){
-  try{ apply(await api(method, url, body)); setHubError(''); return true; }
-  catch(e){ setHubError(e instanceof TypeError ? OFFLINE_MSG : e.message); return false; }
-}
-
-const MAX_IMAGE_BYTES = 4*1024*1024;
-function readFileAsDataURL(file){
-  return new Promise((resolve,reject)=>{
-    const r = new FileReader();
-    r.onload = ()=>resolve(r.result);
-    r.onerror = ()=>reject(new Error('Datei konnte nicht gelesen werden'));
-    r.readAsDataURL(file);
-  });
-}
-async function addItem(b){
-  const t = document.getElementById('in-'+b+'-t');
-  const a = document.getElementById('in-'+b+'-a');
-  const f = document.getElementById('in-'+b+'-img');
-  const title = t.value.trim(), meta = a.value.trim();
-  if(!title) return;
-  const file = f?.files?.[0] || null;
-  if(file && file.size > MAX_IMAGE_BYTES){ setHubError('Bild zu groß (max. 4 MB).'); return; }
-  let image = null;
-  if(file){
-    try{ image = await readFileAsDataURL(file); }
-    catch(e){ setHubError('Bild konnte nicht gelesen werden.'); return; }
-  }
-  t.value=''; a.value=''; if(f) f.value='';
-  const ok = await mutate('POST', '/api/boards/'+b+'/items', {title, meta, image});
-  if(!ok){ t.value = title; a.value = meta; } // keep the text if saving failed
-}
-function toggleItem(b,id,done){ return mutate('PATCH', '/api/boards/'+b+'/items/'+id, {done}); }
-function delItem(b,id){ return mutate('DELETE', '/api/boards/'+b+'/items/'+id); }
-
-function render(b){
-  const wrap = document.getElementById('list-'+b);
-  if(hub.rev < 0){ wrap.innerHTML = '<div class="empty">Wird geladen…</div>'; return; }
-  const items = hub.boards[b] || [];
-  if(!items.length){ wrap.innerHTML = '<div class="empty">Noch nichts hier — füge oben den ersten Eintrag hinzu.</div>'; return; }
-  wrap.innerHTML = items.map(i=>`
-    <div class="item ${i.done?'done':''}" data-id="${String(i.id).replace(/[^a-z0-9]/gi,'')}">
-      <input type="checkbox" data-act="toggle" ${i.done?'checked':''}>
-      ${i.image? `<a href="${i.image}" target="_blank" rel="noopener"><img class="item-img" src="${i.image}" alt=""></a>` : ''}
-      <div class="item-body">
-        <div class="item-title">${escapeHtml(i.title)}</div>
-        ${i.meta? `<div class="item-meta">${escapeHtml(i.meta)}</div>` : ''}
-      </div>
-      <button class="del" data-act="del" title="Entfernen">&times;</button>
-    </div>`).join('');
-}
-function escapeHtml(s){ const d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
-
-const hubView = document.getElementById('view-community');
-function itemCtx(el){
-  const item = el.closest('.item'), board = el.closest('.board');
-  return item && board ? {id:item.dataset.id, b:board.dataset.board} : null;
-}
-hubView.addEventListener('click', e=>{
-  const btn = e.target.closest('[data-act="del"]'); if(!btn) return;
-  const c = itemCtx(btn); if(c) delItem(c.b, c.id);
-});
-hubView.addEventListener('change', e=>{
-  const cb = e.target.closest('[data-act="toggle"]'); if(!cb) return;
-  const c = itemCtx(cb); if(c) toggleItem(c.b, c.id, cb.checked);
-});
-
-BOARDS.forEach(render);
-refreshHub();
-// keep every visitor's board in sync while the Community Hub is open
-setInterval(()=>{
-  if(!document.hidden && hubView.style.display !== 'none') refreshHub();
-}, 5000);
-document.addEventListener('visibilitychange', ()=>{ if(!document.hidden && hubView.style.display !== 'none') refreshHub(); });
-
-document.getElementById('boardTabs').addEventListener('click', e=>{
-  const b = e.target.closest('button'); if(!b) return;
-  document.querySelectorAll('#boardTabs button').forEach(x=>x.classList.remove('active'));
-  b.classList.add('active');
-  document.querySelectorAll('.board').forEach(el=>{
-    el.classList.toggle('active', el.dataset.board === b.dataset.board);
-  });
-});
-</script>
+<div id="announcer" class="visually-hidden" aria-live="polite" aria-atomic="true"></div>
+<div id="toasts" class="toasts"></div>
 </body>
 </html>

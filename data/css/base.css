@@ -90,6 +90,7 @@ img { max-width: 100%; display: block; }
   font-weight: 700;
 }
 .skip-link:focus { top: var(--s3); }
+.skip-link:hover { color: var(--on-or); }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {

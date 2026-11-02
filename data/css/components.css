@@ -33,7 +33,7 @@
 .btn-or:hover:not(:disabled) { background: var(--or-hi); }
 
 .btn-quiet { border-color: var(--rule-strong); color: var(--ink); }
-.btn-quiet:hover:not(:disabled) { border-color: var(--or); color: var(--or); }
+.btn-quiet:hover:not(:disabled) { border-color: var(--or); color: var(--link); }
 
 .btn-on-field { border-color: rgb(255 248 234 / 0.5); color: var(--on-tincture); }
 .btn-on-field:hover:not(:disabled) { border-color: var(--on-tincture); color: var(--on-tincture); background: rgb(0 0 0 / 0.15); }
@@ -76,6 +76,7 @@
   letter-spacing: 0.08em;
 }
 .brand:hover { color: var(--ink); }
+.brand { min-height: var(--hit); }
 .brand-mark { width: 22px; height: 26px; background: var(--or); clip-path: polygon(0 0, 100% 0, 100% 55%, 50% 100%, 0 55%); }
 
 .status-chip {
@@ -102,7 +103,7 @@
 @keyframes breathe { 50% { opacity: 0.35; } }
 
 .ip-group { display: inline-flex; align-items: stretch; border: var(--hairline) solid var(--or); border-radius: var(--radius); }
-.ip-group code { display: inline-flex; align-items: center; padding: 0 var(--s3); color: var(--or); font-weight: 600; }
+.ip-group code { display: inline-flex; align-items: center; padding: 0 var(--s3); color: var(--link); font-weight: 600; }
 .ip-group .btn { border-radius: 0; }
 
 .theme-toggle { color: var(--ink-dim); }
@@ -120,6 +121,12 @@
   scroll-snap-type: x proximity;
 }
 .nav-list::-webkit-scrollbar { display: none; }
+/* edge fade hints that the row scrolls on narrow screens */
+.nav-list,
+.board-tabs { mask-image: linear-gradient(90deg, #000 calc(100% - 32px), transparent); }
+@media (min-width: 900px) {
+  .nav-list, .board-tabs { mask-image: none; }
+}
 .nav-link {
   display: inline-flex;
   align-items: center;
@@ -218,6 +225,7 @@ input.mono { font-family: var(--font-mono); font-size: var(--fs-sm); }
 .item-body { flex: 1; min-width: 0; padding-top: var(--s2); }
 .item-title { font-weight: 700; overflow-wrap: anywhere; }
 .item-meta { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s1) var(--s3); margin-top: var(--s1); color: var(--ink-dim); font-size: var(--fs-sm); }
+.item-meta > :empty { display: none; }
 .item-meta-text { overflow-wrap: anywhere; }
 .item-time { font-size: var(--fs-xs); }
 .item-coords { display: inline-flex; flex-wrap: wrap; align-items: center; gap: var(--s2); }

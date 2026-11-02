@@ -14,10 +14,10 @@ function metaLine(item, coordinates) {
   const coords = coordinates ? parseCoordinates(item.meta) : null;
   if (!coords) return el('span', { class: 'item-meta-text', text: item.meta });
   const copy = el('button', {
-    class: 'btn btn-quiet btn-xs', type: 'button',
-    'aria-label': `Koordinaten ${coords.text} kopieren`,
-  }, el('span', { 'data-label': '', text: 'Kopieren' }));
-  bindCopyButton(copy, coords.text, { announceAs: `Koordinaten ${coords.text} kopiert` });
+    class: 'btn btn-quiet btn-xs btn-icon', type: 'button',
+    'aria-label': `Koordinaten ${coords.text} kopieren`, title: 'Koordinaten kopieren',
+  }, el('span', { 'data-label': '', class: 'visually-hidden', text: 'Kopieren' }));
+  bindCopyButton(copy, coords.text, { copied: 'Kopiert', announceAs: `Koordinaten ${coords.text} kopiert` });
   return el('span', { class: 'item-coords' },
     icon('pin', { size: 16 }),
     el('code', { text: coords.text }),
