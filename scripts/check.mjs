@@ -16,7 +16,7 @@ function walk(dir) {
   });
 }
 
-const files = [...walk(DATA), join(ROOT, 'server', 'server.js'), ...walk(join(ROOT, 'scripts')), ...walk(join(ROOT, 'tests'))];
+const files = [...walk(DATA), ...walk(join(ROOT, 'server')), ...walk(join(ROOT, 'scripts')), ...walk(join(ROOT, 'tests'))];
 const rel = (f) => relative(ROOT, f);
 
 for (const file of files.filter((f) => ['.js', '.mjs'].includes(extname(f)))) {

@@ -1,4 +1,9 @@
-.claude/
+# local Claude settings stay private; shared hooks, skills and agents are tracked
+.claude/*
+!.claude/settings.json
+!.claude/hooks/
+!.claude/skills/
+!.claude/agents/
 .impeccable/mocks/
 .impeccable/config.local.json
 node_modules/
