@@ -1,12 +1,20 @@
 /* ---------- view switching (data-view is set before paint; without JS every view shows) ---------- */
 .js .view { display: none; }
 [data-view="start"] #view-start,
+[data-view="neuigkeiten"] #view-neuigkeiten,
 [data-view="regeln"] #view-regeln,
 [data-view="beitreten"] #view-beitreten,
 [data-view="hub"] #view-hub,
+[data-view="wuensche"] #view-wuensche,
 [data-view="map"] #view-map,
-[data-view="staff"] #view-staff { display: block; animation: view-in var(--dur-2) var(--ease-out) both; }
-@keyframes view-in { from { opacity: 0; } }
+[data-view="staff"] #view-staff,
+[data-view="admin"] #view-admin {
+  display: block;
+  /* the keyframe name comes from motion.css (only where View Transitions are missing) */
+  animation-duration: var(--dur-3);
+  animation-timing-function: var(--ease-out);
+  animation-fill-mode: both;
+}
 
 [tabindex="-1"]:focus { outline: none; }
 

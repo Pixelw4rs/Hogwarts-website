@@ -11,6 +11,11 @@ services:
     environment:
       - PORT=8080
       - WEB_ROOT=/data
+      # admin login: put ADMIN_USER and ADMIN_PASSWORD in a .env file next to this one (never commit it)
+      - ADMIN_USER=${ADMIN_USER:-admin}
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD:-}
+      # set to 1 if the site is served over https but the proxy does not send X-Forwarded-Proto
+      - COOKIE_SECURE=${COOKIE_SECURE:-0}
     volumes:
       - ./server:/app:ro       # the small backend (server.js)
       - ./data:/data           # website + everything you upload; boards live in data/db/

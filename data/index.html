@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>ARDET — Minecraft Server</title>
-<meta name="description" content="ARDET: Status, Beitritt, Regeln und der Community Hub für unseren Hogwarts-Bau auf mc.ardet.de.">
+<meta name="description" content="ARDET: Status, Neuigkeiten, Regeln, Plugin-Wünsche und der Community Hub für unseren Hogwarts-Bau auf mc.ardet.de.">
 <meta name="theme-color" content="#141116">
 <link rel="icon" type="image/png" href="favicon.png">
 <link rel="shortcut icon" href="favicon.ico">
@@ -16,17 +16,20 @@
     try { theme = localStorage.getItem('ardet-theme'); } catch (e) {}
     root.dataset.theme = theme || 'dark'; // night is the default; day is opt-in via the toggle
     var view = location.hash.replace(/^#\/?/, '').split('/')[0];
-    root.dataset.view = /^(start|regeln|beitreten|hub|map|staff)$/.test(view) ? view : 'start';
+    root.dataset.view = /^(start|neuigkeiten|regeln|beitreten|hub|wuensche|map|staff|admin)$/.test(view) ? view : 'start';
     root.classList.add('js');
   })();
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=IM+Fell+English+SC&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=IM+Fell+English+SC&family=JetBrains+Mono:wght@400;600&family=Spectral:ital,wght@0,300;1,300;1,400&display=swap">
 <link rel="stylesheet" href="css/tokens.css">
 <link rel="stylesheet" href="css/base.css">
 <link rel="stylesheet" href="css/components.css">
 <link rel="stylesheet" href="css/views.css">
+<link rel="stylesheet" href="css/pages.css">
+<link rel="stylesheet" href="css/atlas.css">
+<link rel="stylesheet" href="css/motion.css">
 <script type="module" src="js/main.js"></script>
 </head>
 <body>
@@ -44,14 +47,17 @@
       <code data-address translate="no">mc.ardet.de</code>
       <button class="btn btn-or" type="button" data-copy-address><span data-label>IP kopieren</span></button>
     </div>
+    <a class="btn btn-icon admin-link" href="#admin" data-admin-link aria-label="Admin-Bereich" title="Admin-Bereich"></a>
     <button class="btn btn-icon theme-toggle" type="button" data-theme-toggle aria-label="Tagmodus einschalten"></button>
   </div>
   <nav class="nav wrap" aria-label="Hauptnavigation">
-    <ul class="nav-list">
+    <ul class="nav-list" id="nav-list">
       <li><a class="nav-link" href="#start" data-nav="start">Start</a></li>
+      <li><a class="nav-link" href="#neuigkeiten" data-nav="neuigkeiten">Neuigkeiten</a></li>
       <li><a class="nav-link" href="#regeln" data-nav="regeln">Regeln</a></li>
       <li><a class="nav-link" href="#beitreten" data-nav="beitreten">Beitreten</a></li>
       <li><a class="nav-link" href="#hub" data-nav="hub">Community Hub</a></li>
+      <li><a class="nav-link" href="#wuensche" data-nav="wuensche">Wünsche</a></li>
       <li><a class="nav-link" href="#map" data-nav="map">Map</a></li>
       <li><a class="nav-link" href="#staff" data-nav="staff">Staff</a></li>
     </ul>
@@ -85,43 +91,55 @@
     </aside>
   </div>
 
+  <section class="wrap start-news" id="start-news-section" aria-labelledby="start-news-title" hidden>
+    <div class="start-news-head">
+      <h2 id="start-news-title" class="section-title">Neuigkeiten</h2>
+      <a href="#neuigkeiten" class="more-link">Alle Neuigkeiten</a>
+    </div>
+    <div class="start-news-list" id="start-news"></div>
+  </section>
+
   <div class="wrap">
     <ul class="ways">
-      <li>
+      <li data-reveal="rise">
         <a class="way" href="#map">
-          <span class="way-name">Server-Map</span>
-          <span class="way-text">Live-Karte der Welt. Dazu das gemeinsame Koordinaten-Board für Basen, Farmen und sehenswerte Orte.</span>
+          <span class="way-name">Sternkarte</span>
+          <span class="way-text">Alle gemeinsamen Koordinaten als Sternkarte rund um den Spawn, dazu die Live-Karte der Welt.</span>
         </a>
       </li>
-      <li>
+      <li data-reveal="rise">
         <a class="way" href="https://discord.gg/2SQccy5vT3" target="_blank" rel="noopener" id="discordLink">
           <span class="way-name">Discord beitreten <span class="visually-hidden">(öffnet in neuem Tab)</span></span>
           <span class="way-text">Immer noch da für Voice und schnellen Chat.</span>
         </a>
       </li>
-      <li>
-        <a class="way" href="#hub">
-          <span class="way-name">Community Hub</span>
-          <span class="way-text">Bauaufgaben, Design-Vorschläge, Terraforming-Pläne und der zweite Gebäudekomplex — hier statt in Discord.</span>
+      <li data-reveal="rise">
+        <a class="way" href="#wuensche">
+          <span class="way-name">Plugin wünschen</span>
+          <span class="way-text">Schlag ein Plugin oder Datapack vor und stimme für die Ideen der anderen.</span>
         </a>
       </li>
     </ul>
   </div>
 </section>
 
+<section class="view wrap view-page" id="view-neuigkeiten" aria-labelledby="neuigkeiten-title">
+  <h1 id="neuigkeiten-title" class="view-title" tabindex="-1">Neuigkeiten</h1>
+  <p class="view-lede">Updates, Events und Wartungen vom Team.</p>
+  <div class="news-feed" id="news-feed"></div>
+</section>
+
 <section class="view wrap view-page" id="view-regeln" aria-labelledby="regeln-title">
   <h1 id="regeln-title" class="view-title" tabindex="-1">Regeln</h1>
-  <ol class="rules">
-    <li><span>Redstone-/Farm-Lag im Blick behalten — Chunks verantwortungsvoll laden.</span></li>
-    <li><span>Große Terraforming- oder Gelände-Projekte zuerst auf das <a href="#hub/terraforming">Terraforming-Board</a>.</span></li>
-  </ol>
+  <ol class="rules" id="rules-list"></ol>
+  <noscript><ol class="rules"><li><span>Redstone-/Farm-Lag im Blick behalten — Chunks verantwortungsvoll laden.</span></li><li><span>Große Terraforming- oder Gelände-Projekte zuerst auf das Terraforming-Board.</span></li></ol></noscript>
 </section>
 
 <section class="view wrap view-page" id="view-beitreten" aria-labelledby="beitreten-title">
   <h1 id="beitreten-title" class="view-title" tabindex="-1">Wie man beitritt</h1>
   <p class="view-lede">Der Server ist whitelisted — bitte einen Admin, deinen Namen hinzuzufügen.</p>
   <div class="editions">
-    <article class="edition" data-tincture="azure">
+    <article class="edition" data-tincture="azure" data-reveal="unroll">
       <h2 class="edition-title">Java Edition</h2>
       <p>Füge die Adresse als Server in deiner Multiplayer-Liste hinzu.</p>
       <div class="ip-group ip-group-lg">
@@ -129,7 +147,7 @@
         <button class="btn btn-or" type="button" data-copy-address><span data-label>IP kopieren</span></button>
       </div>
     </article>
-    <article class="edition" data-tincture="vert">
+    <article class="edition" data-tincture="vert" data-reveal="unroll">
       <h2 class="edition-title">Bedrock Edition</h2>
       <p>Nutze einen GeyserMC-kompatiblen Client und verbinde dich mit der Adresse auf dem Port, den dir ein Admin gibt.</p>
       <div class="ip-group ip-group-lg">
@@ -147,32 +165,96 @@
   </div>
 </section>
 
+<section class="view wrap view-page" id="view-wuensche" aria-labelledby="wuensche-title">
+  <h1 id="wuensche-title" class="view-title" tabindex="-1">Plugin- &amp; Datapack-Wünsche</h1>
+  <p class="view-lede">Was fehlt dir auf dem Server? Schlag es vor und stimme für die Ideen der anderen. Das Team schaut regelmäßig rein und antwortet hier.</p>
+  <div class="wish-grid">
+    <section class="wish-board" aria-labelledby="wish-list-title">
+      <h2 id="wish-list-title" class="visually-hidden">Alle Wünsche</h2>
+      <nav class="filter-tabs" aria-label="Wünsche filtern">
+        <ul class="filter-list" id="wish-filters">
+          <li><a class="filter-link" href="#wuensche" data-wish-filter="">Alle <span class="filter-count">–</span></a></li>
+          <li><a class="filter-link" href="#wuensche/plugin" data-wish-filter="plugin">Plugins <span class="filter-count">–</span></a></li>
+          <li><a class="filter-link" href="#wuensche/datapack" data-wish-filter="datapack">Datapacks <span class="filter-count">–</span></a></li>
+        </ul>
+      </nav>
+      <p class="notice notice-error" id="wish-notice" role="alert" hidden></p>
+      <ol class="wish-list" id="wish-list"></ol>
+      <p class="content-state" id="wish-state" aria-live="polite"></p>
+    </section>
+    <div class="wish-side"><div id="wish-form-slot"></div></div>
+  </div>
+</section>
+
 <section class="view view-map" id="view-map" aria-labelledby="map-title">
   <div class="map-wrap">
     <div class="map-head">
       <h1 id="map-title" class="view-title" tabindex="-1">Server-Karte</h1>
-      <p class="map-fallback">Die Karte lädt nicht? <a href="https://map.ardet.de" target="_blank" rel="noopener">In neuem Tab öffnen<span class="visually-hidden"> (öffnet in neuem Tab)</span></a></p>
+      <nav class="filter-tabs" aria-label="Kartenansicht">
+        <ul class="filter-list" id="map-tabs">
+          <li><a class="filter-link" href="#map" data-map-tab="sterne">Sternkarte</a></li>
+          <li><a class="filter-link" href="#map/live" data-map-tab="live">Live-Karte</a></li>
+        </ul>
+      </nav>
     </div>
-    <div class="map-frame" data-state="idle">
-      <iframe id="mapFrame" title="Server-Karte" data-src="https://map.ardet.de" allow="fullscreen" referrerpolicy="no-referrer-when-downgrade"></iframe>
-      <p class="map-loading" aria-hidden="true">Karte wird geladen…</p>
+    <div class="map-panel atlas" id="map-sterne">
+      <div class="atlas-layout atlas-layout-wide">
+        <div class="atlas-list">
+          <div class="atlas-table-wrap">
+            <table class="atlas-table">
+              <caption class="visually-hidden">Orte aus dem Koordinaten-Board</caption>
+              <thead><tr><th scope="col">Name</th><th scope="col" class="num">X</th><th scope="col" class="num">Y</th><th scope="col" class="num">Z</th><th scope="col" class="dim">Dimension</th><th scope="col"><span class="visually-hidden">Kopieren</span></th></tr></thead>
+              <tbody id="atlas-places"></tbody>
+            </table>
+          </div>
+          <p class="atlas-empty" id="atlas-empty" hidden>Noch keine Orte. <a href="#hub/map">Trag den ersten Ort im Koordinaten-Board ein.</a></p>
+          <p class="atlas-hint">Die Orte kommen aus dem <a href="#hub/map">Koordinaten-Board</a> im Community Hub.</p>
+        </div>
+        <div id="atlas-chart"></div>
+      </div>
+    </div>
+    <div class="map-panel" id="map-live" hidden>
+      <p class="map-fallback">Die Karte lädt nicht? <a href="https://map.ardet.de" target="_blank" rel="noopener">In neuem Tab öffnen<span class="visually-hidden"> (öffnet in neuem Tab)</span></a></p>
+      <div class="map-frame" data-state="idle">
+        <iframe id="mapFrame" title="Server-Karte" data-src="https://map.ardet.de" allow="fullscreen" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <p class="map-loading" aria-hidden="true">Karte wird geladen…</p>
+      </div>
     </div>
   </div>
 </section>
 
 <section class="view wrap view-page" id="view-staff" aria-labelledby="staff-title">
   <h1 id="staff-title" class="view-title" tabindex="-1">Staff</h1>
-  <dl class="roll">
-    <div class="roll-row" data-tincture="gules"><dt>Owner</dt><dd><span class="name" translate="no">Pixel_wars</span><span class="name" translate="no">praeditus</span></dd></div>
-    <div class="roll-row" data-tincture="purpure"><dt>Admin</dt><dd><span class="name" translate="no">Pixel_wars</span><span class="name" translate="no">praeditus</span></dd></div>
-    <div class="roll-row" data-tincture="vert"><dt>Bauleitung</dt><dd><span class="name" translate="no">praeditus</span></dd></div>
-  </dl>
+  <dl class="roll" id="staff-roll"></dl>
+</section>
+
+<section class="view wrap view-page" id="view-admin" aria-labelledby="admin-title">
+  <h1 id="admin-title" class="view-title" tabindex="-1">Admin-Bereich</h1>
+  <p class="notice notice-error" id="admin-unconfigured" hidden>Der Admin-Zugang ist auf dem Server noch nicht eingerichtet. Setze <code>ADMIN_PASSWORD</code> in der <code>.env</code> und starte den Container neu.</p>
+  <div id="admin-login" class="admin-login"></div>
+  <div id="admin-panel" hidden>
+    <div class="admin-head">
+      <p class="admin-who" id="admin-who"></p>
+      <button class="btn btn-quiet" type="button" id="admin-logout">Abmelden</button>
+    </div>
+    <nav class="filter-tabs" aria-label="Admin-Bereiche">
+      <ul class="filter-list" id="admin-tabs">
+        <li><a class="filter-link" href="#admin/staff" data-admin-tab="staff">Staff</a></li>
+        <li><a class="filter-link" href="#admin/regeln" data-admin-tab="regeln">Regeln</a></li>
+        <li><a class="filter-link" href="#admin/neuigkeiten" data-admin-tab="neuigkeiten">Neuigkeiten</a></li>
+      </ul>
+    </nav>
+    <p class="admin-tip">Wünsche beantwortest du direkt auf der Seite <a href="#wuensche">Wünsche</a>: Solange du angemeldet bist, siehst du dort Status, Antwort und Löschen.</p>
+    <div class="admin-section" id="admin-staff"></div>
+    <div class="admin-section" id="admin-regeln" hidden></div>
+    <div class="admin-section" id="admin-neuigkeiten" hidden></div>
+  </div>
 </section>
 
 </main>
 
 <footer class="footer wrap">
-  <p><span class="footer-brand">ARDET</span> · <code data-address translate="no">mc.ardet.de</code> · <a href="https://discord.gg/2SQccy5vT3" target="_blank" rel="noopener">Discord</a></p>
+  <p><span class="footer-brand">ARDET</span> · <code data-address translate="no">mc.ardet.de</code> · <a href="https://discord.gg/2SQccy5vT3" target="_blank" rel="noopener">Discord</a> · <a href="#admin">Admin</a></p>
 </footer>
 
 <div id="announcer" class="visually-hidden" aria-live="polite" aria-atomic="true"></div>

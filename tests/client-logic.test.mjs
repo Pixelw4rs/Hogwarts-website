@@ -69,14 +69,14 @@ describe('interpretStatus', () => {
 
 describe('routes', () => {
   test('parses known views and hub boards', () => {
-    assert.deepEqual(parseHash('#hub/design'), { view: 'hub', board: 'design' });
-    assert.deepEqual(parseHash('#regeln'), { view: 'regeln', board: null });
-    assert.deepEqual(parseHash('#map/design'), { view: 'map', board: null });
+    assert.deepEqual(parseHash('#hub/design'), { view: 'hub', board: 'design', sub: null });
+    assert.deepEqual(parseHash('#regeln'), { view: 'regeln', board: null, sub: null });
+    assert.deepEqual(parseHash('#map/design'), { view: 'map', board: null, sub: null });
   });
   test('unknown or empty hash falls back to start', () => {
-    assert.deepEqual(parseHash(''), { view: 'start', board: null });
-    assert.deepEqual(parseHash('#nope'), { view: 'start', board: null });
-    assert.deepEqual(parseHash('#hub/nope'), { view: 'hub', board: null });
+    assert.deepEqual(parseHash(''), { view: 'start', board: null, sub: null });
+    assert.deepEqual(parseHash('#nope'), { view: 'start', board: null, sub: null });
+    assert.deepEqual(parseHash('#hub/nope'), { view: 'hub', board: null, sub: null });
   });
   test('toHash round-trips', () => {
     assert.equal(toHash({ view: 'hub', board: 'map' }), '#hub/map');

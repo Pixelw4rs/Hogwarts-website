@@ -1,11 +1,13 @@
 // Start view: banner rail (one pennant per board) and the latest entries across the hub.
 import { BOARDS, RECENT_LIMIT, boardByKey } from '../config.js';
+import { reveal } from '../components/reveal.js';
+import { rollNumber } from '../components/roll-number.js';
 import { $, el } from '../lib/dom.js';
 import { countItems, recentItems, timeAgo } from '../lib/format.js';
 import { toHash } from '../lib/route.js';
 
 function pennant(board) {
-  return el('li', {},
+  return el('li', { 'data-reveal': 'unfurl' },
     el('a', { class: 'pennant', href: toHash({ view: 'hub', board: board.key }), dataset: { tincture: board.tincture, board: board.key, loading: '' } },
       el('span', { class: 'pennant-count', 'data-field': 'count', text: '–' }),
       el('span', { class: 'pennant-unit', 'data-field': 'unit', text: board.coordinates ? 'Orte' : 'offen' }),
@@ -20,7 +22,7 @@ function paintPennant(link, board, items) {
   const { open, done, total } = countItems(items);
   const n = board.coordinates ? total : open;
   const unit = board.coordinates ? (total === 1 ? 'Ort' : 'Orte') : `offen · ${done} erledigt`;
-  link.querySelector('[data-field="count"]').textContent = String(n);
+  rollNumber(link.querySelector('[data-field="count"]'), n);
   link.querySelector('[data-field="unit"]').textContent = unit;
   const latest = items[0]?.title;
   link.querySelector('[data-field="latest"]').textContent = latest ? `Zuletzt: ${latest}` : 'Noch leer';
@@ -30,7 +32,7 @@ function paintPennant(link, board, items) {
 function recentRow(item) {
   const board = boardByKey(item.board);
   const sub = [board.shortLabel ?? board.label, item.meta, timeAgo(item.created)].filter(Boolean).join(' · ');
-  return el('li', {},
+  return el('li', { 'data-reveal': 'rise' },
     el('a', { class: `recent-link${item.done ? ' is-done' : ''}`, href: toHash({ view: 'hub', board: item.board }), dataset: { tincture: board.tincture } },
       el('span', { class: 'recent-shield', 'aria-hidden': 'true' }),
       el('span', { class: 'recent-title', text: item.title }),
@@ -44,6 +46,7 @@ export function mountStart(store) {
   const rail = $('#pennants');
   const recent = $('#recent');
   rail.replaceChildren(...BOARDS.map(pennant));
+  reveal(rail);
   const links = new Map(BOARDS.map((b) => [b.key, rail.querySelector(`[data-board="${b.key}"]`)]));
 
   store.subscribe((snap) => {
@@ -57,5 +60,6 @@ export function mountStart(store) {
     recent.replaceChildren(...(rows.length
       ? rows.map(recentRow)
       : [el('li', { class: 'recent-empty', text: 'Noch keine Einträge — fang im Community Hub an.' })]));
+    reveal(recent);
   });
 }

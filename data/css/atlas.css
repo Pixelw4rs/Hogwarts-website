@@ -1,0 +1,160 @@
+/* Sternkarte — the astronomy-tower star atlas (Impeccable option "challenger-star-atlas").
+   A night chart in both themes: deep navy ground, chalk stars, red-torch amber for the picked place,
+   Spectral italic names, tabular figures. Scoped to .atlas / .atlas-plate so the roll of arms stays intact. */
+.atlas, .atlas-plate {
+  --atlas-ground: #0b1630;
+  --atlas-ground-2: #0f1c3b;
+  --chalk: #edeff5;
+  --chalk-dim: rgb(237 239 245 / 0.74);
+  --torch: #e0623a;
+  --steel: #8fa3c8;
+  --atlas-line: rgb(143 163 200 / 0.18);
+  --atlas-line-2: rgb(143 163 200 / 0.32);
+  --font-atlas: "Spectral", "Iowan Old Style", Georgia, serif;
+}
+
+/* ---------- Map view panel ---------- */
+.map-panel.atlas {
+  padding: var(--s6);
+  color: var(--chalk);
+  background:
+    radial-gradient(120% 80% at 80% 0%, rgb(143 163 200 / 0.08), transparent 60%),
+    var(--atlas-ground);
+  border: var(--hairline) solid var(--atlas-line-2);
+  border-radius: var(--radius);
+}
+.atlas-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 400px);
+  gap: var(--s6);
+  align-items: start;
+}
+.atlas-layout-wide { grid-template-columns: minmax(0, 1fr) minmax(320px, 540px); gap: var(--s10); }
+.atlas-list { min-width: 0; display: grid; gap: var(--s5); }
+
+/* table of places */
+.atlas-table-wrap { overflow-x: auto; }
+.atlas-table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums lining-nums; }
+.atlas-table thead th {
+  padding: 0 var(--s3) var(--s3);
+  border-bottom: var(--hairline) solid var(--atlas-line-2);
+  color: var(--steel);
+  font-size: var(--fs-xs);
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-align: left;
+  text-transform: uppercase;
+}
+.atlas-table td, .atlas-table tbody th {
+  height: 56px;
+  padding: 0 var(--s3);
+  border-bottom: var(--hairline) solid var(--atlas-line);
+  text-align: left;
+  font-weight: 400;
+}
+.atlas-table .num { text-align: right; width: 5.5rem; }
+.atlas-table .dim { color: var(--chalk-dim); font-size: var(--fs-sm); }
+.atlas-table .act { width: 1%; white-space: nowrap; text-align: right; }
+.atlas-table tbody tr { transition: background-color var(--dur-1) var(--ease-out); }
+.atlas-table tbody tr:hover { background: rgb(143 163 200 / 0.06); }
+.atlas-table tbody tr.is-picked { background: rgb(224 98 58 / 0.09); box-shadow: inset 3px 0 0 var(--torch); }
+.atlas-place {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--hit);
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--chalk);
+  font: 300 italic 1.5rem / 1.1 var(--font-atlas);
+  text-align: left;
+  overflow-wrap: anywhere;
+}
+.atlas-place:hover { color: var(--torch); }
+.atlas-place:focus-visible { outline-color: var(--torch); }
+tr.is-picked .atlas-place { color: var(--torch); }
+.btn-atlas { border-color: var(--atlas-line-2); color: var(--chalk); }
+.btn-atlas:hover:not(:disabled) { border-color: var(--chalk); background: rgb(143 163 200 / 0.1); }
+.btn-atlas:focus-visible { outline-color: var(--torch); }
+.atlas-empty, .atlas-hint { color: var(--chalk-dim); font-size: var(--fs-sm); }
+.atlas a { color: var(--chalk); text-decoration-color: var(--steel); }
+.atlas a:hover { color: var(--torch); }
+.map-panel.atlas :focus-visible { outline-color: var(--torch); }
+
+/* ---------- the chart plate ---------- */
+.atlas-plate {
+  margin: 0;
+  padding: var(--s5) var(--s5) var(--s4);
+  color: var(--chalk);
+  background: linear-gradient(180deg, var(--atlas-ground-2), var(--atlas-ground));
+  border: var(--hairline) solid var(--atlas-line-2);
+  border-radius: var(--radius);
+  box-shadow: inset 0 1px 0 rgb(237 239 245 / 0.05);
+}
+.atlas-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: var(--s1) var(--s4); margin-bottom: var(--s3); }
+.atlas-title { font: 300 italic 1.75rem / 1 var(--font-atlas); }
+.atlas-eyebrow { color: var(--steel); font-size: var(--fs-xs); letter-spacing: 0.1em; text-transform: uppercase; }
+.atlas-frame { aspect-ratio: 1; }
+.atlas-svg { display: block; width: 100%; height: 100%; overflow: visible; }
+.is-compact .atlas-title { font-size: 1.375rem; }
+
+.atlas-grid-fine { fill: none; stroke: var(--steel); stroke-opacity: 0.09; stroke-width: 0.6; }
+.atlas-axis { fill: none; stroke: var(--steel); stroke-opacity: 0.5; stroke-width: 0.8; }
+.atlas-ring { fill: none; stroke: var(--steel); stroke-opacity: 0.35; stroke-width: 0.8; stroke-dasharray: 2 4; transform-origin: 280px 280px; }
+.atlas-ring.is-outer { stroke-dasharray: none; }
+.atlas-tick { fill: var(--steel); font: 400 11px var(--font-ui); font-variant-numeric: tabular-nums; }
+.atlas-dust { fill: var(--chalk); opacity: 0.35; }
+.atlas-name { fill: var(--chalk); fill-opacity: 0.78; font: 300 italic 15px var(--font-atlas); pointer-events: none; }
+.atlas-spawn circle:first-child { fill: var(--chalk); }
+.atlas-spawn-ring { fill: none; stroke: var(--chalk); stroke-opacity: 0.4; stroke-width: 0.8; }
+
+.atlas-star { cursor: pointer; }
+.atlas-hit { fill: transparent; }
+.atlas-dot { fill: var(--chalk); transform-box: fill-box; transform-origin: center; transition: transform var(--dur-2) var(--ease-spring); }
+.atlas-star.is-nether .atlas-dot { fill: none; stroke: var(--chalk); stroke-width: 1.3; }
+.atlas-star:hover .atlas-dot, .atlas-star.is-hover .atlas-dot { transform: scale(1.6); }
+.atlas-star.is-picked .atlas-dot { fill: var(--torch); stroke: var(--torch); }
+.atlas-star.is-picked .atlas-name, .atlas-star.is-hover .atlas-name { fill: var(--chalk); fill-opacity: 1; }
+
+.atlas-pick-ring { fill: none; stroke: var(--torch); stroke-width: 1.4; transform-box: fill-box; transform-origin: center; animation: pick-ring var(--dur-3) var(--ease-out) both; }
+.atlas-pick-ring.is-dashed { stroke-width: 0.6; stroke-dasharray: 2 3; animation-delay: 80ms; }
+.atlas-leader { fill: none; stroke: var(--torch); stroke-width: 1; animation: fade-in var(--dur-3) var(--ease-out) 120ms both; }
+.atlas-pick-name { fill: var(--torch); font: 300 italic 30px var(--font-atlas); animation: fade-in var(--dur-3) var(--ease-out) 160ms both; }
+.atlas-pick-coords { fill: var(--torch); fill-opacity: 0.88; font: 400 13px var(--font-ui); font-variant-numeric: tabular-nums; animation: fade-in var(--dur-3) var(--ease-out) 200ms both; }
+@keyframes pick-ring { from { transform: scale(0.3); opacity: 0; } }
+@keyframes fade-in { from { opacity: 0; } }
+
+.atlas-legend { display: flex; flex-wrap: wrap; gap: var(--s2) var(--s5); margin-top: var(--s3); color: var(--chalk-dim); font-size: var(--fs-xs); }
+.atlas-legend span { display: inline-flex; align-items: center; gap: var(--s2); }
+.lg { display: inline-block; border-radius: 50%; background: var(--chalk); }
+.lg-spawn { width: 11px; height: 11px; }
+.lg-star { width: 7px; height: 7px; }
+.lg-nether { width: 8px; height: 8px; background: none; box-shadow: inset 0 0 0 1px var(--chalk); }
+.lg-picked { width: 8px; height: 8px; background: var(--torch); }
+.lg-torch { color: var(--torch); }
+.atlas-missing { margin-top: var(--s2); color: var(--chalk-dim); font-size: var(--fs-xs); }
+.atlas-missing:empty { display: none; }
+
+/* stars rise into place and twinkle — decorative, so both stop under reduced motion */
+@media (prefers-reduced-motion: no-preference) {
+  .atlas-dust { animation: twinkle 5s ease-in-out var(--d, 0s) infinite; }
+  .atlas-star { animation: star-rise 700ms var(--ease-spring) calc(var(--i, 0) * 45ms) both; transform-box: fill-box; transform-origin: center; }
+  .atlas-star .atlas-dot { animation: twinkle-soft 6s ease-in-out var(--d, 0s) infinite; }
+  .atlas-ring { animation: ring-in 900ms var(--ease-out) calc(var(--i, 0) * 90ms) both; }
+}
+@keyframes twinkle { 50% { opacity: 0.08; } }
+@keyframes twinkle-soft { 50% { opacity: 0.6; } }
+@keyframes star-rise { from { opacity: 0; transform: scale(0.2); } }
+@keyframes ring-in { from { opacity: 0; transform: scale(0.85) rotate(-8deg); } }
+
+/* ---------- responsive ---------- */
+@media (max-width: 1024px) {
+  .atlas-layout, .atlas-layout-wide { grid-template-columns: 1fr; }
+  .atlas-layout > .atlas-plate, .atlas-layout-wide > .atlas-plate { order: -1; max-width: 560px; width: 100%; justify-self: center; }
+}
+@media (max-width: 600px) {
+  .map-panel.atlas { padding: var(--s4); margin-inline: calc(-1 * var(--s2)); }
+  .atlas-table .num { width: auto; }
+  .atlas-table .dim { display: none; }
+  .atlas-place { font-size: 1.25rem; }
+}

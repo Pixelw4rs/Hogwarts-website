@@ -1,10 +1,15 @@
 'use strict';
-// Tiny dependency-free server: serves ./data as the website and stores the
-// Community Hub boards in data/db/boards.json (shared by everyone).
+// Tiny dependency-free server: serves ./data as the website, stores the Community Hub
+// boards in data/db/boards.json (shared by everyone), plus editable content, the
+// plugin/datapack wish list and the admin login (see auth.js, content.js, requests.js).
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
+const { send, readJson, clientIp, createLimiter } = require('./http-utils');
+const { createAuth } = require('./auth');
+const { createContent } = require('./content');
+const { createRequests } = require('./requests');
 
 const PORT = Number(process.env.PORT) || 8080;
 const WEB_ROOT = path.resolve(process.env.WEB_ROOT || '/data');
@@ -14,7 +19,6 @@ const DB_FILE = path.join(DB_DIR, 'boards.json');
 const BOARDS = ['build', 'design', 'terraforming', 'complex', 'map'];
 const MAX_ITEMS = 500, MAX_TITLE = 200, MAX_META = 100;
 const MAX_IMAGE_BYTES = 4 * 1024 * 1024; // 4 MB decoded
-const MAX_BODY = 6 * 1024 * 1024;        // base64 images run ~33% bigger than their decoded size
 const IMAGE_EXT = { 'image/png': 'png', 'image/jpeg': 'jpg', 'image/gif': 'gif', 'image/webp': 'webp' };
 
 fs.mkdirSync(DB_DIR, { recursive: true });
@@ -47,50 +51,13 @@ function persist() {
 }
 
 // ---------- helpers ----------
-function send(res, code, obj) {
-  const body = JSON.stringify(obj);
-  res.writeHead(code, {
-    'Content-Type': 'application/json; charset=utf-8',
-    'Cache-Control': 'no-store',
-    'Content-Length': Buffer.byteLength(body),
-  });
-  res.end(body);
-}
+// simple write rate limit for the boards: 60 changes / minute / IP
+const boardWrites = createLimiter(60, 60000);
+const limited = (ip) => boardWrites.hit(ip);
 
-function readJson(req) {
-  return new Promise((resolve, reject) => {
-    let size = 0, tooBig = false;
-    const chunks = [];
-    req.on('data', c => {
-      size += c.length;
-      if (size > MAX_BODY) tooBig = true; else chunks.push(c);
-    });
-    req.on('end', () => {
-      if (tooBig) return reject(Object.assign(new Error('Anfrage zu groß'), { status: 413 }));
-      try { resolve(JSON.parse(Buffer.concat(chunks).toString() || '{}')); }
-      catch (e) { reject(Object.assign(new Error('Ungültige Anfrage'), { status: 400 })); }
-    });
-    req.on('error', reject);
-  });
-}
-
-// simple write rate limit: 60 changes / minute / IP
-const hits = new Map();
-function limited(ip) {
-  const now = Date.now();
-  const a = (hits.get(ip) || []).filter(t => now - t < 60000);
-  a.push(now);
-  hits.set(ip, a);
-  return a.length > 60;
-}
-setInterval(() => {
-  const now = Date.now();
-  for (const [k, v] of hits) if (!v.some(t => now - t < 60000)) hits.delete(k);
-}, 60000).unref();
-
-function clientIp(req) {
-  return (req.headers['x-forwarded-for'] || '').split(',')[0].trim() || req.socket.remoteAddress || '';
-}
+const auth = createAuth();
+const content = createContent(WEB_ROOT, auth);
+const requests = createRequests(WEB_ROOT, auth);
 
 // ---------- image uploads ----------
 // Accepts a data: URL (what FileReader.readAsDataURL produces in the browser),
@@ -118,6 +85,9 @@ function deleteImage(imagePath) {
 // ---------- API ----------
 async function handleApi(req, res, url) {
   const parts = url.pathname.split('/').filter(Boolean); // api, boards, :board, items, :id
+  if (parts[1] === 'auth') return auth.handle(req, res, parts);
+  if (parts[1] === 'content') return content.handle(req, res, parts);
+  if (parts[1] === 'requests') return requests.handle(req, res, parts);
   if (parts[1] !== 'boards') return send(res, 404, { error: 'Nicht gefunden' });
 
   if (req.method === 'GET' && parts.length === 2) return send(res, 200, state);

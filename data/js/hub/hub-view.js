@@ -1,6 +1,7 @@
 // Community Hub: board tabs (ARIA tabs with arrow keys), error banner, sync line, panels.
 import { BOARDS, UNDO_MS, boardByKey } from '../config.js';
 import { announce } from '../components/announcer.js';
+import { attachIndicator } from '../components/indicator.js';
 import { showUndoToast } from '../components/undo-toast.js';
 import { $, el } from '../lib/dom.js';
 import { countItems, timeAgo } from '../lib/format.js';
@@ -40,6 +41,7 @@ export function mountHub(root, store, { onSelect }) {
     el('span', { class: 'tab-count', 'data-count': '' }),
   ));
   tablist.append(...tabs);
+  const indicator = attachIndicator(tablist, () => tabs.find((t) => t.getAttribute('aria-selected') === 'true') ?? null, { class: 'indicator-tincture' });
 
   root.replaceChildren(
     el('div', { class: 'hub-head' }, el('h1', { class: 'view-title', id: 'hub-title', tabindex: '-1', text: 'Community Hub' }), sync),
@@ -64,6 +66,8 @@ export function mountHub(root, store, { onSelect }) {
   /** @param {string} key @param {{ focus?: boolean }} [opts] */
   function select(key, { focus = false } = {}) {
     if (!boardByKey(key)) return;
+    const from = BOARDS.findIndex((b) => b.key === active);
+    const to = BOARDS.findIndex((b) => b.key === key);
     active = key;
     for (const tab of tabs) {
       const on = tab.dataset.board === key;
@@ -73,10 +77,14 @@ export function mountHub(root, store, { onSelect }) {
     }
     for (const [k, p] of panels) {
       const show = k === key;
-      if (show && p.panel.hidden) p.panel.dataset.unfurl = '';
+      if (show && p.panel.hidden) {
+        p.panel.dataset.unfurl = '';
+        p.panel.dataset.enter = to < from ? 'back' : 'forward';
+      }
       p.panel.hidden = !show;
     }
     root.dataset.tincture = boardByKey(key).tincture;
+    indicator.update();
   }
 
   tablist.addEventListener('click', (e) => {
@@ -97,7 +105,7 @@ export function mountHub(root, store, { onSelect }) {
   });
   root.addEventListener('animationend', (e) => {
     const panel = /** @type {HTMLElement} */ (e.target).closest('.board-panel');
-    if (panel) delete panel.dataset.unfurl;
+    if (panel && e.target === panel.querySelector('.banner')) delete panel.dataset.unfurl;
   });
 
   function paintSync(snap) {

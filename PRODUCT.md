@@ -31,7 +31,8 @@ It is a private, purpose-built workspace for one long-running build (Hogwarts on
 
 ## Capabilities and Constraints
 
-- Views: Start (status, IP copy), Regeln, Beitreten (Java and Bedrock via GeyserMC), Community Hub (5 boards), Map, Staff. The full list is in `FEATURES.md`.
+- Views: Start (status, IP copy, news teaser), Neuigkeiten, Regeln, Beitreten (Java and Bedrock via GeyserMC), Community Hub (5 boards), Wünsche (plugin/datapack requests with votes), Map (Sternkarte and live map), Staff, and the Admin-Bereich. The full list is in `FEATURES.md`.
+- One admin account (from `ADMIN_USER`/`ADMIN_PASSWORD`) edits Staff, Regeln and Neuigkeiten and answers wishes. Boards and wishes stay open to everyone without accounts.
 - The server address is **`mc.ardet.de`** (confirmed). The earlier `www.ardet.de` on the Join page was wrong.
 - The server is whitelisted: an admin has to add new players.
 - Boards have no accounts and no auth. Anyone with the URL can add, tick or delete. Writes are rate-limited to 60/min/IP; images are png/jpeg/gif/webp up to 4 MB; each board holds at most 500 items.

@@ -335,6 +335,26 @@ A raised-cloth well with a hairline border and 16px padding: a 2fr title field, 
 ### Name Tag
 A mono name in a Strong Hairline box with 2px corners (4px by 12px padding). Used on the Staff roll.
 
+### Sternkarte (star atlas, second world)
+The coordinate board and the Map view are drawn as an astronomy-tower star chart: Impeccable's "challenger-star-atlas" option, adopted by the owner for the map only. It is scoped to `.atlas` and `.atlas-plate` and looks the same in both themes, because a star chart is a night object.
+- **Palette:** navy chart ground (`#0b1630`, plate gradient from `#0f1c3b`), chalk stars and text (`#edeff5`), steel grid and labels (`#8fa3c8`), and red-torch amber (`#e0623a`) only for the picked place.
+- **Type:** names in Spectral italic 300; figures in the UI face with tabular lining numerals.
+- **Plot:** north (−Z) is up and east (+X) is right. Rings sit at a 1/2/5 × 10ⁿ block step. Nether places are hollow rings plotted at ×8. End places and entries without coordinates are listed under the chart instead of plotted.
+- **Interaction:** the list or table is the accessible interface. Hovering or focusing a row lights its star, and clicking a star picks its row. The SVG is one labelled image.
+- **Motion:** rings and stars rise in, background dust twinkles, and the pick draws a torch ring with a leader line to its name in the opposite quadrant.
+
+### Motion layer
+- **Page switch:** a View Transition slides the main area 40px in the direction of travel (by nav order). The bar stays still.
+- **Sliding indicator:** one bar moves under the active nav link, board tab (in the board's tincture, 3px), filter tab or admin tab, with a slight spring.
+- **Scroll reveal:** list rows rise 18px, cloth (posts, editions, staff ribbons) unrolls from the top edge, and pennants unfurl from the gilt rail, staggered 70ms.
+- **Rolling numbers:** counts roll up when they grow and down when they shrink.
+- **Rules:** motion uses transform and opacity only. It is gated by `prefers-reduced-motion`, and content is hidden for a reveal only after JS has set `data-reveal-on`.
+
+### News Post, Wish Row, Login Card
+- **Post:** a tag ribbon (swallowtail, in the tag's tincture: Info sable, Update azure, Event purpure, Wartung gules), a Fell title, a faded meta line and lede-size body. A pinned post sits on raised cloth with a Strong Hairline.
+- **Wish row:** a 52×56 vote box (chevron plus rolling count, `aria-pressed`; or-washed when voted), the name (with an external-link mark when it has a link), kind and status tags in hairline boxes, and the team's answer behind a 2px or edge.
+- **Login card:** a raised-cloth card (400px) with the float shadow and a 40px or escutcheon. Its show-password toggle sits inside the field.
+
 ## Do's and Don'ts
 
 ### Do:

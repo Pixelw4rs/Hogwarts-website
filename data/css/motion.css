@@ -1,0 +1,114 @@
+/* Motion layer: page transitions, sliding tab indicators, scroll reveals, rolling counters, parallax.
+   Everything animates transform/opacity only and is switched off by prefers-reduced-motion
+   (tokens.css zeroes the durations; the blocks below are additionally gated). */
+:root {
+  --ease-spring: cubic-bezier(0.34, 1.32, 0.64, 1);
+  --ease-in: cubic-bezier(0.55, 0, 1, 0.45);
+  --page-shift: 40px;
+}
+
+/* ---------- page switch: View Transitions API, slide in the direction of travel ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  main { view-transition-name: page; }
+  .bar { view-transition-name: bar; }
+  /* the bar stays put; its live content (the sliding indicator) animates on its own */
+  ::view-transition-old(bar) { display: none; }
+  ::view-transition-new(bar), ::view-transition-group(bar) { animation: none; }
+  ::view-transition-group(page) { animation-duration: var(--dur-3); animation-timing-function: var(--ease-out); }
+  ::view-transition-old(page) { animation: page-out 200ms var(--ease-in) both; }
+  ::view-transition-new(page) { animation: page-in var(--dur-3) var(--ease-out) both; }
+  :root[data-nav-dir="back"]::view-transition-old(page) { animation-name: page-out-back; }
+  :root[data-nav-dir="back"]::view-transition-new(page) { animation-name: page-in-back; }
+}
+@keyframes page-out { to { opacity: 0; transform: translateX(calc(-0.6 * var(--page-shift))); } }
+@keyframes page-in { from { opacity: 0; transform: translateX(var(--page-shift)); } }
+@keyframes page-out-back { to { opacity: 0; transform: translateX(calc(0.6 * var(--page-shift))); } }
+@keyframes page-in-back { from { opacity: 0; transform: translateX(calc(-1 * var(--page-shift))); } }
+
+/* browsers without View Transitions get the same direction as a plain keyframe on the view */
+@supports not (view-transition-name: none) {
+  [data-view] .view { animation-name: page-in; }
+  [data-view][data-nav-dir="back"] .view { animation-name: page-in-back; }
+}
+
+/* sub panels (map tabs, admin sections, hub boards) slide in from the side of the chosen tab */
+[data-enter="forward"] { animation: enter-forward var(--dur-3) var(--ease-out) both; }
+[data-enter="back"] { animation: enter-back var(--dur-3) var(--ease-out) both; }
+@keyframes enter-forward { from { opacity: 0; transform: translateX(24px); } }
+@keyframes enter-back { from { opacity: 0; transform: translateX(-24px); } }
+/* the hub banner keeps its unfurl; the rest of the board slides */
+.board-panel[data-enter] { animation: none; }
+.board-panel[data-enter="forward"] > :not(.banner) { animation: enter-forward var(--dur-3) var(--ease-out) both; }
+.board-panel[data-enter="back"] > :not(.banner) { animation: enter-back var(--dur-3) var(--ease-out) both; }
+
+/* ---------- sliding indicator (nav, board tabs, filter tabs) ---------- */
+.nav-list, .board-tabs, .filter-list { position: relative; }
+.indicator {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 1px;
+  height: 2px;
+  margin: 0;
+  list-style: none;
+  background: var(--or);
+  transform-origin: 0 50%;
+  pointer-events: none;
+}
+.indicator[data-ready] { transition: transform var(--dur-3) var(--ease-spring), opacity var(--dur-1) var(--ease-out); }
+.indicator[data-hidden] { opacity: 0; }
+.indicator-tincture { height: 3px; background: var(--tincture, var(--or)); }
+/* once the bar is live it replaces the static underline */
+.nav-list:has(> .indicator[data-ready]) .nav-link[aria-current="page"] { border-bottom-color: transparent; }
+.board-tabs:has(> .indicator[data-ready]) .board-tab[aria-selected="true"] { border-bottom-color: transparent; }
+.filter-list:has(> .indicator[data-ready]) .filter-link[aria-current="page"] { border-bottom-color: transparent; }
+
+/* ---------- scroll reveal: rows rise, cloth unrolls, pennants unfurl from the rail ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  :root[data-reveal-on] [data-reveal]:not([data-revealed]) { opacity: 0; }
+  :root[data-reveal-on] [data-reveal="rise"]:not([data-revealed]) { transform: translateY(18px); }
+  :root[data-reveal-on] [data-reveal="unroll"]:not([data-revealed]) { transform: perspective(900px) rotateX(-16deg) translateY(14px); transform-origin: 50% 0; }
+  :root[data-reveal-on] [data-reveal="unfurl"]:not([data-revealed]) { transform: scaleY(0.15); transform-origin: 50% 0; }
+  :root[data-reveal-on] [data-reveal][data-revealed] {
+    transition: opacity 520ms var(--ease-out), transform 720ms var(--ease-out);
+    transition-delay: calc(var(--i, 0) * 70ms);
+  }
+  :root[data-reveal-on] [data-reveal="unfurl"][data-revealed] { transition-timing-function: var(--ease-out), var(--ease-spring); }
+}
+
+/* ---------- rolling numbers ---------- */
+.roll { display: inline-grid; overflow: hidden; vertical-align: bottom; }
+.roll > .roll-digit { grid-area: 1 / 1; }
+.roll-in { animation: roll-in-up var(--dur-2) var(--ease-out) both; }
+.roll-out { animation: roll-out-up var(--dur-2) var(--ease-out) both; }
+.roll[data-dir="down"] .roll-in { animation-name: roll-in-down; }
+.roll[data-dir="down"] .roll-out { animation-name: roll-out-down; }
+@keyframes roll-in-up { from { transform: translateY(100%); opacity: 0; } }
+@keyframes roll-out-up { to { transform: translateY(-100%); opacity: 0; } }
+@keyframes roll-in-down { from { transform: translateY(-100%); opacity: 0; } }
+@keyframes roll-out-down { to { transform: translateY(100%); opacity: 0; } }
+
+/* ---------- Start: hero entrance and scroll parallax over the castle ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  .hero-title { animation: hero-in 900ms var(--ease-out) both; }
+  .castle-inner .status-line { animation: hero-in 900ms var(--ease-out) 160ms both; }
+  @supports (animation-timeline: scroll()) {
+    .castle-img { animation: castle-drift linear both; animation-timeline: scroll(root); animation-range: 0 640px; }
+    .castle-inner { animation: hero-lift linear both; animation-timeline: scroll(root); animation-range: 0 520px; }
+  }
+}
+@keyframes hero-in { from { opacity: 0; transform: translateY(24px); } }
+@keyframes castle-drift { to { transform: translateY(96px) scale(1.08); } }
+@keyframes hero-lift { to { transform: translateY(-48px); opacity: 0.25; } }
+
+/* row mark after jumping to it from a star: a gold edge that fades out */
+.item { position: relative; }
+.item.is-flash::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 -12px;
+  width: 3px;
+  background: var(--or);
+  animation: flash 1.4s var(--ease-out) both;
+}
+@keyframes flash { 0%, 40% { opacity: 1; } 100% { opacity: 0; } }

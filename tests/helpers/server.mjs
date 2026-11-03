@@ -22,7 +22,7 @@ function freePort() {
   });
 }
 
-export async function startServer({ seed } = {}) {
+export async function startServer({ seed, env = {} } = {}) {
   const webRoot = mkdtempSync(join(tmpdir(), 'ardet-'));
   cpSync(DATA, webRoot, { recursive: true, filter: (src) => !SKIP.some((p) => (src + sep).startsWith(p)) });
   if (seed !== undefined) {
@@ -31,7 +31,7 @@ export async function startServer({ seed } = {}) {
   }
   const port = await freePort();
   const child = spawn(process.execPath, [join(ROOT, 'server', 'server.js')], {
-    env: { ...process.env, PORT: String(port), WEB_ROOT: webRoot },
+    env: { ...process.env, ADMIN_USER: '', ADMIN_PASSWORD: '', ...env, PORT: String(port), WEB_ROOT: webRoot },
     stdio: ['ignore', 'pipe', 'pipe'],
   });
   let stderr = '';

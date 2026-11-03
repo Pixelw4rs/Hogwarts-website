@@ -180,3 +180,55 @@ All eight gaps are fixed in the redesign: ARIA tabs with arrow keys and Home/End
 
 **Resolved after review:**
 - Asset caching: `server.js` used to send `.css`/`.js` with `max-age=3600`, so after a deploy returning visitors could run new HTML against cached old modules. With the owner's approval it now sends them `no-cache` (one line in `serveStatic`, covered by a test). Images keep the 1h cache.
+
+## News, wishes, admin and Sternkarte (2026-11-03, branch `feature/news-requests-admin`)
+
+Requested by the owner: more motion when switching tabs and on scroll, the Map in the Impeccable "star atlas" option, a news feed, a public plugin/datapack wish page, and an admin login to edit Staff, Regeln and Neuigkeiten. The `/api/boards` contract is unchanged; everything below is new.
+
+### Views (nav order = transition direction)
+
+| Hash | View | Notes |
+|---|---|---|
+| `#start` | Start | + "Neuigkeiten" teaser (latest 2 posts, hidden when there are none) |
+| `#neuigkeiten` | Neuigkeiten | Pinned first, then newest. Tag ribbon: Info / Update / Event / Wartung |
+| `#regeln` | Regeln | Now loaded from `/api/content` (`<noscript>` keeps the original two rules) |
+| `#beitreten` | Beitreten | unchanged |
+| `#hub`, `#hub/<board>` | Community Hub | The coordinate board shows the star chart beside its list |
+| `#wuensche`, `#wuensche/plugin`, `#wuensche/datapack` | Wünsche | Submit, vote, filter. Admin sees status, answer and delete inline |
+| `#map`, `#map/live` | Server-Karte | Sternkarte (default) and Live-Karte (the iframe) |
+| `#staff` | Staff | Now loaded from `/api/content` |
+| `#admin`, `#admin/staff`, `#admin/regeln`, `#admin/neuigkeiten` | Admin-Bereich | Not in the main nav: key icon in the bar and "Admin" in the footer |
+
+### New API
+
+| Method | Path | Who | Behavior |
+|---|---|---|---|
+| GET | `/api/auth/me` | all | `{ user, configured }` |
+| POST | `/api/auth/login` | all | `{username, password}` → HttpOnly SameSite=Strict cookie (12h). 401 on wrong data, 429 after 5 failures/15 min/IP or 20 failures/15 min in total, 503 if `ADMIN_PASSWORD` is unset |
+| POST | `/api/auth/logout` | all | Ends the session |
+| GET | `/api/content` | all | `{ rev, rules, staff, news }` (news sorted pinned → newest) |
+| PUT | `/api/content/rules` | admin | Replaces the list (≤50, ≤500 chars, empty dropped) |
+| PUT | `/api/content/staff` | admin | Replaces the roles (≤20, tincture ∈ gules/purpure/vert/azure/sable) |
+| POST/PATCH/DELETE | `/api/content/news[/:id]` | admin | title ≤120 required, body ≤5000, tag ∈ info/update/event/wartung, pinned |
+| GET | `/api/requests` | all | `{ rev, requests }` with `votes` and `voted`, never the voter ids |
+| POST | `/api/requests` | all | `{kind: plugin\|datapack, name, link?, reason?, by?}`. Only http(s) links. 5 per 10 min per IP, 30 per hour in total |
+| POST | `/api/requests/:id/vote` | all | `{vote: bool}`. One vote per browser (`ardet_voter` cookie), at most 1000 voters per wish |
+| PATCH/DELETE | `/api/requests/:id` | admin | status ∈ open/review/accepted/done/rejected, note ≤300 |
+
+Admin writes and logout refuse a foreign `Origin` (403). Every body is capped at 16 KB, except board uploads (6 MB). Content and wishes are stored like the boards: atomic write and a corrupt-file backup.
+
+### Motion
+
+- Page switches use the View Transitions API and slide in from the side you're heading to (by nav order). Browsers without it get the same slide as a keyframe.
+- The nav, board tabs, wish filters, map tabs and admin tabs have a sliding indicator (ported from the 21st.dev "Tabs" component). Board and section panels slide in from the side of the chosen tab.
+- Scroll reveal: rows rise, posts and editions unroll, pennants unfurl from the gilt rail, staggered.
+- Rolling numbers on pennant counts and vote counts.
+- The castle image drifts and the hero lifts on scroll (scroll-driven animation, where supported).
+- Star chart: rings and stars rise in, the dust twinkles, and the picked star gets a torch ring and a leader line.
+- All of it is off under `prefers-reduced-motion`, and the reveal never hides content if JS fails.
+
+### Intentional behaviour changes
+
+1. **The Map tab opens the Sternkarte**. The live map iframe is still lazy, but now loads the first time **Live-Karte** is opened (`#map/live`), not the first time the Map tab is opened.
+2. **Rules and staff** come from the server instead of the HTML. They're seeded with the original text on first start.
+3. Board data is also polled on the Map view, because the star chart reads the coordinate board.

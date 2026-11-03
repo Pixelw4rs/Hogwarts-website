@@ -5,6 +5,7 @@ import { countItems, filterItems } from '../lib/format.js';
 import { icon } from '../lib/icons.js';
 import { createAddForm } from './add-form.js';
 import { createItemRow, updateItemRow } from './item-row.js';
+import { createStarChart } from '../components/star-chart.js';
 
 const SKELETON_ROWS = 3;
 
@@ -26,6 +27,30 @@ export function createBoardPanel(board, actions) {
   const list = el('ul', { class: 'items', 'aria-label': `Einträge in ${board.label}` });
   const state = el('div', { class: 'board-state' });
 
+  // The coordinate board gets the star atlas next to its list: hovering a row lights its star,
+  // clicking a star jumps to (and briefly marks) its row.
+  const chart = board.coordinates ? createStarChart({
+    compact: true,
+    onPick(id) {
+      const row = rows.get(id);
+      if (!row) return;
+      chart.select(id);
+      row.scrollIntoView({ block: 'nearest' });
+      row.classList.remove('is-flash');
+      requestAnimationFrame(() => row.classList.add('is-flash'));
+    },
+  }) : null;
+  if (chart) {
+    const rowId = (e) => /** @type {HTMLElement} */ (e.target).closest('.item')?.dataset.id ?? null;
+    list.addEventListener('pointerover', (e) => chart.highlight(rowId(e)));
+    list.addEventListener('pointerleave', () => chart.highlight(null));
+    list.addEventListener('focusin', (e) => chart.highlight(rowId(e)));
+    list.addEventListener('focusout', () => chart.highlight(null));
+  }
+  const listArea = chart
+    ? el('div', { class: 'atlas-layout' }, el('div', { class: 'atlas-list' }, list, state), chart.el)
+    : null;
+
   const panel = el('section', {
     class: 'board-panel', id: `panel-${board.key}`, role: 'tabpanel',
     'aria-labelledby': `tab-${board.key}`, dataset: { tincture: board.tincture }, hidden: true,
@@ -43,8 +68,7 @@ export function createBoardPanel(board, actions) {
       ),
       board.coordinates ? null : el('div', { class: 'check-inline' }, hideDoneBox, el('label', { for: hideDoneBox.id, text: 'Erledigte ausblenden' })),
     ),
-    list,
-    state,
+    ...(listArea ? [listArea] : [list, state]),
   );
 
   list.addEventListener('change', (e) => {
@@ -95,6 +119,7 @@ export function createBoardPanel(board, actions) {
     counts.textContent = board.coordinates ? plural(all.length, 'Ort', 'Orte') : `${open} offen · ${done} erledigt`;
     const shown = filterItems(hideDone ? all.filter((i) => !i.done) : all, query);
     reconcile(shown);
+    chart?.render(all);
     showState(all.length === 0 ? 'empty' : shown.length === 0 ? 'nomatch' : 'none');
   }
 
