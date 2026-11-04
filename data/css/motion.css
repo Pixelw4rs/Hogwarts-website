@@ -112,3 +112,119 @@
   animation: flash 1.4s var(--ease-out) both;
 }
 @keyframes flash { 0%, 40% { opacity: 1; } 100% { opacity: 0; } }
+
+/* =====================================================================================
+   Cloth & feedback layer. The pennant drop stays the signature; this extends the same
+   material: cloth swings on its rod, the night/day cloth is lowered from the bar, and
+   every press is answered where it happened. All movement is gated by reduced motion;
+   colour and state changes still land without it.
+   ===================================================================================== */
+
+/* ---------- focal: a hanging pennant swings on the rod after it drops ---------- */
+@media (prefers-reduced-motion: no-preference) and (min-width: 761px) {
+  .pennant { transform-origin: 50% 0; }
+  .pennant:hover, .pennant:focus-visible { animation: cloth-swing 1500ms var(--ease-out) both; }
+}
+@keyframes cloth-swing {
+  0% { rotate: 0deg; }
+  22% { rotate: 1.6deg; }
+  46% { rotate: -0.9deg; }
+  68% { rotate: 0.4deg; }
+  100% { rotate: 0deg; }
+}
+
+/* ---------- continuity: switching night/day lowers the new cloth from the bar ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  :root[data-vt="theme"] main,
+  :root[data-vt="theme"] .bar { view-transition-name: none; }
+  :root[data-vt="theme"]::view-transition-old(root) { animation: none; }
+  :root[data-vt="theme"]::view-transition-new(root) { animation: cloth-lower var(--dur-3) var(--ease-out) both; }
+}
+@keyframes cloth-lower { from { clip-path: inset(0 0 100% 0); } to { clip-path: inset(0 0 0 0); } }
+/* the toggle's sun/moon turns over as it is replaced */
+@media (prefers-reduced-motion: no-preference) {
+  :root[data-vt="theme"] .theme-toggle .icon { animation: icon-turn var(--dur-2) var(--ease-out) both; }
+}
+@keyframes icon-turn { from { opacity: 0; rotate: -90deg; scale: 0.6; } }
+
+/* ---------- feedback: gilt catches the light on the action colour ---------- */
+.btn-or { position: relative; overflow: hidden; isolation: isolate; }
+.btn-or::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(105deg, transparent 35%, rgb(255 248 234 / 0.38) 50%, transparent 65%) 150% 0 / 250% 100% no-repeat;
+  pointer-events: none;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .btn-or:hover:not(:disabled)::after { animation: gilt-sheen 700ms var(--ease-out) both; }
+}
+@keyframes gilt-sheen { from { background-position: 150% 0; } to { background-position: -50% 0; } }
+
+/* the IP group answers a successful copy with a gold ring that settles in */
+@media (prefers-reduced-motion: no-preference) {
+  .ip-group:has([data-state="copied"]) { animation: ring-settle var(--dur-3) var(--ease-out) both; }
+}
+@keyframes ring-settle {
+  from { outline: 2px solid var(--or); outline-offset: 8px; }
+  to { outline: 2px solid transparent; outline-offset: 2px; }
+}
+
+/* focus rings settle onto their control instead of appearing */
+@media (prefers-reduced-motion: no-preference) {
+  :focus-visible { animation: focus-settle var(--dur-1) var(--ease-out); }
+}
+@keyframes focus-settle { from { outline-offset: 7px; outline-color: transparent; } }
+
+/* the shield is stamped when an item is marked done */
+@media (prefers-reduced-motion: no-preference) {
+  .shield-input:checked + label .shield { animation: seal-stamp var(--dur-2) var(--ease-out) both; }
+}
+@keyframes seal-stamp { 0% { scale: 1.22; } 60% { scale: 0.94; } 100% { scale: 1; } }
+
+/* a vote lifts its arrow and the count rolls (roll-number); the box answers the press */
+@media (prefers-reduced-motion: no-preference) {
+  .vote[aria-pressed="true"] { animation: vote-press var(--dur-2) var(--ease-out); }
+}
+@keyframes vote-press { 0% { scale: 0.94; } 100% { scale: 1; } }
+
+/* the status pip strikes once when the server comes online */
+@media (prefers-reduced-motion: no-preference) {
+  [data-state="online"] .pip { animation: pip-strike 640ms var(--ease-out) both; }
+}
+@keyframes pip-strike { 0% { scale: 0.4; opacity: 0; } 45% { scale: 1.35; opacity: 1; } 100% { scale: 1; } }
+
+/* ---------- hover: tabs preview the indicator with a hairline drawn from the centre ---------- */
+.nav-link, .filter-link, .board-tab {
+  background: linear-gradient(var(--rule-strong), var(--rule-strong)) 50% 100% / 0 1px no-repeat;
+  transition: color var(--dur-1) var(--ease-out), border-color var(--dur-2) var(--ease-out), background-color var(--dur-2) var(--ease-out), background-size var(--dur-2) var(--ease-out);
+}
+.nav-link:hover:not([aria-current="page"]),
+.filter-link:hover:not([aria-current="page"]),
+.board-tab:hover:not([aria-selected="true"]) { background-size: calc(100% - 2 * var(--s4)) 1px; }
+
+/* ways onward: an arrow is drawn after the name and the name steps toward it */
+.way-name { display: inline-flex; align-items: center; gap: var(--s2); }
+.way-name::after {
+  content: "";
+  width: 18px;
+  height: 18px;
+  background: currentColor;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='%23000' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 10h12M11 5l5 5-5 5'/%3E%3C/svg%3E") center / contain no-repeat;
+  opacity: 0;
+  translate: -6px 0;
+  transition: opacity var(--dur-1) var(--ease-out), translate var(--dur-2) var(--ease-out);
+}
+.way:hover .way-name::after, .way:focus-visible .way-name::after { opacity: 1; translate: 0 0; }
+
+/* ---------- reveal details: cloth tags unfurl, rule numerals ink in ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  :root[data-reveal-on] .post[data-reveal]:not([data-revealed]) .post-tag { clip-path: polygon(0 0, 0 0, 0 50%, 0 100%, 0 100%); }
+  :root[data-reveal-on] .post[data-revealed] .post-tag { transition: clip-path var(--dur-3) var(--ease-out) calc(var(--i, 0) * 70ms + 180ms); }
+  :root[data-reveal-on] .rules li[data-reveal]:not([data-revealed])::before { opacity: 0; filter: blur(6px); translate: -8px 0; }
+  :root[data-reveal-on] .rules li[data-revealed]::before {
+    transition: opacity 520ms var(--ease-out), filter 700ms var(--ease-out), translate 700ms var(--ease-out);
+    transition-delay: calc(var(--i, 0) * 70ms + 120ms);
+  }
+}

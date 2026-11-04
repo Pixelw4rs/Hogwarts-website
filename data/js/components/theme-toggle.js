@@ -1,5 +1,6 @@
 // Night/day switch. The inline script in index.html applies the stored theme before first paint.
 import { icon } from '../lib/icons.js';
+import { prefersReducedMotion } from '../lib/dom.js';
 
 const STORAGE_KEY = 'ardet-theme';
 
@@ -20,10 +21,18 @@ export function bindThemeToggle(button) {
     meta?.setAttribute('content', getComputedStyle(root).getPropertyValue('--ground').trim());
   }
 
-  button.addEventListener('click', () => {
+  function flip() {
     root.dataset.theme = root.dataset.theme === 'light' ? 'dark' : 'light';
     store(root.dataset.theme);
     paint();
+  }
+
+  button.addEventListener('click', () => {
+    // the new theme is lowered from the bar like a cloth (motion.css: cloth-lower)
+    if (!document.startViewTransition || prefersReducedMotion()) { flip(); return; }
+    root.dataset.vt = 'theme';
+    const transition = document.startViewTransition(flip);
+    transition.finished.finally(() => { delete root.dataset.vt; });
   });
   paint();
 }

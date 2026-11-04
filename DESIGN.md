@@ -348,7 +348,12 @@ The coordinate board and the Map view are drawn as an astronomy-tower star chart
 - **Sliding indicator:** one bar moves under the active nav link, board tab (in the board's tincture, 3px), filter tab or admin tab, with a slight spring.
 - **Scroll reveal:** list rows rise 18px, cloth (posts, editions, staff ribbons) unrolls from the top edge, and pennants unfurl from the gilt rail, staggered 70ms.
 - **Rolling numbers:** counts roll up when they grow and down when they shrink.
-- **Rules:** motion uses transform and opacity only. It is gated by `prefers-reduced-motion`, and content is hidden for a reveal only after JS has set `data-reveal-on`.
+- **Cloth swing:** after the 12px drop a pennant swings on its rod (±1.6° damped, 1.5s, desktop only). It extends the signature motion; nothing else swings.
+- **Theme switch:** the new night or day cloth is lowered from the top over the old one (View Transition, clip-path, 560ms), and the sun/moon icon turns over.
+- **Feedback:** a done shield is stamped (scale 1.22 → 1), a vote press answers with a 0.94 squeeze, a successful copy settles a gold ring onto the IP group, focus rings settle in from 7px out, and the pip strikes once when the server comes online. Or buttons catch a gilt sheen on hover.
+- **Hover hairlines:** nav, filter and board tabs preview the indicator with a `rule-strong` hairline drawn from the centre; ways onward draw an arrow after their name.
+- **Reveal details:** a post's tag ribbon unfurls from the hoist after its cloth unrolls; rule numerals ink in (blur to sharp).
+- **Rules:** motion uses transform and opacity, plus bounded clip-path and filter where the cloth or ink metaphor needs it. It is gated by `prefers-reduced-motion`, and content is hidden for a reveal only after JS has set `data-reveal-on`.
 
 ### News Post, Wish Row, Login Card
 - **Post:** a tag ribbon (swallowtail, in the tag's tincture: Info sable, Update azure, Event purpure, Wartung gules), a Fell title, a faded meta line and lede-size body. A pinned post sits on raised cloth with a Strong Hairline.
