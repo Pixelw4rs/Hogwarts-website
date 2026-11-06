@@ -1,5 +1,5 @@
 // Ambient pointer layer from the rootless kit: a gilt blob cursor, a gold ripple at every press
-// (twice the size of the control pressed, capped), and the hero title's letters, which zoom in and
+// (always 120px, the same on controls and on the empty page), and the hero title's letters, which zoom in and
 // then drift away from the pointer. Off entirely under reduced motion; the cursor is off on touch
 // devices. The kit's background dot field is not used.
 import { RootlessAnimations } from '../lib/rootless-animations.js';
@@ -20,19 +20,9 @@ function readAccent() {
 const tint = (alpha) => `rgba(${rgb}, ${alpha / 100})`;
 
 const CONTROLS = 'a, button, label, select, summary, input, textarea, [role="tab"], .pennant, [data-ra-hover]';
-const RIPPLE_MAX = 350;
-const RIPPLE_LOOSE = 120; // a press outside any control
-
-/**
- * Final ripple diameter: twice the larger side of the control that was pressed, capped.
- * @param {PointerEvent} e
- */
-function rippleDiameter(e) {
-  const control = e.target instanceof Element ? e.target.closest(CONTROLS) : null;
-  if (!control) return RIPPLE_LOOSE;
-  const { width, height } = control.getBoundingClientRect();
-  return Math.min(RIPPLE_MAX, Math.round(2 * Math.max(width, height)));
-}
+// Every press gets the same ripple, whatever was pressed: the size a click on the empty page gets.
+const RIPPLE_SIZE = 120;
+const rippleDiameter = () => RIPPLE_SIZE;
 
 /**
  * Splits the hero title into letter spans, one nowrap group per word so lines only break between

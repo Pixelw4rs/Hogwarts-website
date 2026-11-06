@@ -239,7 +239,7 @@ The motion layer is `data/css/motion.css` plus the `data/js` helpers, imported u
 - **Board widget hover:** a 4px lift in 220ms with a deeper shadow and a brighter sheen; 1px when pressed. (The old 12px drop and cloth swing were removed on request.)
 - **Feedback:** stamp on done, squeeze on vote, gold ring on copy, focus rings settling in from 7px, the status dot striking once when the server comes online, gilt sheen on or buttons.
 - **Theme switch:** the new theme is lowered from the top (View Transition clip, 560ms) and the sun/moon turns over; the cursor and ripples stay live on top.
-- **Ambient pointer:** a blob cursor and click ripples in `--or`, and hero letters that zoom in from a blur and drift away from the pointer. Off under reduced motion; the cursor is off on touch.
+- **Ambient pointer:** a blob cursor and click ripples in `--or` (every ripple 120px, whatever is pressed), and hero letters that zoom in from a blur and drift away from the pointer. Off under reduced motion; the cursor is off on touch.
 - **Reduced motion** zeroes all durations and turns off reveals, swings, the ambient layer and the star twinkle; content is hidden for a reveal only after JS has set `data-reveal-on`.
 
 ## Do's and Don'ts

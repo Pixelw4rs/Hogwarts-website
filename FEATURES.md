@@ -226,7 +226,7 @@ Admin writes and logout refuse a foreign `Origin` (403). Every body is capped at
 - Rolling numbers on pennant counts and vote counts.
 - The castle image drifts and the hero lifts on scroll (scroll-driven animation, where supported).
 - Star chart: rings and stars rise in, the dust twinkles, and the picked star gets a torch ring and a leader line.
-- Ambient pointer layer (from the owner's "rootless" animation kit, `data/js/lib/rootless-animations.js`, wired in `components/ambient.js`): a gilt blob cursor that grows over controls and squishes on press, a gold ripple at every click or tap (twice the size of the pressed control, at most 350px; 120px outside controls), and hero letters that zoom in out of a blur and then drift away from the pointer. The blob cursor is off on touch devices; the native cursor stays in text fields.
+- Ambient pointer layer (from the owner's "rootless" animation kit, `data/js/lib/rootless-animations.js`, wired in `components/ambient.js`): a gilt blob cursor that grows over controls and squishes on press, a gold ripple at every click or tap (always 120px, the same on controls as on the empty page), and hero letters that zoom in out of a blur and then drift away from the pointer. The blob cursor is off on touch devices; the native cursor stays in text fields.
 - All of it is off under `prefers-reduced-motion`, and the reveal never hides content if JS fails.
 
 ### Intentional behaviour changes
