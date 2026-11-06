@@ -7,29 +7,14 @@
   --page-shift: 40px;
 }
 
-/* ---------- page switch: View Transitions API, slide in the direction of travel ---------- */
-@media (prefers-reduced-motion: no-preference) {
-  main { view-transition-name: page; }
-  .bar { view-transition-name: bar; }
-  /* the bar stays put; its live content (the sliding indicator) animates on its own */
-  ::view-transition-old(bar) { display: none; }
-  ::view-transition-new(bar), ::view-transition-group(bar) { animation: none; }
-  ::view-transition-group(page) { animation-duration: var(--dur-3); animation-timing-function: var(--ease-out); }
-  ::view-transition-old(page) { animation: page-out 200ms var(--ease-in) both; }
-  ::view-transition-new(page) { animation: page-in var(--dur-3) var(--ease-out) both; }
-  :root[data-nav-dir="back"]::view-transition-old(page) { animation-name: page-out-back; }
-  :root[data-nav-dir="back"]::view-transition-new(page) { animation-name: page-in-back; }
-}
-@keyframes page-out { to { opacity: 0; transform: translateX(calc(-0.6 * var(--page-shift))); } }
+/* ---------- page switch: the new view slides in from the direction of travel ----------
+   A plain keyframe on the live view; it replays whenever a view goes from display:none to block
+   (views.css sets duration and easing). No View Transition here: its full-page snapshot cost a frame
+   spike per click and froze the ambient cursor and ripples until it ended. */
 @keyframes page-in { from { opacity: 0; transform: translateX(var(--page-shift)); } }
-@keyframes page-out-back { to { opacity: 0; transform: translateX(calc(0.6 * var(--page-shift))); } }
 @keyframes page-in-back { from { opacity: 0; transform: translateX(calc(-1 * var(--page-shift))); } }
-
-/* browsers without View Transitions get the same direction as a plain keyframe on the view */
-@supports not (view-transition-name: none) {
-  [data-view] .view { animation-name: page-in; }
-  [data-view][data-nav-dir="back"] .view { animation-name: page-in-back; }
-}
+[data-view] .view { animation-name: page-in; }
+[data-view][data-nav-dir="back"] .view { animation-name: page-in-back; }
 
 /* sub panels (map tabs, admin sections, hub boards) slide in from the side of the chosen tab */
 [data-enter="forward"] { animation: enter-forward var(--dur-3) var(--ease-out) both; }
@@ -135,8 +120,6 @@
 
 /* ---------- continuity: switching night/day lowers the new cloth from the bar ---------- */
 @media (prefers-reduced-motion: no-preference) {
-  :root[data-vt="theme"] main,
-  :root[data-vt="theme"] .bar { view-transition-name: none; }
   :root[data-vt="theme"]::view-transition-old(root) { animation: none; }
   :root[data-vt="theme"]::view-transition-new(root) { animation: cloth-lower var(--dur-3) var(--ease-out) both; }
 }

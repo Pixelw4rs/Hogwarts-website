@@ -344,7 +344,7 @@ The coordinate board and the Map view are drawn as an astronomy-tower star chart
 - **Motion:** rings and stars rise in, background dust twinkles, and the pick draws a torch ring with a leader line to its name in the opposite quadrant.
 
 ### Motion layer
-- **Page switch:** a View Transition slides the main area 40px in the direction of travel (by nav order). The bar stays still.
+- **Page switch:** the new view slides in 40px from the direction of travel (by nav order), as a keyframe on the live page (no View Transition, so the ambient cursor never freezes). The bar stays still.
 - **Sliding indicator:** one bar moves under the active nav link, board tab (in the board's tincture, 3px), filter tab or admin tab, with a slight spring.
 - **Scroll reveal:** list rows rise 18px, cloth (posts, editions, staff ribbons) unrolls from the top edge, and pennants unfurl from the gilt rail, staggered 70ms.
 - **Rolling numbers:** counts roll up when they grow and down when they shrink.

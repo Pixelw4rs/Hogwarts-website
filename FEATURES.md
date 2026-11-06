@@ -219,7 +219,7 @@ Admin writes and logout refuse a foreign `Origin` (403). Every body is capped at
 
 ### Motion
 
-- Page switches use the View Transitions API and slide in from the side you're heading to (by nav order). Browsers without it get the same slide as a keyframe.
+- Page switches slide the new page in from the side you're heading to (by nav order), as a plain keyframe on the live page. No View Transition, so the cursor and click ripples keep moving during the switch.
 - The nav, board tabs, wish filters, map tabs and admin tabs have a sliding indicator (ported from the 21st.dev "Tabs" component). Board and section panels slide in from the side of the chosen tab.
 - Scroll reveal: rows rise, posts and editions unroll, pennants unfurl from the gilt rail, staggered.
 - Rolling numbers on pennant counts and vote counts.
