@@ -20,7 +20,8 @@ export function SiteHeader({ view, status }: { view: string; status: ServerStatu
   useEffect(() => {
     const list = listRef.current;
     if (!list || indicator.current) return;
-    indicator.current = attachIndicator(list, () => list.querySelector('[aria-current="page"]'), { class: 'indicator-or' });
+    // the bar follows the label, not the padded link, so it sits under the word inside the pill
+    indicator.current = attachIndicator(list, () => list.querySelector('[aria-current="page"] .nav-label'), { class: 'indicator-or' });
   }, []);
 
   useEffect(() => {
@@ -42,7 +43,7 @@ export function SiteHeader({ view, status }: { view: string; status: ServerStatu
             <ul ref={listRef} className="nav-list m-0 flex list-none p-0">
               {NAV.map((v) => (
                 <li key={v.id}>
-                  <a className="nav-link" href={`#${v.id}`} data-nav={v.id} aria-current={v.id === view ? 'page' : undefined}>{v.label}</a>
+                  <a className="nav-link" href={`#${v.id}`} data-nav={v.id} aria-current={v.id === view ? 'page' : undefined}><span className="nav-label">{v.label}</span></a>
                 </li>
               ))}
             </ul>

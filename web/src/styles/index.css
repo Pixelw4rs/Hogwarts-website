@@ -235,7 +235,7 @@
 
 /* ---------- nav: links inside the floating island; the sliding bar is the legacy indicator ---------- */
 .nav-link {
-  display: inline-flex; align-items: center; height: 40px; padding: 0 14px;
+  display: inline-flex; align-items: center; height: 40px; padding: 0 16px;
   border-radius: 999px; color: var(--ink-dim); text-decoration: none; white-space: nowrap; font-size: 0.9375rem;
 }
 .nav-link:hover { color: var(--ink); }
@@ -291,7 +291,9 @@
 }
 
 /* unlayered: restyles the legacy sliding bar (motion layer) for the floating nav */
-.nav-list .indicator { bottom: 2px; height: 2px; border-radius: 2px; }
+.nav-list .indicator { bottom: 7px; height: 2px; border-radius: 2px; }
+/* the hover preview line (motion.css) sits on the same baseline as the bar */
+.nav-list .nav-link { background-position: 50% calc(100% - 7.5px); }
 
 /* unlayered: board cards answer hover with the short lift above, not the long cloth swing */
 .pennant:hover, .pennant:focus-visible { animation: none; }
