@@ -1,6 +1,7 @@
 // Entry point: routing (with direction-aware view transitions), polling and wiring of every view.
 import { API_AUTH, API_CONTENT, API_REQUESTS, HUB_POLL_MS, REQUESTS_POLL_MS, SERVER_ADDRESS, VIEWS } from './config.js';
 import { mountAdmin } from './admin/admin-view.js';
+import { startAmbient } from './components/ambient.js';
 import { bindCopyButton } from './components/copy-button.js';
 import { attachIndicator } from './components/indicator.js';
 import { reveal } from './components/reveal.js';
@@ -27,6 +28,7 @@ for (const node of $$('[data-address]')) node.textContent = SERVER_ADDRESS;
 for (const btn of $$('[data-copy-address]')) bindCopyButton(/** @type {HTMLButtonElement} */ (btn), SERVER_ADDRESS, { announceAs: `Server-Adresse ${SERVER_ADDRESS} kopiert` });
 bindThemeToggle(/** @type {HTMLButtonElement} */ ($('[data-theme-toggle]')));
 $('[data-admin-link]').append(icon('key'));
+startAmbient();
 
 const status = startServerStatus();
 const store = createHubStore();

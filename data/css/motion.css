@@ -228,3 +228,49 @@
     transition-delay: calc(var(--i, 0) * 70ms + 120ms);
   }
 }
+
+/* =====================================================================================
+   Ambient pointer layer (components/ambient.js, rootless kit). Only present when JS has set
+   data-ambient, which it never does under reduced motion. The kit's pill and rounded-card
+   shapes are left out: corners here stay cut to 2px. Its motion is kept: press squish,
+   mark pop, the letter intro and the caret.
+   ===================================================================================== */
+
+/* the kit injects its ripple style at runtime; this tints it with the theme's or */
+body .ra-global-ripple { background: color-mix(in srgb, var(--or) 22%, transparent); }
+
+/* hero letters: one unbreakable group per word, each letter zooms in out of a blur */
+.hero-title.is-split { animation: none; }
+.hero-word { display: inline-block; white-space: nowrap; }
+.ra-char {
+  display: inline-block;
+  will-change: transform;
+  animation: ra-char-in 1.35s var(--ease-out) both;
+  animation-delay: var(--delay, 0s);
+}
+@keyframes ra-char-in {
+  0% { opacity: 0; transform: scale(3.2) translateY(-40px); filter: blur(24px); }
+  60% { opacity: 0.85; filter: blur(3px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); }
+}
+/* typing caret after the title, blinking until the letters have landed */
+.ra-caret {
+  display: inline-block;
+  width: 0.12em;
+  height: 0.8em;
+  /* takes no width, so the title wraps exactly as it did before it was split */
+  margin: 0 -0.3em 0 0.18em;
+  background: currentColor;
+  border-radius: var(--radius);
+  vertical-align: -0.04em;
+  animation: ra-blink 0.85s steps(1) infinite, ra-caret-out 0.4s 2.6s forwards;
+}
+@keyframes ra-blink { 50% { opacity: 0; } }
+@keyframes ra-caret-out { to { opacity: 0; visibility: hidden; } }
+
+/* press squish and mark pop */
+@media (prefers-reduced-motion: no-preference) {
+  .btn:active:not(:disabled) { transform: translateY(1px) scale(0.97); }
+  .brand-mark { transition: scale var(--dur-2) var(--ease-out); }
+  .brand:hover .brand-mark, .brand:focus-visible .brand-mark { scale: 1.08; }
+}

@@ -352,6 +352,7 @@ The coordinate board and the Map view are drawn as an astronomy-tower star chart
 - **Theme switch:** the new night or day cloth is lowered from the top over the old one (View Transition, clip-path, 560ms), and the sun/moon icon turns over.
 - **Feedback:** a done shield is stamped (scale 1.22 → 1), a vote press answers with a 0.94 squeeze, a successful copy settles a gold ring onto the IP group, focus rings settle in from 7px out, and the pip strikes once when the server comes online. Or buttons catch a gilt sheen on hover.
 - **Hover hairlines:** nav, filter and board tabs preview the indicator with a `rule-strong` hairline drawn from the centre; ways onward draw an arrow after their name.
+- **Ambient pointer layer:** a gilt blob cursor (or fill at ~18%, or stroke), a gold ripple per press (twice the pressed control's larger side, capped at 350px; 120px outside controls), and hero letters that zoom in from a 24px blur, then float and shy away from the pointer. Off under reduced motion and, for the cursor, on touch. The source kit's pill and rounded-card shapes are not used; corners stay at 2px.
 - **Reveal details:** a post's tag ribbon unfurls from the hoist after its cloth unrolls; rule numerals ink in (blur to sharp).
 - **Rules:** motion uses transform and opacity, plus bounded clip-path and filter where the cloth or ink metaphor needs it. It is gated by `prefers-reduced-motion`, and content is hidden for a reveal only after JS has set `data-reveal-on`.
 
