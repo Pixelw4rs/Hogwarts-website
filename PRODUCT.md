@@ -8,7 +8,7 @@ web
 
 ## Stack
 
-Static HTML/CSS/ES-module JS with no build step, served as-is from `data/` by the dependency-free `server/server.js` (Node 22, Docker). The owner chose this over Vite/React so the deploy stays a plain volume mount.
+React + Vite + Tailwind v4 client in `web/`, built into the Docker image and served by the dependency-free `server/server.js` (Node 22). The owner switched from the plain no-build client in November 2026 so 21st.dev components can be used; database and uploads stay in the `data/` volume.
 
 ## Users
 

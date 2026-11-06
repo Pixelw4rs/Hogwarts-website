@@ -1,381 +1,260 @@
 ---
 name: ARDET
-description: Coordination home for the ARDET Minecraft server's Hogwarts build, drawn as a heraldic roll of arms.
+description: Coordination home for the ARDET Minecraft server's Hogwarts build, drawn as rounded live widgets in a castle-at-dusk palette.
 colors:
-  or: "#d4a23c"
-  or-hi: "#e7bc5e"
-  on-or: "#1a1206"
-  gules: "#b0362c"
-  purpure: "#6c3a86"
-  vert: "#276b44"
-  azure: "#2d5ba6"
-  sable-field: "#2a2430"
-  on-tincture: "#fff8ea"
-  ground: "#141116"
-  ground-raised: "#1d1920"
-  ground-sunk: "#0f0d11"
-  ink: "#ece6da"
-  ink-dim: "#b4ac9f"
-  rule: "rgb(236 230 218 / 0.14)"
-  rule-strong: "rgb(236 230 218 / 0.28)"
-  state-on: "#4cc283"
-  state-off: "#e2604f"
-  state-wait: "#8a8379"
-  or-day: "#a3741f"
-  or-hi-day: "#b8862a"
-  link-day: "#7a5810"
-  ground-day: "#efe9dd"
-  ground-raised-day: "#f8f4ec"
-  ground-sunk-day: "#e4ddcf"
-  ink-day: "#1b171d"
-  ink-dim-day: "#5a5258"
-  sable-field-day: "#1e1a21"
-  state-on-day: "#22884f"
-  state-off-day: "#b3392b"
+  sand: "#f2dcb4"
+  sea-pine: "#4c6b68"
+  slate: "#2a3d3f"
+  deep: "#162222"
+  ember: "#e0773f"
+  or: "#e8bd7e"
+  or-hi: "#f3cf98"
+  on-or: "#182222"
+  ground: "#162222"
+  surface: "#1c2a2a"
+  surface-2: "#243535"
+  surface-sunk: "#101a1a"
+  ink: "#f3e5cb"
+  ink-dim: "#a7b7b0"
+  line: "rgb(243 229 203 / 0.09)"
+  line-strong: "rgb(243 229 203 / 0.18)"
+  state-on: "#78c59a"
+  state-off: "#e8774f"
+  state-wait: "#8c9c97"
+  gules: "#8e4632"
+  purpure: "#5b4a66"
+  vert: "#3f6660"
+  azure: "#3c5a6e"
+  sable-field: "#263434"
+  on-tincture: "#f7e8cc"
+  or-day: "#2f5451"
+  or-hi-day: "#3d6763"
+  on-or-day: "#f7e8cc"
+  link-day: "#2b5a55"
+  ground-day: "#f3e2c4"
+  surface-day: "#faf1e0"
+  surface-2-day: "#f1e0c3"
+  surface-sunk-day: "#e9d4b1"
+  ink-day: "#1c2b2b"
+  ink-dim-day: "#4a5f5c"
+  state-on-day: "#22804f"
+  state-off-day: "#b2482a"
 typography:
   display:
-    fontFamily: "IM Fell English SC, Iowan Old Style, Georgia, serif"
-    fontSize: "clamp(2.75rem, 1.6rem + 4.6vw, 4.75rem)"
-    fontWeight: 400
-    lineHeight: 1.05
-    letterSpacing: "0.005em"
+    fontFamily: "Bricolage Grotesque, ui-sans-serif, system-ui, sans-serif"
+    fontSize: "clamp(2.75rem, 1.4rem + 5vw, 5.5rem)"
+    fontWeight: 700
+    lineHeight: 1
+    letterSpacing: "-0.02em"
   headline:
-    fontFamily: "IM Fell English SC, Iowan Old Style, Georgia, serif"
+    fontFamily: "Bricolage Grotesque, ui-sans-serif, system-ui, sans-serif"
     fontSize: "clamp(2.25rem, 1.6rem + 2.4vw, 3.5rem)"
-    fontWeight: 400
+    fontWeight: 700
     lineHeight: 1.05
-  banner:
-    fontFamily: "IM Fell English SC, Iowan Old Style, Georgia, serif"
-    fontSize: "clamp(2rem, 1.5rem + 1.6vw, 2.5rem)"
-    fontWeight: 400
-    lineHeight: 1.05
+    letterSpacing: "-0.025em"
   title:
-    fontFamily: "IM Fell English SC, Iowan Old Style, Georgia, serif"
+    fontFamily: "Bricolage Grotesque, ui-sans-serif, system-ui, sans-serif"
     fontSize: "1.75rem"
-    fontWeight: 400
+    fontWeight: 700
     lineHeight: 1.05
   numeral:
-    fontFamily: "Atkinson Hyperlegible, system-ui, sans-serif"
-    fontSize: "clamp(2.5rem, 1.8rem + 2.2vw, 4.25rem)"
+    fontFamily: "Bricolage Grotesque, ui-sans-serif, system-ui, sans-serif"
+    fontSize: "clamp(2.5rem, 1.9rem + 2vw, 3.75rem)"
     fontWeight: 700
     lineHeight: 1
   body:
-    fontFamily: "Atkinson Hyperlegible, system-ui, sans-serif"
+    fontFamily: "Atkinson Hyperlegible Next, ui-sans-serif, system-ui, sans-serif"
     fontSize: "1.0625rem"
     fontWeight: 400
     lineHeight: 1.55
     fontFeature: "tnum"
-  lede:
-    fontFamily: "Atkinson Hyperlegible, system-ui, sans-serif"
-    fontSize: "1.25rem"
-    fontWeight: 400
-    lineHeight: 1.55
   ui-strong:
-    fontFamily: "Atkinson Hyperlegible, system-ui, sans-serif"
+    fontFamily: "Atkinson Hyperlegible Next, ui-sans-serif, system-ui, sans-serif"
     fontSize: "0.875rem"
     fontWeight: 700
     lineHeight: 1
-  label:
-    fontFamily: "Atkinson Hyperlegible, system-ui, sans-serif"
-    fontSize: "0.8125rem"
-    fontWeight: 400
-    letterSpacing: "0.08em"
   mono:
-    fontFamily: "JetBrains Mono, ui-monospace, Cascadia Mono, monospace"
-    fontSize: "0.92em"
+    fontFamily: "Atkinson Hyperlegible Mono, ui-monospace, Cascadia Mono, monospace"
+    fontSize: "0.94em"
     fontWeight: 600
+  atlas:
+    fontFamily: "Spectral, Iowan Old Style, Georgia, serif"
+    fontSize: "1.5rem"
+    fontWeight: 300
+    fontStyle: "italic"
 rounded:
-  hairline-corner: "2px"
+  sm: "10px"
+  field: "12px"
+  md: "16px"
+  lg: "24px"
+  pill: "999px"
 spacing:
   s1: "4px"
   s2: "8px"
   s3: "12px"
   s4: "16px"
-  s5: "20px"
   s6: "24px"
   s8: "32px"
-  s10: "40px"
-  s12: "48px"
-  s16: "64px"
   hit: "44px"
-  bar-h: "64px"
   page-max: "1280px"
+  gutter: "clamp(16px, 4vw, 48px)"
 components:
   button-or:
     backgroundColor: "{colors.or}"
     textColor: "{colors.on-or}"
     typography: "{typography.ui-strong}"
-    rounded: "{rounded.hairline-corner}"
-    padding: "0 16px"
+    rounded: "{rounded.pill}"
+    padding: "0 18px"
     height: "44px"
-  button-or-hover:
-    backgroundColor: "{colors.or-hi}"
-    textColor: "{colors.on-or}"
   button-quiet:
     textColor: "{colors.ink}"
-    typography: "{typography.ui-strong}"
-    rounded: "{rounded.hairline-corner}"
-    padding: "0 16px"
+    rounded: "{rounded.pill}"
     height: "44px"
   button-icon:
     textColor: "{colors.ink-dim}"
-    rounded: "{rounded.hairline-corner}"
+    rounded: "{rounded.pill}"
     size: "44px"
-  button-icon-small:
-    textColor: "{colors.ink-dim}"
-    rounded: "{rounded.hairline-corner}"
-    size: "32px"
   input:
-    backgroundColor: "{colors.ground-sunk}"
+    backgroundColor: "{colors.surface-sunk}"
     textColor: "{colors.ink}"
-    typography: "{typography.body}"
-    rounded: "{rounded.hairline-corner}"
-    padding: "0 12px"
+    rounded: "{rounded.field}"
+    padding: "0 14px"
     height: "44px"
-  nav-link:
-    textColor: "{colors.ink-dim}"
-    typography: "{typography.body}"
-    padding: "0 16px"
-    height: "44px"
-  nav-link-active:
-    textColor: "{colors.ink}"
-  board-tab:
-    textColor: "{colors.ink-dim}"
-    typography: "{typography.body}"
-    padding: "0 16px"
-    height: "44px"
-  board-tab-selected:
-    textColor: "{colors.ink}"
-  pennant:
+  card:
+    backgroundColor: "{colors.surface}"
+    rounded: "{rounded.md}"
+    padding: "24px"
+  board-widget:
     textColor: "{colors.on-tincture}"
-    padding: "24px 16px 64px"
-    height: "320px"
-  tincture-banner:
+    rounded: "6px 6px 16px 16px"
+    padding: "18px 18px 20px"
+    height: "236px"
+  board-banner:
     textColor: "{colors.on-tincture}"
-    typography: "{typography.banner}"
-    padding: "20px 48px 20px 24px"
-  undo-toast:
-    backgroundColor: "{colors.ground-raised}"
-    textColor: "{colors.ink}"
-    rounded: "{rounded.hairline-corner}"
+    rounded: "{rounded.lg}"
+    padding: "22px 28px"
+  header-island:
+    rounded: "{rounded.pill}"
+  toast:
+    backgroundColor: "{colors.surface-2}"
+    rounded: "{rounded.md}"
     padding: "8px 8px 8px 16px"
-  add-form:
-    backgroundColor: "{colors.ground-raised}"
-    rounded: "{rounded.hairline-corner}"
-    padding: "16px"
-  name-tag:
-    textColor: "{colors.ink}"
-    typography: "{typography.mono}"
-    rounded: "{rounded.hairline-corner}"
-    padding: "4px 12px"
-  notice-error:
-    backgroundColor: "{colors.gules}"
-    textColor: "{colors.on-tincture}"
-    rounded: "{rounded.hairline-corner}"
-    padding: "12px 16px"
 ---
 
 # Design System: ARDET
 
 ## Overview
 
-**Creative North Star: "The Wappenrolle"**
+**Creative North Star: "Castle at Dusk"**
 
-The site is a heraldic roll of arms for a building crew. Each of the five boards flies its own tincture, and heraldry's rule of tincture (metal on colour, never colour on colour) is the whole contrast system. The ground is cloth, not a dashboard panel: a near-black sable at night and warm vellum by day, both carrying a faint 4px warp-and-weft weave. Text is argent, actions are or (gold), and a board's colour shows up only as a field (pennant, banner, ribbon) or as a small escutcheon shield marking which board something belongs to.
+The site is a small set of rounded, live widgets laid over a castle at dusk: moonlit sand above, sea-pine and slate teal below, and the ember of lit windows as the one warm signal. It is a working tool used mid-session next to a running game, often at night, so the look stays calm and the controls stay obvious. The identity comes from three things: the palette, the board widgets hanging from a gilt rail on Start, and the motion layer carried over from the earlier "Wappenrolle" design.
 
-The layout is dense and plain, because people use it mid-session next to a running game. Structure comes from 1px hairlines on a 4px grid, not from cards or shadows. The ceremony is kept to a few devices: the gilt rail of hanging pennants on Start, the swallowtail banner that unfurls over each board, the Fell display face, and the shield shape repeated at every scale from the 10px status pip to the 40px empty-state mark. Everything else is quiet UI in Atkinson Hyperlegible.
+Colour never switches hard between the two poles. Every surface sits on a tonal ramp (sunk, ground, surface, raised), the page backdrop is a soft moonlit gradient, and the board fields and banner shade from a sand-tinted edge into a deeper teal-tinted one. "Not binary" is the rule.
 
-Both themes are first-class. Night is the default (no JS means night). Day keeps the same tinctures and deepens the gold so fills and focus rings still hold 3:1 on vellum.
+Night is the default (no stored choice means night). Day is a sand parchment ground with deep-teal ink and a sea-pine action colour. Both themes are first-class and share the board fields.
 
-**Key Characteristics:**
-- Five fixed board tinctures (gules, purpure, vert, azure, sable). They look the same in both themes and always carry argent text.
-- Or (gold) marks action: the primary button, links, focus rings, the active nav underline, the checked shield.
-- Every divider is one 1px hairline. Corners are cut to 2px.
-- Escutcheon and swallowtail silhouettes made with clip-path. No other ornament.
-- Woven ground texture, flat surfaces, and shadows only where something hangs or floats.
-- One signature motion: the pennant drop (12px, exponential ease-out).
+**Key characteristics**
+- Rounded everything: pills for controls, chips and tabs; 16px cards; 24px for the hero frame, the board banner and large panels.
+- One action colour (`--or`): sand-gold at night, sea-pine by day. It marks buttons, links, focus, the sliding tab bar, the rail and the cursor.
+- Five muted board fields in one lightness band, always carrying sand text.
+- Floating island header; surfaces separated by tone and a faint line, with shadows only on things that float or hang.
+- The motion layer from before, unchanged except the board-card hover.
 
 ## Colors
 
-A sable-and-vellum ground holding five saturated heraldic fields and one gold metal. Saturation lives only in the fields; the ground and ink stay warm neutrals.
+### Poles
+- **Moonlit Sand** (`#f2dcb4`): the highlight pole. Night ink is a lighter sand (`#f3e5cb`), the night action colour is sand-gold (`#e8bd7e`), and every field's top edge is mixed toward sand.
+- **Sea Pine** (`#4c6b68`) and **Slate** (`#2a3d3f`): the middle of the ramp; the day action colour is a deep sea-pine (`#2f5451`).
+- **Deep Teal** (`#162222`): the night ground and the dark end every field shades into.
+- **Ember** (`#e0773f`): the lit-window accent. It is the offline/error signal and the "picked" torch on the star chart. It is never decoration.
 
-### Primary
-- **Or, the Gilt Metal** ({colors.or} at night, {colors.or-day} by day): the action colour. It fills the "IP kopieren" button, outlines the IP group, colours links (by day links use the deeper {colors.link-day}), draws every focus ring, underlines the active nav link, fills the checked shield and the brand shield, tints text selection and the caret, and drains around the undo ring. Hover lifts to **Bright Or** ({colors.or-hi} / {colors.or-hi-day}). Text on or is always **Pitch** ({colors.on-or}).
+### Action (`--or`)
+Night `#e8bd7e` with pitch-teal text (`#182222`), hover `#f3cf98`. Day `#2f5451` with sand text (`#f7e8cc`), hover `#3d6763`, links `#2b5a55`. Focus rings, the sliding nav/tab bar, the gilt rail, text selection, the caret, the cursor blob and click ripples all read `--or`, so the whole UI changes with the theme.
 
-### Secondary: the board tinctures
-Each tincture is bound to one board through `data-tincture` and exposed as a single `--tincture` variable, so every component reads its colour from the board it belongs to.
-- **Gules, Banner Red** ({colors.gules}): Bauaufgaben. Also the Owner ribbon on Staff and the error notice field.
-- **Purpure, Heraldic Violet** ({colors.purpure}): Design-Vorschläge. Also the Admin ribbon.
-- **Vert, Field Green** ({colors.vert}): Terraforming. Also the Bedrock edition ribbon and the Bauleitung ribbon.
-- **Azure, Lapis Blue** ({colors.azure}): Zweiter Gebäudekomplex. Also the Java edition ribbon.
-- **Sable Field** ({colors.sable-field}, by day {colors.sable-field-day}): the Server-Map board. Because it sits close to the night ground, sable carries an argent edge. On pennants it is a 1px `ink` drop-shadow that follows the swallowtail clip-path; on small shields it is the `rule-strong` inset ring.
-- **Argent on Tincture** ({colors.on-tincture}): the only text and charge colour allowed on a tincture field.
+### Board fields
+Bound per board through `data-tincture` and exposed as `--tincture`; identical in both themes:
+- **Rust** `#8e4632`: Bauaufgaben; also the error notice and the armed delete button.
+- **Dusk Plum** `#5b4a66`: Design-Vorschläge.
+- **Sea Pine** `#3f6660`: Terraforming.
+- **Slate Blue** `#3c5a6e`: Zweiter Gebäudekomplex.
+- **Deep Teal** `#263434`: Server-Map; gets a `line-strong` inset ring so it separates from the night ground.
 
-### Tertiary: state signals
-These are signals, not tinctures. They mark status and errors. They never fill a board.
-- **Beacon Green** ({colors.state-on} / {colors.state-on-day}): the online pip.
-- **Ember Red** ({colors.state-off} / {colors.state-off-day}): the offline or error pip (drawn as an outlined shield, while online is filled, so the state never relies on hue alone), invalid-field borders, inline field-error text, the failed-copy border, and the delete icon on hover.
-- **Ash** ({colors.state-wait}): the pending pip, which breathes while status loads.
+News tags, staff roles and the edition chips reuse the same five fields.
 
-### Neutral
-- **Sable Ground** ({colors.ground}) / **Vellum** ({colors.ground-day}): the page cloth, under a 4px warp (`weave`) and weft (`weave-shade`) hairline texture.
-- **Raised Cloth** ({colors.ground-raised} / {colors.ground-raised-day}): the add-form well, toasts, and the hover wash on recent rows.
-- **Sunk Cloth** ({colors.ground-sunk} / {colors.ground-sunk-day}): input wells, the map frame, the icon-button hover.
-- **Argent Ink** ({colors.ink}) / **Iron Gall** ({colors.ink-day}): body text and titles.
-- **Faded Ink** ({colors.ink-dim} / {colors.ink-dim-day}): metadata, field labels, inactive tabs and nav, placeholders.
-- **Hairline** ({colors.rule}) and **Strong Hairline** ({colors.rule-strong}): every divider, and the borders of inputs, quiet buttons, and name tags. By day both are ink-based at 0.14 and 0.30 alpha.
+### Neutrals
+Night: ground `#162222`, surface `#1c2a2a`, raised `#243535`, sunk `#101a1a`, ink `#f3e5cb`, faded ink `#a7b7b0`, lines at 9% and 18% sand. Day: ground `#f3e2c4`, surface `#faf1e0`, raised `#f1e0c3`, sunk `#e9d4b1`, ink `#1c2b2b`, faded ink `#4a5f5c`, lines at 10% and 20% teal.
 
-### Named Rules
-**The Rule of Tincture.** Anything laid on a tincture field (pennant, banner, ribbon, error notice) is argent ({colors.on-tincture}) or or. Tinctures are never used as text colour, and one tincture never sits on another.
+### States
+Online `#78c59a` (day `#22804f`) as a filled dot with a soft halo; offline/error ember as an outlined ring, so state never relies on hue alone; pending ash `#8c9c97`, breathing while it loads. The state is always repeated in words.
 
-**The Or Is Action Rule.** Gold means "you can press this" or "this has focus". The only static uses are the brand shield and the Regeln rule numerals. Don't use or as decoration on a surface you can't act on.
-
-**The One Board, One Tincture Rule.** A board's colour reaches the UI only through `--tincture` bound by `data-tincture`. A new board gets a new tincture key. It never borrows a hex.
+### Rules
+- **Sand on fields.** Text on a board field, banner, chip or the error notice is sand (`--on-tincture`). A field is never used as a text colour.
+- **Action is one colour.** Only `--or` means "press this" or "this has focus".
+- **One board, one field.** A board's colour comes only through `--tincture`; a new board gets a new key.
+- **No hard splits.** Large areas blend between poles with gradients or tonal steps, never a flat two-tone cut.
 
 ## Typography
 
-**Display Font:** IM Fell English SC (with Iowan Old Style, Georgia, serif)
-**Body Font:** Atkinson Hyperlegible (with system-ui, sans-serif)
-**Label/Mono Font:** JetBrains Mono (with ui-monospace, Cascadia Mono, monospace)
-
-**Character:** A seventeenth-century small-caps face for names and numbers paired with a legibility-first sans for everything you read or press. The Fell gives the roll its voice. Atkinson keeps it usable on a phone at night. Every display face is weight 400, because Fell only ships one.
-
-### Hierarchy
-- **Display** (400, clamp 2.75 to 4.75rem, 1.05): only the "Willkommen bei Hogwarts" hero over the castle band. Max 12ch, with a soft text shadow for legibility over the photo.
-- **Headline** (400, clamp 2.25 to 3.5rem, 1.05): view titles (Regeln, Community Hub, Staff, Server-Karte).
-- **Banner** (400, clamp 2 to 2.5rem, 1.05): the board name inside the tincture banner.
-- **Title** (400, 1.75rem, 1.05): section titles, edition and Staff ribbons, way-onward names, and the brand wordmark (with 0.08em tracking; 1.5rem under 600px).
-- **Numeral** (Atkinson 700, clamp 2.5 to 4.25rem, 1, lining tabular figures): a pennant's open count. It is not set in Fell, because Fell's old-style 1 reads as a capital I. On mobile it is a fixed 2.75rem. Regeln counters are Fell upper-roman (I, II) at 2.5rem in or, where the letterform is intended.
-- **Body** (400, 1.0625rem, 1.55): all running text. Tabular numerals are on site-wide so counts and coordinates line up. Ledes run at 1.25rem with a 62ch max. Prose stays at 42 to 70ch.
-- **UI Strong** (700, 0.875rem, 1): button labels, field labels, item titles (at body size), and inline error text.
-- **Label** (400, 0.8125rem, uppercase, 0.08 to 0.1em tracking): only for a data term tied to its value (a pennant's "offen · erledigt" unit). Never above a heading.
-- **Mono** (600, 0.92em): the server address, coordinates, dimension tags, staff names, file sizes. These are things a player types or copies, so they get a code face.
-
-### Named Rules
-**The Fell Is for Names Rule.** IM Fell English SC sets names and numbers: titles, board names, ribbons, counts. It never sets running text, buttons, form labels, or metadata.
-
-**The Copyable Is Mono Rule.** Anything a player copies or types into the game (the IP, coordinates, player names) is set in JetBrains Mono. Nothing else is.
+- **Display and titles:** Bricolage Grotesque 700 with tight tracking (-0.02 to -0.035em). The hero "Willkommen bei Hogwarts" runs `clamp(2.75rem, 1.4rem + 5vw, 5.5rem)`, view headlines `clamp(2.25rem, 1.6rem + 2.4vw, 3.5rem)`, section titles 1.375 to 1.75rem. Board counts are Bricolage numerals.
+- **Body and UI:** Atkinson Hyperlegible Next. Body 1.0625rem / 1.55 with tabular figures site-wide; ledes 1.1875rem, max 62ch; labels and buttons 700 at 0.875rem.
+- **Copyable:** Atkinson Hyperlegible Mono 600 for the server address, coordinates, player names and file sizes, the things a player types into the game. Nothing else is mono.
+- **Star chart:** Spectral italic 300 for place names on the Sternkarte.
 
 ## Layout
 
-The page sits in a single centred column (`page-max` 1280px) with fluid gutters (clamp 16px, 4vw, 48px) that respect safe-area insets. The map view widens to 1400px. A sticky 64px bar holds the brand shield, the live status chip, the IP group, and the theme toggle, with the main nav row beneath it. The bar is translucent ground (92%) with a 10px backdrop blur and a bottom hairline.
+A single centred column (`page-max` 1280px, gutters `clamp(16px, 4vw, 48px)`); the Map widens to 1400px. The header is two floating pill islands: brand on the left and status, IP and icons on the right, with the nav island in a second row underneath. The bar is translucent ground with a 24px backdrop blur and a soft float shadow.
 
-All spacing comes from the 4px scale (`s1` to `s16`). Controls and tap targets are 44px (`hit`). Item rows are 12px top and bottom between hairlines. View pages pad 48px above and 64px below. Lists are hairline-ruled stacks, never grids of cards.
+Start: a rounded castle hero frame (24px), then a `1fr | 300–380px` grid of the board rail and the "Zuletzt im Hub" card, then news cards and three link cards. Content pages (Neuigkeiten, Regeln, Beitreten, Staff, Wünsche) are stacks of 16px cards with 10–20px gaps. Controls and tap targets are 44px. The nav and tab rows scroll sideways under 900px with a 32px edge fade.
 
-Start runs as a 1fr | 280 to 380px split: the pennant rail on the left, "Zuletzt im Hub" on the right behind a hairline. At 1024px and below it becomes one column. At 760px and below the rail turns vertical (a gilt bar down the left edge), each pennant lays out horizontally with its swallowtail pointing right, the ways-onward strip stacks, the add form drops to two columns, and the Staff roll stacks. At 600px and below the header IP text and player count hide, leaving only the copy button. The nav and board tabs scroll sideways under 900px, with a 32px edge fade as the hint.
+## Elevation
 
-## Elevation & Depth
-
-Flat by default. Depth comes from tone (raised and sunk cloth) and hairlines. Shadows appear only where an object physically hangs or floats above the cloth: the pennants and their gilt rail, the floating toast, and the error notice that interrupts the board. Night shadows are black. Day shadows are a warm umber (rgb 40 30 20) at about a third of the strength.
-
-### Shadow Vocabulary
-- **Notice** (`box-shadow: 0 2px 6px rgb(0 0 0 / 0.35)`, day `rgb(40 30 20 / 0.16)`): the gules error notice.
-- **Float** (`box-shadow: 0 10px 28px rgb(0 0 0 / 0.45)`, day `rgb(40 30 20 / 0.2)`): undo toasts.
-- **Hanging cloth** (`filter: drop-shadow(0 6px 10px rgb(0 0 0 / 0.3))`): each pennant, following its clipped swallowtail.
-- **Gilt rail** (`box-shadow: 0 2px 4px rgb(0 0 0 / 0.35)` on a `rail-hi` → `or` → `rail-lo` gradient bar): the rod the pennants hang from.
-
-### Named Rules
-**The Nothing Floats Without Reason Rule.** A surface gets a shadow only if it hangs (pennant, rail) or floats over content (toast, error notice). Rows, forms, tabs, and panels stay flat on the cloth.
-
-## Shapes
-
-Corners are cut to 2px everywhere: buttons, inputs, forms, toasts, tags, thumbnails, and the map frame. The only exceptions are the pill of the gilt rail (5px), the round undo-countdown ring, and the circles inside icons. Borders are always one 1px hairline. Weight changes only on the tab and nav underlines (3px under the selected board tab, 2px under the active nav link). Dashed hairlines mean "nothing here yet" (empty board, file preview).
-
-Two clip-path silhouettes carry the identity:
-- **Escutcheon** (`polygon(0 0, 100% 0, 100% 55%, 50% 100%, 0 55%)`): the brand mark, status pip, board-tab shield, and recent-row shield. The SVG shield icon (20px grid) is the same form for the checkbox and the empty state.
-- **Swallowtail.** Pennants hang with a V notch cut into the foot (`50% 86%`). Banners and ribbons fly with a notch at the fly end: 28px on the board banner, 18px on edition titles, 16px on Staff ribbons, and 24px on mobile pennants.
-
-Tinctured cloth (pennants, banners) carries a 3px horizontal thread texture over the field.
+Surfaces separate by tone plus a faint 1px line. Shadows are for things that float or hang:
+- **Float** (`0 18px 40px -12px` deep teal, plus a 1px inner highlight): the header islands, toasts, the login card.
+- **Hang** (`0 12px 22px -12px`): board widgets, the board banner, the error notice, the map frame; **Hang-hi** on hover.
+Day shadows use slate teal at about half the strength.
 
 ## Components
 
-### Buttons
-Compact, bold, square-cut.
-- **Shape:** 2px corners, 44px tall, 16px side padding, 700 weight at 0.875rem, icon gap 8px.
-- **Or (primary):** the gold field with pitch text. Hover goes to Bright Or. Pressing moves it down 1px.
-- **Quiet:** transparent with a Strong Hairline border and ink text. Hover turns the border and text to or. Used for Rückgängig, Bild, and Erneut versuchen.
-- **On-field:** a quiet button sitting on a tincture field. The border is argent at 50%, and hover darkens it with a 15% black wash.
-- **Icon:** a 44px square in faded ink. Hover goes to full ink over sunk cloth. A 32px small size is used for row delete (which turns ember red on hover) and image removal.
-- **Disabled:** 60% opacity, not-allowed cursor.
+- **Buttons:** pills, 44px, 700 weight. Or: action fill with a gilt sheen on hover. Quiet: line-strong border that turns to the action colour. On-field: translucent sand outline on a board field. Icon: 44px round, faded ink, raised on hover. Small: 32px (44px on touch).
+- **Copy address:** a sunk pill holding the mono address and the or button. Copying swaps the icon for a drawn check, and a gold ring settles onto the group.
+- **Fields:** sunk wells, 12px corners, 44px, line-strong border; hover lifts the border, focus turns it `--or` with a 3px ring at 30%. Search and the small selects are pills. Errors: ember border plus a bold ember line.
+- **Done check:** a 24px rounded box (8px corners). Open is an outline; done fills with `--or`, draws the check and is stamped (scale 1.22 → 1). Done titles get a 1px strike-through.
+- **Item rows:** rounded rows (16px) that wash to surface on hover; optional 56px thumbnail with 12px corners; coordinates as mono with a dimension pill and a copy button.
+- **Tabs:** board and filter tabs are pills with a dot in the board field; the selected board tab gets a 22% field wash. One sliding bar (3px, rounded) moves under the active tab with a spring.
+- **Board widget (Start):** a field card hanging from a 6px gilt pill rail, corners 6px at the rod and 16px at the foot, field gradient from sand-tinted to teal-tinted, a soft radial sheen. Shows the rolling count, "offen · n erledigt", the board name and the latest entry.
+- **Board banner (Hub):** a 24px rounded field bar with the board name and counts, unfurling from the left when the board opens.
+- **Cards (21st.dev "Stats cards with links" primitives):** surface, 1px line, 16px corners; used for recent, news teasers, ways onward, posts, rules, editions, staff rows and wishes.
+- **Undo toast:** raised surface, 16px, float shadow; an 18px ring drains over the 5s undo window and pauses on hover or focus.
+- **Wish row:** a 52×56 vote box (14px corners; or wash when voted), name, kind and status pills, the team's answer in a tinted inset.
+- **Login card:** surface, 24px corners, float shadow, a 44px or tile as the mark, and the show-password toggle inside the field.
+- **Sternkarte:** the star chart stays a night plate in both themes, now deep teal (`#0f1c1d` → `#152728`) with sand chalk, sage grid lines and an ember torch for the picked place; it sits in a 24px rounded panel.
 
-### Copy Button
-The "IP kopieren" or-button sits joined to the mono address inside a 1px or-outlined group. Its inner corners are square, and the address is in link colour at weight 600. On success the copy icon swaps for a check that draws itself in (stroke-dash, 320ms). On failure the border turns ember red.
+## Motion
 
-### Status Pip
-A 10×12px escutcheon (12×14px in the hero panel) in ash, beacon green, or ember red, set by `data-state`. While loading it breathes (1.2s opacity). The state is always repeated in words next to it.
-
-### Inputs / Fields
-- **Style:** a sunk-cloth well with a Strong Hairline border, 2px corners, 44px tall, 12px side padding, or caret. Labels sit above in 700 faded ink at 0.875rem. Coordinate fields use mono.
-- **Hover / Focus:** hover raises the border to faded ink. Focus turns the border or and adds a 3px or glow at 30%.
-- **Error:** the border turns ember red and a 700-weight ember message appears below. The message is hidden when empty.
-- **Search:** a 360px max input with a faded search icon inside, 38px left padding.
-
-### Shield Checkbox
-State is shown by form as well as colour. An open item is an outlined escutcheon in faded ink. Hover outlines it in or. A done item fills the shield with or and draws a pitch check charge inside (320ms, 60ms delay). The hit area is 44px. A done item's title gets a 1px strike-through in faded ink, and its thumbnail drops to 55%.
-
-### Item Rows
-A flex row ruled by hairlines above (and below the last row): shield, an optional 56px thumbnail, title (700), a metadata line in faded ink (author, time, mono coordinates, dimension tag), and a small delete icon. New rows slide in 4px from above (320ms).
-
-### Navigation
-- **Main nav:** text links in faded ink, 44px tall, 16px padding. Hover goes to ink. The current page is ink with a 2px or underline. It scrolls sideways with snap on narrow screens.
-- **Board tabs:** each tab is a 12×14px tincture shield, the board name, and a small bold count. The selected tab is ink over a 16% tincture wash with a 3px tincture underline. The row sits on a hairline.
-
-### Pennant Rail (signature)
-Five tincture pennants hang from a 10px gilt rod: a large lining numeral (open count), a tracked unit line, the board name in Fell, and a two-line "Zuletzt" preview, all in argent. On hover or focus the pennant drops 12px (`--drop`, 560ms exponential ease-out). On mobile it slides 6px sideways instead. Each pennant links to its board.
-
-### Tincture Banner (signature)
-Every board panel opens with a full-width swallowtail banner in its tincture: the board name in Fell plus the "offen · erledigt" counts in bold argent. When you switch boards it unfurls from the hoist with a clip-path reveal (560ms ease-out). The same ribbon form, smaller, titles the Beitreten editions and the Staff roles.
-
-### Undo Toast
-Deleting an entry hands it to a raised-cloth toast at the bottom right (float shadow, 2px corners). The toast has an 18px or ring that drains over the 5s undo window, the message, and a quiet "Rückgängig" button. Hover or focus pauses the countdown. The toast enters with a 12px rise and leaves with an 8px fall.
-
-### Add Form
-A raised-cloth well with a hairline border and 16px padding: a 2fr title field, a 1fr meta field, a quiet "Bild" file trigger, and the or submit, aligned to the field bottoms. On mobile it drops to two columns and the submit goes full width.
-
-### Name Tag
-A mono name in a Strong Hairline box with 2px corners (4px by 12px padding). Used on the Staff roll.
-
-### Sternkarte (star atlas, second world)
-The coordinate board and the Map view are drawn as an astronomy-tower star chart: Impeccable's "challenger-star-atlas" option, adopted by the owner for the map only. It is scoped to `.atlas` and `.atlas-plate` and looks the same in both themes, because a star chart is a night object.
-- **Palette:** navy chart ground (`#0b1630`, plate gradient from `#0f1c3b`), chalk stars and text (`#edeff5`), steel grid and labels (`#8fa3c8`), and red-torch amber (`#e0623a`) only for the picked place.
-- **Type:** names in Spectral italic 300; figures in the UI face with tabular lining numerals.
-- **Plot:** north (−Z) is up and east (+X) is right. Rings sit at a 1/2/5 × 10ⁿ block step. Nether places are hollow rings plotted at ×8. End places and entries without coordinates are listed under the chart instead of plotted.
-- **Interaction:** the list or table is the accessible interface. Hovering or focusing a row lights its star, and clicking a star picks its row. The SVG is one labelled image.
-- **Motion:** rings and stars rise in, background dust twinkles, and the pick draws a torch ring with a leader line to its name in the opposite quadrant.
-
-### Motion layer
-- **Page switch:** the new view slides in 40px from the direction of travel (by nav order), as a keyframe on the live page (no View Transition, so the ambient cursor never freezes). The bar stays still.
-- **Sliding indicator:** one bar moves under the active nav link, board tab (in the board's tincture, 3px), filter tab or admin tab, with a slight spring.
-- **Scroll reveal:** list rows rise 18px, cloth (posts, editions, staff ribbons) unrolls from the top edge, and pennants unfurl from the gilt rail, staggered 70ms.
-- **Rolling numbers:** counts roll up when they grow and down when they shrink.
-- **Cloth swing:** after the 12px drop a pennant swings on its rod (±1.6° damped, 1.5s, desktop only). It extends the signature motion; nothing else swings.
-- **Theme switch:** the new night or day cloth is lowered from the top over the old one (View Transition, clip-path, 560ms), and the sun/moon icon turns over.
-- **Feedback:** a done shield is stamped (scale 1.22 → 1), a vote press answers with a 0.94 squeeze, a successful copy settles a gold ring onto the IP group, focus rings settle in from 7px out, and the pip strikes once when the server comes online. Or buttons catch a gilt sheen on hover.
-- **Hover hairlines:** nav, filter and board tabs preview the indicator with a `rule-strong` hairline drawn from the centre; ways onward draw an arrow after their name.
-- **Ambient pointer layer:** a gilt blob cursor (or fill at ~18%, or stroke), a gold ripple per press (twice the pressed control's larger side, capped at 350px; 120px outside controls), and hero letters that zoom in from a 24px blur, then float and shy away from the pointer. Off under reduced motion and, for the cursor, on touch. The source kit's pill and rounded-card shapes are not used; corners stay at 2px.
-- **Reveal details:** a post's tag ribbon unfurls from the hoist after its cloth unrolls; rule numerals ink in (blur to sharp).
-- **Rules:** motion uses transform and opacity, plus bounded clip-path and filter where the cloth or ink metaphor needs it. It is gated by `prefers-reduced-motion`, and content is hidden for a reveal only after JS has set `data-reveal-on`.
-
-### News Post, Wish Row, Login Card
-- **Post:** a tag ribbon (swallowtail, in the tag's tincture: Info sable, Update azure, Event purpure, Wartung gules), a Fell title, a faded meta line and lede-size body. A pinned post sits on raised cloth with a Strong Hairline.
-- **Wish row:** a 52×56 vote box (chevron plus rolling count, `aria-pressed`; or-washed when voted), the name (with an external-link mark when it has a link), kind and status tags in hairline boxes, and the team's answer behind a 2px or edge.
-- **Login card:** a raised-cloth card (400px) with the float shadow and a 40px or escutcheon. Its show-password toggle sits inside the field.
+The motion layer is `data/css/motion.css` plus the `data/js` helpers, imported unchanged by the React app. Durations 160 / 320 / 560ms on an exponential ease-out (`cubic-bezier(0.16, 1, 0.3, 1)`), a slight spring for the tab bar and star rise.
+- **Page switch:** the new view slides 40px from the direction of travel as a keyframe on the live page (no View Transition, so the cursor never freezes).
+- **Sliding indicator** under the nav, board tabs, filter tabs and admin tabs; tabs preview it with a hairline drawn from the centre.
+- **Scroll reveal:** rows rise 18px, cards unroll from the top edge, board widgets unfurl from the rail, staggered 70ms.
+- **Rolling numbers** for board counts and votes.
+- **Board widget hover:** a 4px lift in 220ms with a deeper shadow and a brighter sheen; 1px when pressed. (The old 12px drop and cloth swing were removed on request.)
+- **Feedback:** stamp on done, squeeze on vote, gold ring on copy, focus rings settling in from 7px, the status dot striking once when the server comes online, gilt sheen on or buttons.
+- **Theme switch:** the new theme is lowered from the top (View Transition clip, 560ms) and the sun/moon turns over; the cursor and ripples stay live on top.
+- **Ambient pointer:** a blob cursor and click ripples in `--or`, and hero letters that zoom in from a blur and drift away from the pointer. Off under reduced motion; the cursor is off on touch.
+- **Reduced motion** zeroes all durations and turns off reveals, swings, the ambient layer and the star twinkle; content is hidden for a reveal only after JS has set `data-reveal-on`.
 
 ## Do's and Don'ts
 
-### Do:
-- **Do** read a board's colour from `--tincture` through `data-tincture`. Give a new board its own tincture key.
-- **Do** set every word on a tincture field in argent ({colors.on-tincture}) or or. On the sable field, add the argent edge (an inset `rule-strong` ring) so it separates from the night ground.
-- **Do** show state by form as well as hue: outline vs. filled shield, the pip plus a word, strike-through for done.
-- **Do** divide with one 1px hairline on the 4px scale. Use dashed hairlines only for empty or pending slots.
-- **Do** keep controls at 44px (`hit`) with the 2px corner.
-- **Do** run motion on `--ease-out` with `--dur-1/2/3` (160, 320, 560ms) so reduced motion sets all of it to zero, including the pennant drop and the banner unfurl.
-- **Do** check new colours in both themes. By day the metal is {colors.or-day} and links are {colors.link-day}.
+### Do
+- Use the tonal ramp and gradients between sand and teal for large areas.
+- Read a board's colour from `--tincture`; give a new board its own key.
+- Keep controls at 44px, pills for controls, 16px for cards, 24px for heroes and banners.
+- Show state by form and words as well as hue (filled vs. outlined dot, strike-through for done).
+- Check every new colour in both themes; the action colour flips from sand-gold to sea-pine.
+- Import motion from the shared layer instead of re-implementing it in components.
 
-### Don't:
-- **Don't** use a tincture as text colour, and don't lay one tincture on another.
-- **Don't** use or on anything that isn't an action, focus, or selection, apart from the brand shield and the rule numerals.
-- **Don't** set running text, buttons, or labels in IM Fell English SC.
-- **Don't** wrap rows or panels in shadowed cards. Lists stay hairline-ruled on flat cloth.
-- **Don't** use tracked uppercase labels except as the term attached to a value. Never put one above a heading.
-- **Don't** round corners beyond 2px on rectangular surfaces.
+### Don't
+- Don't put text in a board colour or lay one field on another.
+- Don't use `--or` for anything that is not an action, focus or selection.
+- Don't cut the page into flat sand and teal blocks.
+- Don't add shadows to rows, forms or tabs; only floating and hanging things get one.
+- Don't use mono for anything a player wouldn't type or copy.

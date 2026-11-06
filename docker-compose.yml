@@ -1,6 +1,7 @@
 services:
   hogwarts:
-    image: node:22-alpine
+    build: .                   # builds the React site into the image (Dockerfile)
+    image: ardet-hogwarts
     container_name: hogwarts
     restart: unless-stopped
     user: "1000:1000"          # run `id pixel` - change if pixel is not 1000
@@ -10,7 +11,8 @@ services:
       - "8080:8080"
     environment:
       - PORT=8080
-      - WEB_ROOT=/data
+      - WEB_ROOT=/data         # database and uploads
+      - STATIC_ROOT=/site      # the built site inside the image
       # admin login: put ADMIN_USER and ADMIN_PASSWORD in a .env file next to this one (never commit it)
       - ADMIN_USER=${ADMIN_USER:-admin}
       - ADMIN_PASSWORD=${ADMIN_PASSWORD:-}

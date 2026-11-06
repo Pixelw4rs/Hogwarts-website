@@ -5,10 +5,11 @@ must still work after the rewrite. Tick each one during verification.
 
 ## Architecture
 
-- [x] **Single-page site** at `data/index.html`, written in German (`lang="de"`). No framework and no build step.
+- [x] **Single-page site**, written in German (`lang="de"`). React + Vite + Tailwind app in `web/` (built into `web/dist`); the earlier plain client in `data/index.html` still works for `npm run dev`.
 - [x] **Static assets** in `data/`: `favicon.png`, `favicon.ico`, `hogwarts-bg.jpg`.
 - [x] **Backend** in `server/server.js`: dependency-free Node HTTP server (Node 22 in Docker).
-- [x] **Deployment** via `docker-compose.yml`: mounts `./server` read-only and `./data` read-write, port 8080, env `PORT` and `WEB_ROOT`.
+- [x] **Deployment** via `docker-compose.yml` + `Dockerfile`: the image builds the React site into `/site`; compose mounts `./server` read-only and `./data` read-write, port 8080, env `PORT`, `WEB_ROOT` (database, uploads) and `STATIC_ROOT` (site files; defaults to `WEB_ROOT`). Uploads under `/uploads/` are always served from `WEB_ROOT`.
+- [x] **Board cards on Start** lift 4px in 220ms on hover/focus (the long drop and cloth swing were dropped on request).
 - [x] **Health check** runs `GET /api/boards` every 30s.
 
 ## Pages / views
