@@ -6,7 +6,18 @@ import { RootlessAnimations } from '../lib/rootless-animations.js';
 import { prefersReducedMotion } from '../lib/dom.js';
 
 const root = document.documentElement;
-const isDay = () => root.dataset.theme === 'light';
+
+// The cursor follows the page's action colour (--or), read once per theme switch rather than per frame.
+// Plain rgba() because the cursor is drawn on a canvas, where not every browser takes color-mix().
+let accent = '#d4a23c';
+let rgb = '212, 162, 60';
+function readAccent() {
+  const hex = getComputedStyle(root).getPropertyValue('--or').trim();
+  if (!/^#[0-9a-f]{6}$/i.test(hex)) return;
+  accent = hex;
+  rgb = [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16)).join(', ');
+}
+const tint = (alpha) => `rgba(${rgb}, ${alpha / 100})`;
 
 const CONTROLS = 'a, button, label, select, summary, input, textarea, [role="tab"], .pennant, [data-ra-hover]';
 const RIPPLE_MAX = 350;
@@ -60,13 +71,15 @@ export function startAmbient() {
   const title = /** @type {HTMLElement|null} */ (document.querySelector('.hero-title'));
   const split = title ? splitHeroTitle(title) : false;
   root.setAttribute('data-ambient', '');
+  readAccent();
+  new MutationObserver(readAccent).observe(root, { attributes: true, attributeFilter: ['data-theme'] });
 
   RootlessAnimations.init({
     cursorOnTouch: false,
     hoverSelector: CONTROLS,
-    cursorFill: () => (isDay() ? 'rgba(163, 116, 31, 0.16)' : 'rgba(212, 162, 60, 0.18)'),
-    cursorStroke: () => (isDay() ? '#a3741f' : '#d4a23c'),
-    rippleColor: 'rgba(212, 162, 60, 0.22)',
+    cursorFill: () => tint(18),
+    cursorStroke: () => accent,
+    rippleColor: tint(22),
     rippleSize: rippleDiameter,
     particles: false,
     letters: split ? '.hero-title .ra-char' : null,

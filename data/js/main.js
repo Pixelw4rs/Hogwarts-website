@@ -1,4 +1,4 @@
-// Entry point: routing (with direction-aware view transitions), polling and wiring of every view.
+// Entry point: routing (with direction-aware page slides), polling and wiring of every view.
 import { API_AUTH, API_CONTENT, API_REQUESTS, HUB_POLL_MS, REQUESTS_POLL_MS, SERVER_ADDRESS, VIEWS } from './config.js';
 import { mountAdmin } from './admin/admin-view.js';
 import { startAmbient } from './components/ambient.js';
@@ -9,7 +9,7 @@ import { startServerStatus } from './components/server-status.js';
 import { bindThemeToggle } from './components/theme-toggle.js';
 import { createHubStore } from './hub/store.js';
 import { mountHub } from './hub/hub-view.js';
-import { $, $$, prefersReducedMotion } from './lib/dom.js';
+import { $, $$ } from './lib/dom.js';
 import { icon } from './lib/icons.js';
 import { createResource } from './lib/resource.js';
 import { parseHash, toHash, viewIndex } from './lib/route.js';
@@ -54,13 +54,13 @@ const navIndicator = attachIndicator($('#nav-list'), () => navLinks.find((l) => 
 let current = null;
 
 /**
- * Runs a DOM update inside a View Transition when the browser has one; the CSS slides
- * the page in from the side the visitor is heading to. Without it, a CSS keyframe does the same.
+ * Swaps the view. The new view slides in from the side the visitor is heading to with a plain CSS
+ * keyframe on the live page (motion.css). No View Transition: its full-page snapshot cost a frame
+ * spike on every click and froze the ambient cursor and ripples until it ended.
  * @param {() => void} update
  */
 function transition(update) {
-  if (!document.startViewTransition || prefersReducedMotion()) { update(); return; }
-  document.startViewTransition(update);
+  update();
 }
 
 function paintNav(view) {

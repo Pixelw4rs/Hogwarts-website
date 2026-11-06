@@ -1,14 +1,15 @@
 ---
 name: project-conventions
-description: Rules for changing the ARDET Hogwarts-website (no deps, no build, German UI, CSS order, live data). Use before editing anything in data/, server/, scripts/ or tests/.
+description: Rules for changing the ARDET Hogwarts-website (React/Vite/Tailwind client in web/, dependency-free server, German UI, live data). Use before editing anything in web/, data/, server/, scripts/ or tests/.
 user-invocable: false
 ---
 
 # ARDET site conventions
 
 ## Stack
-- No npm dependencies and no build step. Do not add packages, bundlers, frameworks or TypeScript.
-- `data/` is served as-is by `server/server.js`. Client code is native ES modules, entry `data/js/main.js`.
+- The client is React + Vite + Tailwind v4 (TypeScript) in `web/`, entry `web/src/main.tsx`. Pin exact versions in `web/package.json`. 21st.dev / shadcn components go in `web/src/components/ui` and read the site tokens.
+- Motion stays single-source: `data/css/motion.css` and the `data/js` modules are imported through the `@legacy` alias until each view is converted. Do not fork them into `web/`.
+- `server/` stays dependency-free CommonJS. It serves the built site from `STATIC_ROOT` and data from `WEB_ROOT`.
 - Server code in `server/` is CommonJS (`require`), Node 22, only built-in modules.
 - Docker mounts `./server` read-only at `/app`, so the server must not write inside its own folder.
 

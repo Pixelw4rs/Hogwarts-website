@@ -1,10 +1,13 @@
 {
   "name": "ardet-hogwarts-website",
   "private": true,
-  "description": "ARDET Minecraft server site. No build step: data/ is served as-is by server/server.js.",
+  "description": "ARDET Minecraft server site. The client is a React + Vite + Tailwind app in web/; server/ is dependency-free Node.",
   "scripts": {
     "start": "node server/server.js",
     "dev": "node scripts/dev.mjs",
+    "web:install": "npm --prefix web install",
+    "web:dev": "npm --prefix web run dev",
+    "web:build": "npm --prefix web run build",
     "check": "node scripts/check.mjs",
     "test": "node --test tests/",
     "test:coverage": "node --test --experimental-test-coverage tests/"

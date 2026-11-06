@@ -10,10 +10,11 @@
 [data-view="staff"] #view-staff,
 [data-view="admin"] #view-admin {
   display: block;
-  /* the keyframe name comes from motion.css (only where View Transitions are missing) */
+  /* the keyframe name comes from motion.css. backwards, not both: once the slide ends the view keeps
+     no transform, which would otherwise pin position:fixed children inside it to the view */
   animation-duration: var(--dur-3);
   animation-timing-function: var(--ease-out);
-  animation-fill-mode: both;
+  animation-fill-mode: backwards;
 }
 
 [tabindex="-1"]:focus { outline: none; }

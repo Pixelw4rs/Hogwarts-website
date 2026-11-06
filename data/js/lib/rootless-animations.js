@@ -149,19 +149,29 @@ export let RootlessAnimations;
     const css = `
       ${o.cursor && o.hideNativeCursor ? "html, body, body *:not(input, textarea, select, [contenteditable]) { cursor: none !important; }" : ""}
       * { -webkit-tap-highlight-color: transparent; }
+      /* as big as the cursor and centred on the pointer by JS (a 0x0 box would give it an empty,
+         invisible layer in a View Transition) */
       #ra-cursor-container {
-        position: fixed; top: 0; left: 0; width: 0; height: 0;
+        position: fixed; top: 0; left: 0; width: 52px; height: 52px;
         pointer-events: none; z-index: 99999;
-        transform: translate(-50%, -50%); will-change: left, top;
+        will-change: transform;
+        view-transition-name: ra-cursor;
       }
+      /* A View Transition (the night/day switch) paints a frozen snapshot over the page. The cursor
+         and the ripples get their own live layer on top of it, so they keep moving instead of vanishing. */
+      ::view-transition-group(ra-cursor) { animation: none; }
+      ::view-transition-old(ra-cursor) { display: none; }
+      ::view-transition-new(ra-cursor) { animation: none; }
+      ::view-transition-group(*.ra-fx) { animation: none; }
+      ::view-transition-old(*.ra-fx) { display: none; }
+      ::view-transition-new(*.ra-fx) { animation: none; }
       #ra-cursor-canvas {
         width: 52px; height: 52px; display: block;
-        transform: translate(-50%, -50%);
         transition: transform 0.16s cubic-bezier(0.16, 1, 0.3, 1);
         will-change: transform;
       }
-      body.ra-cursor-hover #ra-cursor-canvas { transform: translate(-50%, -50%) scale(1.25); }
-      body.ra-cursor-down  #ra-cursor-canvas { transform: translate(-50%, -50%) scale(0.85); }
+      body.ra-cursor-hover #ra-cursor-canvas { transform: scale(1.25); }
+      body.ra-cursor-down  #ra-cursor-canvas { transform: scale(0.85); }
       #ra-spatial-canvas {
         position: fixed; inset: 0; width: 100vw; height: 100vh;
         pointer-events: none; z-index: ${o.particleZIndex};
@@ -368,15 +378,29 @@ export let RootlessAnimations;
     // ---------------------------------------------------------------- floating letters
     const letterNodes = o.letters ? Array.from(document.querySelectorAll(o.letters)) : [];
     let charPoints = [];
+    let lettersVisible = false;
+    // the pointer the letters react to: it trails the real one a little, so they ease away instead of jumping
+    let letterPointerX = pointerX;
+    let letterPointerY = pointerY;
 
+    // Rest position of a letter's centre in page coordinates, from the layout alone: offsetLeft/Top
+    // ignore transforms, so neither the zoom-in intro, the page slide nor the float/push skews it.
+    function restPoint(el) {
+      let x = el.offsetWidth / 2;
+      let y = el.offsetHeight / 2;
+      for (let n = el; n; n = n.offsetParent) { x += n.offsetLeft; y += n.offsetTop; }
+      return [x, y];
+    }
+
+    // Kept in page coordinates, so scrolling needs no new measurement.
     function updateCachedLayout() {
       charPoints = letterNodes.map((el, i) => {
-        const r = el.getBoundingClientRect();
+        const [x, y] = restPoint(el);
         const old = charPoints[i];
         return {
           el,
-          x: r.left + r.width / 2 - (old ? old.currX : 0),
-          y: r.top + r.height / 2 - (old ? old.currY : 0),
+          x,
+          y,
           currX: old ? old.currX : 0,
           currY: old ? old.currY : 0,
           vx: old ? old.vx : 0,
@@ -393,37 +417,50 @@ export let RootlessAnimations;
         }
       });
       window.addEventListener("resize", updateCachedLayout);
-      window.addEventListener("scroll", updateCachedLayout, { passive: true });
       // views are display:none while away; measure again once a route change has painted
       window.addEventListener("hashchange", () => setTimeout(updateCachedLayout, 80));
       setTimeout(updateCachedLayout, 200);
+      // the physics only runs while the letters are on screen (not on other views or scrolled away)
+      const box = letterNodes[0].parentElement.closest("h1, h2, p, div") || letterNodes[0];
+      new IntersectionObserver((entries) => {
+        const visible = entries.some((e) => e.isIntersecting);
+        if (visible && !lettersVisible) updateCachedLayout();
+        lettersVisible = visible;
+      }).observe(box);
     }
 
-    function updateFloatingLetters(now) {
+    function updateFloatingLetters(now, f) {
       const nowSec = now * 0.0022;
+      const follow = 1 - Math.pow(0.88, f);
+      letterPointerX += (pointerX + window.scrollX - letterPointerX) * follow;
+      letterPointerY += (pointerY + window.scrollY - letterPointerY) * follow;
+      const maxDist = 190;
+      const soft = 36; // px: the push fades out near the pointer's centre instead of flipping sides
+      const stiffness = 0.065 * f;
+      const damping = Math.pow(0.86, f);
       for (let i = 0; i < charPoints.length; i++) {
         const cp = charPoints[i];
         const floatY = Math.sin(nowSec + i * 0.75) * 6;
         const floatX = Math.cos(nowSec * 0.8 + i * 0.5) * 2.5;
-        const dx = pointerX - cp.x;
-        const dy = pointerY - cp.y;
+        const dx = letterPointerX - cp.x;
+        const dy = letterPointerY - cp.y;
         const dist = Math.hypot(dx, dy);
-        const maxDist = 160;
         let pushX = 0;
         let pushY = 0;
-        if (dist < maxDist && dist > 0) {
-          const force = Math.pow(1 - dist / maxDist, 2) * 24;
-          const angle = Math.atan2(dy, dx);
-          pushX = -Math.cos(angle) * force;
-          pushY = -Math.sin(angle) * force;
+        if (dist < maxDist) {
+          const s = 1 - dist / maxDist;
+          const force = s * s * (3 - 2 * s) * 22; // smoothstep falloff
+          const len = Math.sqrt(dist * dist + soft * soft);
+          pushX = -(dx / len) * force;
+          pushY = -(dy / len) * force;
         }
-        cp.vx += (pushX + floatX - cp.currX) * 0.16;
-        cp.vy += (pushY + floatY - cp.currY) * 0.16;
-        cp.vx *= 0.82;
-        cp.vy *= 0.82;
-        cp.currX += cp.vx;
-        cp.currY += cp.vy;
-        cp.el.style.transform = `translate3d(${cp.currX.toFixed(1)}px, ${cp.currY.toFixed(1)}px, 0)`;
+        cp.vx += (pushX + floatX - cp.currX) * stiffness;
+        cp.vy += (pushY + floatY - cp.currY) * stiffness;
+        cp.vx *= damping;
+        cp.vy *= damping;
+        cp.currX += cp.vx * f;
+        cp.currY += cp.vy * f;
+        cp.el.style.transform = `translate3d(${cp.currX.toFixed(2)}px, ${cp.currY.toFixed(2)}px, 0)`;
       }
     }
 
@@ -508,6 +545,7 @@ export let RootlessAnimations;
       prevPointerY = e.clientY;
     });
 
+    let rippleCount = 0;
     window.addEventListener("pointerdown", (e) => {
       document.body.classList.add("ra-cursor-down");
       if (shapeCanvas) triggerSmoothShapeChange();
@@ -521,6 +559,9 @@ export let RootlessAnimations;
         r.style.height = `${size}px`;
         r.style.left = `${e.clientX - size / 2}px`;
         r.style.top = `${e.clientY - size / 2}px`;
+        // its own live layer during a View Transition (see the ::view-transition rules in injectCoreCSS)
+        r.style.viewTransitionName = `ra-ripple-${++rippleCount}`;
+        r.style.viewTransitionClass = "ra-fx";
         document.body.appendChild(r);
         setTimeout(() => r.remove(), 650);
       }
@@ -532,7 +573,11 @@ export let RootlessAnimations;
     // ---------------------------------------------------------------- main loop
     if (shapeCanvas) drawCanvasShape(shapeProfiles[0], shapeProfiles[1], 0, 1, 1);
 
+    let lastNow = performance.now();
     function frame(now) {
+      // elapsed time in 60 fps frames, so the letters feel the same on a 60 Hz and a 144 Hz screen
+      const f = Math.min(3, Math.max(0.1, (now - lastNow) / (1000 / 60)));
+      lastNow = now;
       if (!document.hidden) {
         if (shapeCanvas) {
           const fromProfile = shapeFrom === -1 ? morphFromSnapshot : shapeProfiles[shapeFrom];
@@ -563,8 +608,8 @@ export let RootlessAnimations;
         if (cursorContainer) {
           smoothPointerX += (pointerX - smoothPointerX) * 0.35;
           smoothPointerY += (pointerY - smoothPointerY) * 0.35;
-          cursorContainer.style.left = `${smoothPointerX}px`;
-          cursorContainer.style.top = `${smoothPointerY}px`;
+          // transform instead of left/top: moving it needs no layout, only compositing
+          cursorContainer.style.transform = `translate3d(${(smoothPointerX - 26).toFixed(1)}px, ${(smoothPointerY - 26).toFixed(1)}px, 0)`;
           cursorMorphProgress += 0.005;
           if (cursorMorphProgress >= 1) {
             cursorMorphProgress = 0;
@@ -576,7 +621,7 @@ export let RootlessAnimations;
           drawCustomCursorShape(easeInOutCubic(cursorMorphProgress));
         }
 
-        if (charPoints.length) updateFloatingLetters(now);
+        if (charPoints.length && lettersVisible) updateFloatingLetters(now, f);
       }
 
       if (pCtx) {

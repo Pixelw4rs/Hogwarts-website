@@ -1,0 +1,297 @@
+@import "tailwindcss";
+/* the unchanged motion layer from the current site (layered, so the look below can restyle its hooks) */
+@import "../../../data/css/motion.css" layer(motion);
+/* forms, hub, wishes, map, content pages and admin (same layer, so the rules below still win) */
+@import "./features.css" layer(components);
+
+/* =====================================================================================
+   ARDET "Widget board" tokens: rounded, clean surfaces in a castle-at-dusk palette:
+   moonlit sand over sea-pine and slate teal, with an ember accent from the lit windows.
+   Colour moves in tonal steps and soft gradients between those poles, never as a hard
+   two-colour split. The legacy token names (--or, --rule-strong, --dur-*, --ease-out …)
+   are kept because data/css/motion.css, the unchanged motion layer, reads them.
+   ===================================================================================== */
+:root {
+  color-scheme: dark;
+
+  /* palette poles */
+  --sand: #f2dcb4;
+  --sea-pine: #4c6b68;
+  --slate: #2a3d3f;
+  --deep: #162222;
+  --ember: #e0773f;
+
+  /* board fields: muted, same lightness band, identical in both themes, always carry sand text */
+  --gules: #8e4632;
+  --purpure: #5b4a66;
+  --vert: #3f6660;
+  --azure: #3c5a6e;
+  --sable-field: #263434;
+  --on-tincture: #f7e8cc;
+
+  /* action: moonlit sand */
+  --or: #e8bd7e;
+  --or-hi: #f3cf98;
+  --on-or: #182222;
+  --link: var(--or);
+
+  /* night ground and surfaces: a teal ramp from sunk to raised */
+  --ground: #162222;
+  --surface: #1c2a2a;
+  --surface-2: #243535;
+  --surface-sunk: #101a1a;
+  --ink: #f3e5cb;
+  --ink-dim: #a7b7b0;
+  --line: rgb(243 229 203 / 0.09);
+  --line-strong: rgb(243 229 203 / 0.18);
+  --rule: var(--line);
+  --rule-strong: var(--line-strong);
+  --glass: rgb(22 34 34 / 0.74);
+  --backdrop:
+    radial-gradient(1100px 620px at 12% -8%, rgb(232 189 126 / 0.09), transparent 62%),
+    radial-gradient(900px 600px at 100% 40%, rgb(76 107 104 / 0.16), transparent 65%),
+    linear-gradient(180deg, #1a2828 0%, #152020 55%, #111b1b 100%);
+  --scrim: linear-gradient(180deg, rgb(16 26 26 / 0.05) 25%, rgb(16 26 26 / 0.55) 60%, rgb(16 26 26 / 0.9));
+  --hero-ink: #f7e8cc;
+
+  --state-on: #78c59a;
+  --state-off: #e8774f;
+  --state-wait: #8c9c97;
+
+  /* shape */
+  --radius: 10px;
+  --r-sm: 10px;
+  --r-md: 16px;
+  --r-lg: 24px;
+  --float: 0 18px 40px -12px rgb(6 12 12 / 0.65), inset 0 1px 0 rgb(243 229 203 / 0.06);
+  --hang: 0 12px 22px -12px rgb(6 12 12 / 0.7);
+  --hang-hi: 0 20px 32px -14px rgb(6 12 12 / 0.75);
+
+  /* 4px grid (legacy names used by motion.css) */
+  --s1: 4px; --s2: 8px; --s3: 12px; --s4: 16px; --s6: 24px; --s8: 32px;
+  --gutter: clamp(16px, 4vw, 48px);
+  --page-max: 1280px;
+  --hit: 44px;
+
+  /* motion: unchanged values from the current site */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-lift: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --dur-1: 160ms;
+  --dur-2: 320ms;
+  --dur-3: 560ms;
+  --drop: 12px;
+}
+
+/* Day: sand parchment ground, deep teal ink and a sea-pine action colour. */
+:root[data-theme="light"] {
+  color-scheme: light;
+  --or: #2f5451;
+  --or-hi: #3d6763;
+  --on-or: #f7e8cc;
+  --link: #2b5a55;
+  --ground: #f3e2c4;
+  --surface: #faf1e0;
+  --surface-2: #f1e0c3;
+  --surface-sunk: #e9d4b1;
+  --ink: #1c2b2b;
+  --ink-dim: #4a5f5c;
+  --line: rgb(28 43 43 / 0.1);
+  --line-strong: rgb(28 43 43 / 0.2);
+  --glass: rgb(250 241 224 / 0.8);
+  --backdrop:
+    radial-gradient(1100px 620px at 12% -8%, rgb(255 246 228 / 0.7), transparent 62%),
+    radial-gradient(900px 600px at 100% 45%, rgb(76 107 104 / 0.1), transparent 65%),
+    linear-gradient(180deg, #f6e8cf 0%, #f2e0c1 60%, #edd8b5 100%);
+  --state-on: #22804f;
+  --state-off: #b2482a;
+  --float: 0 18px 40px -16px rgb(42 61 63 / 0.3), inset 0 1px 0 rgb(255 255 255 / 0.6);
+  --hang: 0 12px 22px -12px rgb(42 61 63 / 0.45);
+  --hang-hi: 0 20px 32px -14px rgb(42 61 63 / 0.5);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root { --dur-1: 0ms; --dur-2: 0ms; --dur-3: 0ms; --drop: 0px; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+}
+
+@theme inline {
+  --font-display: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Atkinson Hyperlegible Next", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Atkinson Hyperlegible Mono", ui-monospace, "Cascadia Mono", monospace;
+
+  --color-ground: var(--ground);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-sunk: var(--surface-sunk);
+  --color-ink: var(--ink);
+  --color-ink-dim: var(--ink-dim);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-or: var(--or);
+  --color-or-hi: var(--or-hi);
+  --color-on-or: var(--on-or);
+  --color-link: var(--link);
+  --color-on-tincture: var(--on-tincture);
+  --color-state-on: var(--state-on);
+  --color-state-off: var(--state-off);
+  --color-state-wait: var(--state-wait);
+
+  /* shadcn names, so catalog components drop in */
+  --color-card: var(--surface);
+  --color-card-foreground: var(--ink);
+  --color-muted-foreground: var(--ink-dim);
+  --color-foreground: var(--ink);
+  --color-primary: var(--or);
+  --color-border: var(--line);
+
+  --radius-sm: var(--r-sm);
+  --radius-md: var(--r-md);
+  --radius-lg: var(--r-lg);
+  --radius-xl: var(--r-md);
+  --ease-out-expo: var(--ease-out);
+}
+
+/* the five board fields, bound like before through data-tincture */
+[data-tincture="gules"] { --tincture: var(--gules); }
+[data-tincture="purpure"] { --tincture: var(--purpure); }
+[data-tincture="vert"] { --tincture: var(--vert); }
+[data-tincture="azure"] { --tincture: var(--azure); }
+[data-tincture="sable"] { --tincture: var(--sable-field); }
+
+@layer base {
+  html { scroll-padding-top: 120px; -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font: 400 1.0625rem/1.55 var(--font-sans);
+    font-variant-numeric: tabular-nums;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3 { font-family: var(--font-display); font-weight: 700; letter-spacing: -0.025em; line-height: 1.05; text-wrap: balance; margin: 0; }
+  /* the dusk backdrop sits on its own fixed layer, so scrolling never repaints it */
+  body::before { content: ""; position: fixed; inset: 0; z-index: -1; background: var(--backdrop); pointer-events: none; }
+  p { margin: 0; text-wrap: pretty; }
+  a { color: var(--link); text-underline-offset: 3px; }
+  ::selection { background: color-mix(in srgb, var(--or) 38%, transparent); color: var(--ink); }
+  :focus-visible { outline: 2px solid var(--or); outline-offset: 3px; }
+  input, textarea { caret-color: var(--or); }
+  html { scrollbar-color: var(--line-strong) transparent; }
+}
+
+/* ---------- view switching: every view stays mounted, like the current site ---------- */
+.js .view { display: none; }
+[data-view="start"] #view-start,
+[data-view="neuigkeiten"] #view-neuigkeiten,
+[data-view="regeln"] #view-regeln,
+[data-view="beitreten"] #view-beitreten,
+[data-view="hub"] #view-hub,
+[data-view="wuensche"] #view-wuensche,
+[data-view="map"] #view-map,
+[data-view="staff"] #view-staff,
+[data-view="admin"] #view-admin {
+  display: block;
+  animation-duration: var(--dur-3);
+  animation-timing-function: var(--ease-out);
+  animation-fill-mode: both;
+}
+
+.visually-hidden {
+  position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+.skip-link { position: absolute; left: 16px; top: -100px; z-index: 100; }
+.skip-link:focus { top: 16px; }
+
+@layer components {
+/* ---------- icons from the authored set (lib/icons.js) ---------- */
+.icon { width: 20px; height: 20px; flex: none; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+
+/* ---------- buttons ---------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  min-height: var(--hit); padding: 0 18px; border: 1px solid transparent; border-radius: 999px;
+  font: 700 0.875rem/1 var(--font-sans); cursor: pointer; text-decoration: none;
+  transition: background-color var(--dur-1) var(--ease-out), color var(--dur-1) var(--ease-out), transform var(--dur-1) var(--ease-out);
+}
+.btn-or { background: var(--or); color: var(--on-or); }
+.btn-or:hover { background: var(--or-hi); }
+.btn-icon { width: var(--hit); padding: 0; background: transparent; color: var(--ink-dim); }
+.btn-icon:hover { background: var(--surface-2); color: var(--ink); }
+
+/* copy button states (components/copy-button.js) */
+[data-copy-address] .icon-done { display: none; }
+[data-copy-address][data-state="copied"] .icon:not(.icon-done) { display: none; }
+[data-copy-address][data-state="copied"] .icon-done { display: block; stroke-dasharray: 20; animation: check-draw var(--dur-2) var(--ease-out) both; }
+@keyframes check-draw { from { stroke-dashoffset: 20; } }
+.ip-group:has([data-state="failed"]) { box-shadow: inset 0 0 0 1px var(--state-off); }
+
+/* ---------- status pip: a dot now, same three states and the same strike ---------- */
+.pip { display: inline-block; flex: none; width: 10px; height: 10px; border-radius: 999px; background: var(--state-wait); }
+[data-state="loading"] .pip { animation: pip-breathe 1.2s ease-in-out infinite; }
+[data-state="online"] .pip { background: var(--state-on); box-shadow: 0 0 0 4px color-mix(in srgb, var(--state-on) 22%, transparent); }
+[data-state="offline"] .pip, [data-state="error"] .pip { background: transparent; box-shadow: inset 0 0 0 2px var(--state-off); }
+@keyframes pip-breathe { 50% { opacity: 0.35; } }
+
+/* ---------- nav: links inside the floating island; the sliding bar is the legacy indicator ---------- */
+.nav-link {
+  display: inline-flex; align-items: center; height: 40px; padding: 0 14px;
+  border-radius: 999px; color: var(--ink-dim); text-decoration: none; white-space: nowrap; font-size: 0.9375rem;
+}
+.nav-link:hover { color: var(--ink); }
+.nav-link[aria-current="page"] { color: var(--ink); }
+.nav-scroll { scrollbar-width: none; mask: linear-gradient(90deg, #000 calc(100% - 32px), transparent); }
+.nav-scroll::-webkit-scrollbar { display: none; }
+@media (min-width: 1024px) { .nav-scroll { mask: none; } }
+
+/* ---------- hero over the castle, now a rounded frame ---------- */
+.castle-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; }
+.hero-title { font-size: clamp(2.75rem, 1.4rem + 5vw, 5.5rem); letter-spacing: -0.02em; line-height: 1; max-width: 12ch; text-shadow: 0 2px 30px rgb(0 0 0 / 0.45); }
+
+/* ---------- board widgets: hang from the gilt rail, drop and swing like the pennants did ---------- */
+.rail::before {
+  content: ""; position: absolute; inset: 0 -6px auto; height: 6px; border-radius: 999px;
+  background: linear-gradient(90deg, color-mix(in srgb, var(--or) 60%, transparent), var(--or) 20% 80%, color-mix(in srgb, var(--or) 60%, transparent));
+}
+.pennant {
+  position: relative; isolation: isolate; overflow: hidden;
+  display: flex; flex-direction: column; flex: 1;
+  min-height: 236px; padding: 18px 18px 20px;
+  border-radius: 6px 6px var(--r-md) var(--r-md);
+  background:
+    linear-gradient(172deg,
+      color-mix(in oklab, var(--tincture) 84%, var(--sand)) 0%,
+      var(--tincture) 42%,
+      color-mix(in oklab, var(--tincture) 72%, var(--deep)) 100%);
+  color: var(--on-tincture); text-decoration: none;
+  box-shadow: var(--hang), inset 0 1px 0 rgb(247 232 204 / 0.16);
+  transition: transform 220ms var(--ease-lift), box-shadow 220ms var(--ease-lift);
+}
+/* a soft moonlight sheen that brightens on hover (opacity only, so it stays smooth) */
+.pennant::before {
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  background: radial-gradient(120% 70% at 20% 0%, rgb(247 232 204 / 0.18), transparent 60%);
+  opacity: 0.6;
+  transition: opacity 220ms var(--ease-lift);
+}
+.pennant[data-tincture="sable"] { box-shadow: var(--hang), inset 0 0 0 1px var(--line-strong); }
+.pennant:hover, .pennant:focus-visible { transform: translateY(-4px); box-shadow: var(--hang-hi), inset 0 1px 0 rgb(247 232 204 / 0.2); }
+.pennant:hover::before, .pennant:focus-visible::before { opacity: 1; }
+.pennant:active { transform: translateY(-1px); transition-duration: 90ms; }
+.pennant:focus-visible { outline-offset: 4px; }
+.pennant[data-loading] .pennant-count { opacity: 0.5; }
+@media (max-width: 760px) {
+  .pennant { min-height: 0; border-radius: var(--r-md); }
+}
+
+/* ---------- ways onward: the arrow is drawn by motion.css; the tile only frames it ---------- */
+.way { display: flex; flex-direction: column; gap: 8px; height: 100%; text-decoration: none; color: var(--ink); }
+.way-name { font: 700 1.25rem/1.1 var(--font-display); letter-spacing: -0.02em; color: var(--ink); }
+.way:hover .way-name { color: var(--link); }
+}
+
+/* unlayered: restyles the legacy sliding bar (motion layer) for the floating nav */
+.nav-list .indicator { bottom: 2px; height: 2px; border-radius: 2px; }
+
+/* unlayered: board cards answer hover with the short lift above, not the long cloth swing */
+.pennant:hover, .pennant:focus-visible { animation: none; }

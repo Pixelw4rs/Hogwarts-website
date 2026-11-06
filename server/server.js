@@ -13,6 +13,8 @@ const { createRequests } = require('./requests');
 
 const PORT = Number(process.env.PORT) || 8080;
 const WEB_ROOT = path.resolve(process.env.WEB_ROOT || '/data');
+// the site's files (the built React app); defaults to WEB_ROOT, where data/ serves the plain client
+const STATIC_ROOT = path.resolve(process.env.STATIC_ROOT || WEB_ROOT);
 const DB_DIR = path.join(WEB_ROOT, 'db');
 const DB_FILE = path.join(DB_DIR, 'boards.json');
 
@@ -151,8 +153,10 @@ function serveStatic(req, res, url) {
   let p;
   try { p = decodeURIComponent(url.pathname); } catch (e) { res.writeHead(400); return res.end(); }
   if (p.endsWith('/')) p += 'index.html';
-  const full = path.join(WEB_ROOT, p);
-  const rel = path.relative(WEB_ROOT, full);
+  // uploads always come from the data folder; everything else from the built site when STATIC_ROOT is set
+  const root = p.startsWith('/uploads/') ? WEB_ROOT : STATIC_ROOT;
+  const full = path.join(root, p);
+  const rel = path.relative(root, full);
   const segs = rel.split(path.sep);
   // no path escapes, no hidden files, and never expose the database folder
   if (rel.startsWith('..') || path.isAbsolute(rel) || segs[0] === 'db' || segs.some(s => s.startsWith('.'))) {

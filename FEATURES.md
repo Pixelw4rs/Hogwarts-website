@@ -5,10 +5,11 @@ must still work after the rewrite. Tick each one during verification.
 
 ## Architecture
 
-- [x] **Single-page site** at `data/index.html`, written in German (`lang="de"`). No framework and no build step.
+- [x] **Single-page site**, written in German (`lang="de"`). React + Vite + Tailwind app in `web/` (built into `web/dist`); the earlier plain client in `data/index.html` still works for `npm run dev`.
 - [x] **Static assets** in `data/`: `favicon.png`, `favicon.ico`, `hogwarts-bg.jpg`.
 - [x] **Backend** in `server/server.js`: dependency-free Node HTTP server (Node 22 in Docker).
-- [x] **Deployment** via `docker-compose.yml`: mounts `./server` read-only and `./data` read-write, port 8080, env `PORT` and `WEB_ROOT`.
+- [x] **Deployment** via `docker-compose.yml` + `Dockerfile`: the image builds the React site into `/site`; compose mounts `./server` read-only and `./data` read-write, port 8080, env `PORT`, `WEB_ROOT` (database, uploads) and `STATIC_ROOT` (site files; defaults to `WEB_ROOT`). Uploads under `/uploads/` are always served from `WEB_ROOT`.
+- [x] **Board cards on Start** lift 4px in 220ms on hover/focus (the long drop and cloth swing were dropped on request).
 - [x] **Health check** runs `GET /api/boards` every 30s.
 
 ## Pages / views
@@ -219,7 +220,7 @@ Admin writes and logout refuse a foreign `Origin` (403). Every body is capped at
 
 ### Motion
 
-- Page switches use the View Transitions API and slide in from the side you're heading to (by nav order). Browsers without it get the same slide as a keyframe.
+- Page switches slide the new page in from the side you're heading to (by nav order), as a plain keyframe on the live page. No View Transition, so the cursor and click ripples keep moving during the switch.
 - The nav, board tabs, wish filters, map tabs and admin tabs have a sliding indicator (ported from the 21st.dev "Tabs" component). Board and section panels slide in from the side of the chosen tab.
 - Scroll reveal: rows rise, posts and editions unroll, pennants unfurl from the gilt rail, staggered.
 - Rolling numbers on pennant counts and vote counts.
